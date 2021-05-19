@@ -9,6 +9,7 @@ import gpsUtil.location.VisitedLocation;
 import tripPricer.Provider;
 
 public class User {
+
 	private final UUID userId;
 	private final String userName;
 	private String phoneNumber;
@@ -18,7 +19,9 @@ public class User {
 	private List<UserReward> userRewards = new ArrayList<>();
 	private UserPreferences userPreferences = new UserPreferences();
 	private List<Provider> tripDeals = new ArrayList<>();
+
 	public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
+
 		this.userId = userId;
 		this.userName = userName;
 		this.phoneNumber = phoneNumber;
@@ -70,6 +73,7 @@ public class User {
 	}
 	
 	public void addUserReward(UserReward userReward) {
+
 		if(userRewards.stream().filter(r -> !r.attraction.attractionName.equals(userReward.attraction)).count() == 0) {
 			userRewards.add(userReward);
 		}
@@ -98,5 +102,4 @@ public class User {
 	public List<Provider> getTripDeals() {
 		return tripDeals;
 	}
-
 }

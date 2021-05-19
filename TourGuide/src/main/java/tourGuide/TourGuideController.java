@@ -27,7 +27,9 @@ public class TourGuideController {
     
     @RequestMapping("/getLocation") 
     public String getLocation(@RequestParam String userName) {
+
     	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
+
 		return JsonStream.serialize(visitedLocation.location);
     }
     
@@ -42,7 +44,9 @@ public class TourGuideController {
         //    Note: Attraction reward points can be gathered from RewardsCentral
     @RequestMapping("/getNearbyAttractions") 
     public String getNearbyAttractions(@RequestParam String userName) {
+
     	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
+
     	return JsonStream.serialize(tourGuideService.getNearByAttractions(visitedLocation));
     }
     
@@ -62,19 +66,19 @@ public class TourGuideController {
     	//        "019b04a9-067a-4c76-8817-ee75088c3822": {"longitude":-48.188821,"latitude":74.84371} 
     	//        ...
     	//     }
-    	
+
     	return JsonStream.serialize("");
     }
     
     @RequestMapping("/getTripDeals")
     public String getTripDeals(@RequestParam String userName) {
+
     	List<Provider> providers = tourGuideService.getTripDeals(getUser(userName));
+
     	return JsonStream.serialize(providers);
     }
     
     private User getUser(String userName) {
-    	return tourGuideService.getUser(userName);
+        return tourGuideService.getUser(userName);
     }
-   
-
 }

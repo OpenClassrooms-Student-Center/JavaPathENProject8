@@ -17,8 +17,7 @@ public class UserPreferences {
 	private int numberOfAdults = 1;
 	private int numberOfChildren = 0;
 	
-	public UserPreferences() {
-	}
+	public UserPreferences() {}
 	
 	public void setAttractionProximity(int attractionProximity) {
 		this.attractionProximity = attractionProximity;
@@ -75,5 +74,4 @@ public class UserPreferences {
 	public void setNumberOfChildren(int numberOfChildren) {
 		this.numberOfChildren = numberOfChildren;
 	}
-
 }
