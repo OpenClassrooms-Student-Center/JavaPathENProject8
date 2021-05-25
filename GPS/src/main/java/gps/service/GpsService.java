@@ -5,6 +5,8 @@ import gpsUtil.GpsUtil;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,23 +15,28 @@ import java.util.List;
 @Service
 public class GpsService implements GpsServiceInterface {
 
+    private Logger logger = LogManager.getLogger(getClass().getSimpleName());
+
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
     private int attractionProximityRange = 200;
 
     private GpsUtil gpsUtil;
 
     public GpsService() {
+        logger.info("GpsService()");
 
         gpsUtil = new GpsUtil();
     }
 
     public GpsService(GpsUtil gpsUtil) {
+        logger.info("GpsService(" + gpsUtil + ")");
 
         this.gpsUtil = gpsUtil;
     }
 
     @Override
     public VisitedLocation getUserLocation(User user) {
+        logger.info("getUserLocation(" + user + ")");
 
         VisitedLocation visitedLocation = null;
 
@@ -62,6 +69,8 @@ public class GpsService implements GpsServiceInterface {
     //     }
     @Override
     public List<VisitedLocation> getAllCurrentLocations() {
+        logger.info("getAllCurrentLocations()");
+
         return null;
     }
 
@@ -76,6 +85,7 @@ public class GpsService implements GpsServiceInterface {
     //    Note: Attraction reward points can be gathered from RewardsCentral
     @Override
     public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
+        logger.info("getNearByAttractions(" + visitedLocation + ")");
 
         List<Attraction> nearbyAttractions = new ArrayList<>();
 

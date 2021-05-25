@@ -1,21 +1,25 @@
 package user.service;
 
 import gpsUtil.location.VisitedLocation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import user.model.User;
 import user.model.UserReward;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class UserService implements UserServiceInterface {
+
+    private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
     private static Map<String, User> userMap = new HashMap<>();
 
     @Override
     public void addUser(User user) {
+        logger.info("addUser(" + user + ")");
 
         if (userMap.containsKey(user.getUserName()) == false) {
 
@@ -25,6 +29,7 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public void addToVisitedLocations(String userName, VisitedLocation visitedLocation) {
+        logger.info("addToVisitedLocations(" + userName + "," + visitedLocation + ")");
 
         User user = userMap.get(userName);
 
@@ -36,6 +41,7 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public void addUserReward(String userName, UserReward userReward) {
+        logger.info("addUserReward(" + userName + "," + userReward + ")");
 
         User user = userMap.get(userName);
 
@@ -60,6 +66,7 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public User getUser(String userName) {
+        logger.info("getUser(" + userName + ")");
 
         User user = userMap.get(userName);
 
@@ -73,6 +80,7 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public Map<String, User> getAllUser() {
+        logger.info("getAllUser()");
         return userMap;
     }
 }

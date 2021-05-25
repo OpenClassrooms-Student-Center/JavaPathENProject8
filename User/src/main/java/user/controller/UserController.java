@@ -26,6 +26,7 @@ public class UserController {
 
     public UserController() {
         logger.info("UserController()");
+
         userServiceInterface = new UserService();
     }
 
