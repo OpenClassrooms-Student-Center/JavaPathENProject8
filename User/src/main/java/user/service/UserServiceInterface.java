@@ -1,34 +1,22 @@
 package user.service;
 
-import user.model.User;
 
-import java.util.ArrayList;
+import gpsUtil.location.VisitedLocation;
+import user.model.User;
+import user.model.UserReward;
+
+import java.util.List;
+import java.util.Map;
 
 public interface UserServiceInterface {
 
-    /**
-     * Create a User
-     * @param user : data of the User to create
-     */
-    public void createUser(User user);
+    public void addUser(User user);
 
-    /**
-     * Read a User
-     * @param userName : user name of the User to read
-     * @return The User that was read
-     */
-    public User readUser(String userName);
+    public void addToVisitedLocations(String userName, VisitedLocation visitedLocation);
 
-    /**
-     * Update a User
-     * @param userName : user name of the User to update
-     * @param user : data of the User to update
-     */
-    public void updateUser(String userName, User user);
+    public void addUserReward(String userName, UserReward userReward);
 
-    /**
-     * Delete a User
-     * @param userName : user name of the User to delete
-     */
-    public void deleteUser(String userName);
+    public User getUser(String userName);
+
+    public Map<String, User> getAllUser();
 }
