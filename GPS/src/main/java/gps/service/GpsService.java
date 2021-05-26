@@ -1,6 +1,9 @@
 package gps.service;
 
 import gps.model.User;
+import gps.model.UserNearestAttraction;
+import gps.proxy.RewardProxy;
+import gps.proxy.UserProxy;
 import gpsUtil.GpsUtil;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
@@ -9,8 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class GpsService implements GpsServiceInterface {
@@ -18,7 +20,9 @@ public class GpsService implements GpsServiceInterface {
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
-    private int attractionProximityRange = 200;
+
+    private UserProxy userProxy;
+    private RewardProxy rewardProxy;
 
     private GpsUtil gpsUtil;
 
@@ -35,18 +39,19 @@ public class GpsService implements GpsServiceInterface {
     }
 
     @Override
-    public VisitedLocation getUserLocation(User user) {
-        logger.info("getUserLocation(" + user + ")");
+    public VisitedLocation getUserLocation(String userName) {
+        logger.info("getUserLocation(" + userName + ")");
 
-        VisitedLocation visitedLocation = null;
+        VisitedLocation visitedLocation;
+
+        User user = userProxy.getUser(userName);
 
         if (user.getVisitedLocations().size() <= 0) {
 
             visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 
-            user.addToVisitedLocations(visitedLocation);
-
-//            rewardsService.calculateRewards(user);
+            userProxy.addToVisitedLocations(visitedLocation);
+            rewardProxy.calculateRewards(userName);
         }
 
         else {
@@ -57,39 +62,27 @@ public class GpsService implements GpsServiceInterface {
         return visitedLocation;
     }
 
-
-    // TODO: Get a list of every user's most recent location as JSON
-    //- Note: does not use gpsUtil to query for their current location,
-    //        but rather gathers the user's current location from their stored location history.
-    //
-    // Return object should be the just a JSON mapping of userId to Locations similar to:
-    //     {
-    //        "019b04a9-067a-4c76-8817-ee75088c3822": {"longitude":-48.188821,"latitude":74.84371}
-    //        ...
-    //     }
     @Override
-    public List<VisitedLocation> getAllCurrentLocations() {
+    public Map<UUID, VisitedLocation> getAllCurrentLocations() {
         logger.info("getAllCurrentLocations()");
 
-        return null;
+        Map<UUID, VisitedLocation> userLocationMap = new HashMap<>();
+
+        for (User u : userProxy.getAllUser()) {
+
+            userLocationMap.put(u.getUserId(), u.getLastVisitedLocation());
+        }
+
+        return userLocationMap;
     }
 
-    //  TODO: Change this method to no longer return a List of Attractions.
-    //  Instead: Get the closest five tourist attractions to the user - no matter how far away they are.
-    //  Return a new JSON object that contains:
-    // Name of Tourist attraction,
-    // Tourist attractions lat/long,
-    // The user's location lat/long,
-    // The distance in miles between the user's location and each of the attractions.
-    // The reward points for visiting each Attraction.
-    //    Note: Attraction reward points can be gathered from RewardsCentral
     @Override
-    public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
+    public List<UserNearestAttraction> getNearByAttractions(VisitedLocation visitedLocation) {
         logger.info("getNearByAttractions(" + visitedLocation + ")");
 
-        List<Attraction> nearbyAttractions = new ArrayList<>();
+        Map<Double, Attraction> attractionMap = new TreeMap<Double, Attraction>();
 
-        for(Attraction attraction : gpsUtil.getAttractions()) {
+        for (Attraction attraction : gpsUtil.getAttractions()) {
 
             double lat1 = Math.toRadians(attraction.latitude);
             double lon1 = Math.toRadians(attraction.longitude);
@@ -102,13 +95,31 @@ public class GpsService implements GpsServiceInterface {
             double nauticalMiles = 60 * Math.toDegrees(angle);
             double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
 
-            if (statuteMiles > attractionProximityRange) {
+            attractionMap.put(statuteMiles, attraction);
+        }
 
-                nearbyAttractions.add(attraction);
+        List<UserNearestAttraction> userNearestAttractionList = new ArrayList<>();
+
+        int counter = 0;
+
+        for (Map.Entry<Double, Attraction> entry : attractionMap.entrySet()) {
+
+            if (counter < 5) {
+
+                String attractionName = entry.getValue().attractionName;
+                Location attractionLocation = new Location(entry.getValue().latitude, entry.getValue().longitude);
+                Location userLocation = visitedLocation.location;
+                double attractionMilesDistance = entry.getKey();
+                int rewardPoints = 0;
+
+                userNearestAttractionList.add(new UserNearestAttraction(attractionName,
+                        attractionLocation, userLocation, attractionMilesDistance, rewardPoints));
+
+                counter++;
             }
         }
 
-        return nearbyAttractions;
+        return userNearestAttractionList;
     }
 
     @Override

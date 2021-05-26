@@ -1,8 +1,6 @@
 package gps.controller;
 
 import com.jsoniter.output.JsonStream;
-import gps.model.User;
-import gps.proxy.UserProxy;
 import gps.service.GpsService;
 import gps.service.GpsServiceInterface;
 import gpsUtil.location.VisitedLocation;
@@ -20,8 +18,6 @@ public class GpsController {
 
     private GpsServiceInterface gpsServiceInterface;
 
-    private UserProxy userProxy;
-
     public GpsController() {
         logger.info("GpsController()");
 
@@ -38,9 +34,7 @@ public class GpsController {
     public String getLocation(@RequestParam String userName) {
         logger.info("getLocation(" + userName + ")");
 
-        User user = userProxy.getUser(userName);
-
-        return JsonStream.serialize(gpsServiceInterface.getUserLocation(user));
+        return JsonStream.serialize(gpsServiceInterface.getUserLocation(userName));
     }
 
     @RequestMapping("/getAllCurrentLocations")
@@ -54,9 +48,7 @@ public class GpsController {
     public String getNearbyAttractions(@RequestParam String userName) {
         logger.info("getNearbyAttractions(" + userName + ")");
 
-        User user = userProxy.getUser(userName);
-
-        VisitedLocation visitedLocation = gpsServiceInterface.getUserLocation(user);
+        VisitedLocation visitedLocation = gpsServiceInterface.getUserLocation(userName);
 
         return JsonStream.serialize(gpsServiceInterface.getNearByAttractions(visitedLocation));
     }

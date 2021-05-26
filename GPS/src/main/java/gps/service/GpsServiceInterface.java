@@ -1,19 +1,22 @@
 package gps.service;
 
 import gps.model.User;
+import gps.model.UserNearestAttraction;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public interface GpsServiceInterface {
 
-    public VisitedLocation getUserLocation(User user);
+    public VisitedLocation getUserLocation(String userName);
 
-    public List<VisitedLocation> getAllCurrentLocations();
+    public Map<UUID, VisitedLocation> getAllCurrentLocations();
 
     public List<Attraction> getAttractionList();
 
-    public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation);
+    public List<UserNearestAttraction> getNearByAttractions(VisitedLocation visitedLocation);
 
 }
