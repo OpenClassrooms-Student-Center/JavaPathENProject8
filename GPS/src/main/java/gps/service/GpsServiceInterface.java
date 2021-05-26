@@ -15,7 +15,7 @@ public interface GpsServiceInterface {
 
     public Map<UUID, VisitedLocation> getAllCurrentLocations();
 
-    public List<Attraction> getAttractionList();
+    public Attraction getAttraction(String attractionName);
 
     public List<UserNearestAttraction> getNearByAttractions(String userName, VisitedLocation visitedLocation);
 

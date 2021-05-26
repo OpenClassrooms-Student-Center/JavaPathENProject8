@@ -63,6 +63,22 @@ public class GpsService implements GpsServiceInterface {
     }
 
     @Override
+    public Attraction getAttraction(String attractionName) {
+
+        Attraction attraction = null;
+
+        for (Attraction a : gpsUtil.getAttractions()) {
+
+            if (a.attractionName.equals(attractionName)) {
+
+                attraction = a;
+            }
+        }
+
+        return attraction;
+    }
+
+    @Override
     public Map<UUID, VisitedLocation> getAllCurrentLocations() {
         logger.info("getAllCurrentLocations()");
 
@@ -120,10 +136,5 @@ public class GpsService implements GpsServiceInterface {
         }
 
         return userNearestAttractionList;
-    }
-
-    @Override
-    public List<Attraction> getAttractionList() {
-        return gpsUtil.getAttractions();
     }
 }

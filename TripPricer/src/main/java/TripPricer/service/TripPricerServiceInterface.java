@@ -1,6 +1,5 @@
 package TripPricer.service;
 
-import TripPricer.model.User;
 import tripPricer.Provider;
 
 import java.util.List;

@@ -37,6 +37,13 @@ public class GpsController {
         return JsonStream.serialize(gpsServiceInterface.getUserLocation(userName));
     }
 
+    @GetMapping("/getAttraction")
+    public String getAttraction(@RequestParam String attractionName) {
+        logger.info("getAttraction(" + attractionName + ")");
+
+        return JsonStream.serialize(gpsServiceInterface.getAttraction(attractionName));
+    }
+
     @RequestMapping("/getAllCurrentLocations")
     public String getAllCurrentLocations() {
         logger.info("getAllCurrentLocations()");

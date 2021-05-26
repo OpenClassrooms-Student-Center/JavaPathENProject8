@@ -5,7 +5,6 @@ import gpsUtil.location.VisitedLocation;
 import user.model.User;
 import user.model.UserReward;
 
-import java.util.List;
 import java.util.Map;
 
 public interface UserServiceInterface {

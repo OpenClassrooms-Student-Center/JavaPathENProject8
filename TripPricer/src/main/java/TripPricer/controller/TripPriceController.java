@@ -1,7 +1,5 @@
 package TripPricer.controller;
 
-import TripPricer.model.User;
-import TripPricer.proxy.UserProxy;
 import TripPricer.service.TripPricerService;
 import TripPricer.service.TripPricerServiceInterface;
 import com.jsoniter.output.JsonStream;

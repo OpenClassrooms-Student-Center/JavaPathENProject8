@@ -1,20 +1,13 @@
 package reward.controller;
 
 import com.jsoniter.output.JsonStream;
-import gpsUtil.location.Attraction;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import reward.model.User;
-import reward.proxy.GpsProxy;
-import reward.proxy.UserProxy;
 import reward.service.RewardService;
 import reward.service.RewardServiceInterface;
-
-import java.util.List;
-import java.util.UUID;
 
 @RestController
 public class RewardController {

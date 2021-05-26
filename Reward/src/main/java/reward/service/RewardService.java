@@ -5,7 +5,6 @@ import gpsUtil.location.VisitedLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import reward.model.User;
 import reward.model.UserReward;
 import reward.proxy.GpsProxy;
@@ -14,7 +13,6 @@ import rewardCentral.RewardCentral;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class RewardService implements RewardServiceInterface {
