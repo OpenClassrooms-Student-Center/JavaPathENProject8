@@ -1,7 +1,5 @@
 package user.model;
 
-
-
 import gpsUtil.location.VisitedLocation;
 import tripPricer.Provider;
 
@@ -12,8 +10,8 @@ import java.util.UUID;
 
 public class User {
 
-	private final UUID userId;
-	private final String userName;
+	private UUID userId;
+	private String userName;
 	private String phoneNumber;
 	private String emailAddress;
 
@@ -36,8 +34,16 @@ public class User {
 		return userId;
 	}
 
+	public void setUserId(UUID userId) {
+		this.userId = userId;
+	}
+
 	public String getUserName() {
 		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getPhoneNumber() {

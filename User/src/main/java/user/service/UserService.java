@@ -51,7 +51,7 @@ public class UserService implements UserServiceInterface {
 
             for (UserReward r : user.getUserRewards()) {
 
-                if (r.attraction.attractionName.equals(userReward.attraction)) {
+                if (r.getAttraction().equals(userReward.getAttraction())) {
 
                     alreadyExist = true;
                 }

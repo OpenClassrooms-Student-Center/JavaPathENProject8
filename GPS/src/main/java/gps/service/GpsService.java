@@ -56,7 +56,7 @@ public class GpsService implements GpsServiceInterface {
 
         else {
 
-            visitedLocation = user.getLastVisitedLocation();
+            visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);
         }
 
         return visitedLocation;
@@ -86,7 +86,7 @@ public class GpsService implements GpsServiceInterface {
 
         for (User u : userProxy.getAllUser()) {
 
-            visitedLocationMap.put(u.getUserId(), u.getLastVisitedLocation());
+            visitedLocationMap.put(u.getUserId(), u.getVisitedLocations().get(u.getVisitedLocations().size()-1));
         }
 
         return visitedLocationMap;

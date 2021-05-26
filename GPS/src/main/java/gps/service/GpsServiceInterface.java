@@ -1,6 +1,5 @@
 package gps.service;
 
-import gps.model.User;
 import gps.model.UserNearestAttraction;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;

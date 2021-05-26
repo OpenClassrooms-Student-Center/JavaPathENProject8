@@ -16,33 +16,9 @@ public class UserPreferences {
 	private CurrencyUnit currency = Monetary.getCurrency("USD");
 	private Money highPricePoint = Money.of(Integer.MAX_VALUE, currency);
 	private Money lowerPricePoint = Money.of(0, currency);
-	
+
 	public UserPreferences() {}
-	
-	public void setAttractionProximity(int attractionProximity) {
-		this.attractionProximity = attractionProximity;
-	}
-	
-	public int getAttractionProximity() {
-		return attractionProximity;
-	}
-	
-	public Money getLowerPricePoint() {
-		return lowerPricePoint;
-	}
 
-	public void setLowerPricePoint(Money lowerPricePoint) {
-		this.lowerPricePoint = lowerPricePoint;
-	}
-
-	public Money getHighPricePoint() {
-		return highPricePoint;
-	}
-
-	public void setHighPricePoint(Money highPricePoint) {
-		this.highPricePoint = highPricePoint;
-	}
-	
 	public int getTripDuration() {
 		return tripDuration;
 	}
@@ -58,7 +34,7 @@ public class UserPreferences {
 	public void setTicketQuantity(int ticketQuantity) {
 		this.ticketQuantity = ticketQuantity;
 	}
-	
+
 	public int getNumberOfAdults() {
 		return numberOfAdults;
 	}
@@ -73,5 +49,37 @@ public class UserPreferences {
 
 	public void setNumberOfChildren(int numberOfChildren) {
 		this.numberOfChildren = numberOfChildren;
+	}
+
+	public int getAttractionProximity() {
+		return attractionProximity;
+	}
+
+	public void setAttractionProximity(int attractionProximity) {
+		this.attractionProximity = attractionProximity;
+	}
+
+	public CurrencyUnit getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(CurrencyUnit currency) {
+		this.currency = currency;
+	}
+
+	public Money getHighPricePoint() {
+		return highPricePoint;
+	}
+
+	public void setHighPricePoint(Money highPricePoint) {
+		this.highPricePoint = highPricePoint;
+	}
+
+	public Money getLowerPricePoint() {
+		return lowerPricePoint;
+	}
+
+	public void setLowerPricePoint(Money lowerPricePoint) {
+		this.lowerPricePoint = lowerPricePoint;
 	}
 }

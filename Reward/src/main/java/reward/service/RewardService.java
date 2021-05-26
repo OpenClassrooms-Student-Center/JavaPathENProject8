@@ -58,7 +58,7 @@ public class RewardService implements RewardServiceInterface {
 
             for(Attraction attraction : attractionList) {
 
-                if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
+                if(user.getUserRewards().stream().filter(r -> r.getAttraction().equals(attraction.attractionName)).count() == 0) {
 
                     int rewardPoints = rewardCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
 
