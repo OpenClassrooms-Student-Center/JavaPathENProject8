@@ -14,6 +14,7 @@ import reward.service.RewardService;
 import reward.service.RewardServiceInterface;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class RewardController {
@@ -21,9 +22,6 @@ public class RewardController {
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
     private RewardServiceInterface rewardServiceInterface;
-
-    private UserProxy userProxy;
-    private GpsProxy gpsProxy;
 
     public RewardController() {
         logger.info("RewardController()");
@@ -37,23 +35,17 @@ public class RewardController {
         this.rewardServiceInterface = rewardServiceInterface;
     }
 
-    @RequestMapping("/getRewards")
-    public String getRewards(@RequestParam String userName) {
-        logger.info("getRewards(" + userName + ")");
+    @RequestMapping("/getRewardPoints")
+    public String getRewardPoints(@RequestParam String attractionName, @RequestParam String userName) {
+        logger.info("getRewardPoints(" + attractionName + "," + userName + ")");
 
-        User user = userProxy.getUser(userName);
-
-        return JsonStream.serialize(rewardServiceInterface.getUserRewards(user));
+        return JsonStream.serialize(rewardServiceInterface.getRewardPoints(attractionName, userName));
     }
 
     @RequestMapping("/calculateRewards")
     public String calculateRewards(@RequestParam String userName) {
         logger.info("calculateRewards(" + userName + ")");
 
-        User user = userProxy.getUser(userName);
-
-        List<Attraction> attractionList = gpsProxy.getNearByAttractions();
-
-        return JsonStream.serialize(rewardServiceInterface.calculateRewards(user, attractionList));
+        return JsonStream.serialize(rewardServiceInterface.calculateRewards(userName));
     }
 }

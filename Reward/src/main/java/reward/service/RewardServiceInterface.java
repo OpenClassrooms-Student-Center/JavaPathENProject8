@@ -1,14 +1,14 @@
 package reward.service;
 
-import gpsUtil.location.Attraction;
-import reward.model.User;
+import org.springframework.web.bind.annotation.RequestParam;
 import reward.model.UserReward;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface RewardServiceInterface {
 
-    public List<UserReward> getUserRewards(User user);
+    public int getRewardPoints(String attractionName, String userName);
 
-    public List<UserReward> calculateRewards(User user, List<Attraction> attractionList);
+    public List<UserReward> calculateRewards(String userName);
 }

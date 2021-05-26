@@ -50,6 +50,6 @@ public class GpsController {
 
         VisitedLocation visitedLocation = gpsServiceInterface.getUserLocation(userName);
 
-        return JsonStream.serialize(gpsServiceInterface.getNearByAttractions(visitedLocation));
+        return JsonStream.serialize(gpsServiceInterface.getNearByAttractions(userName, visitedLocation));
     }
 }

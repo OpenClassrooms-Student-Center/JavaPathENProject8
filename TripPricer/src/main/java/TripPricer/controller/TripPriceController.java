@@ -18,8 +18,6 @@ public class TripPriceController {
 
     private TripPricerServiceInterface tripPricerServiceInterface;
 
-    private UserProxy userProxy;
-
     public TripPriceController() {
         logger.info("TripPriceController()");
 
@@ -36,8 +34,6 @@ public class TripPriceController {
     public String getTripDeals(@RequestParam String userName) {
         logger.info("getTripDeals(" + userName + ")");
 
-        User user = userProxy.getUser(userName);
-
-        return JsonStream.serialize(tripPricerServiceInterface.getTripDeals(user));
+        return JsonStream.serialize(tripPricerServiceInterface.getTripDeals(userName));
     }
 }

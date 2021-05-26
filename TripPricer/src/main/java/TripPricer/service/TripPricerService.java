@@ -1,6 +1,7 @@
 package TripPricer.service;
 
 import TripPricer.model.User;
+import TripPricer.proxy.UserProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ public class TripPricerService implements TripPricerServiceInterface {
 
     private static final String tripPricerApiKey = "test-server-api-key";
 
+    private UserProxy userProxy;
+
     private TripPricer tripPricer;
 
     public TripPricerService() {
@@ -30,8 +33,10 @@ public class TripPricerService implements TripPricerServiceInterface {
         this.tripPricer = tripPricer;
     }
 
-    public List<Provider> getTripDeals(User user) {
-        logger.info("getTripDeals(" + user + ")");
+    public List<Provider> getTripDeals(String userName) {
+        logger.info("getTripDeals(" + userName + ")");
+
+        User user = userProxy.getUser(userName);
 
         int cumulativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
 

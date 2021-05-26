@@ -18,5 +18,5 @@ public interface UserProxy {
     public List<User> getAllUser();
 
     @PostMapping(value = "/addToVisitedLocations")
-    public void addToVisitedLocations(VisitedLocation visitedLocation);
+    public void addToVisitedLocations(String userName, VisitedLocation visitedLocation);
 }

@@ -50,7 +50,7 @@ public class GpsService implements GpsServiceInterface {
 
             visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 
-            userProxy.addToVisitedLocations(visitedLocation);
+            userProxy.addToVisitedLocations(userName, visitedLocation);
             rewardProxy.calculateRewards(userName);
         }
 
@@ -66,18 +66,18 @@ public class GpsService implements GpsServiceInterface {
     public Map<UUID, VisitedLocation> getAllCurrentLocations() {
         logger.info("getAllCurrentLocations()");
 
-        Map<UUID, VisitedLocation> userLocationMap = new HashMap<>();
+        Map<UUID, VisitedLocation> visitedLocationMap = new HashMap<>();
 
         for (User u : userProxy.getAllUser()) {
 
-            userLocationMap.put(u.getUserId(), u.getLastVisitedLocation());
+            visitedLocationMap.put(u.getUserId(), u.getLastVisitedLocation());
         }
 
-        return userLocationMap;
+        return visitedLocationMap;
     }
 
     @Override
-    public List<UserNearestAttraction> getNearByAttractions(VisitedLocation visitedLocation) {
+    public List<UserNearestAttraction> getNearByAttractions(String userName, VisitedLocation visitedLocation) {
         logger.info("getNearByAttractions(" + visitedLocation + ")");
 
         Map<Double, Attraction> attractionMap = new TreeMap<Double, Attraction>();
@@ -110,7 +110,7 @@ public class GpsService implements GpsServiceInterface {
                 Location attractionLocation = new Location(entry.getValue().latitude, entry.getValue().longitude);
                 Location userLocation = visitedLocation.location;
                 double attractionMilesDistance = entry.getKey();
-                int rewardPoints = 0;
+                int rewardPoints = rewardProxy.getRewardPoints(attractionName, userName);
 
                 userNearestAttractionList.add(new UserNearestAttraction(attractionName,
                         attractionLocation, userLocation, attractionMilesDistance, rewardPoints));
