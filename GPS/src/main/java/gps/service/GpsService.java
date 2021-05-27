@@ -24,18 +24,17 @@ public class GpsService implements GpsServiceInterface {
     private UserProxy userProxy;
     private RewardProxy rewardProxy;
 
-    private GpsUtil gpsUtil;
+    private GpsUtil gpsUtil = new GpsUtil();
 
     public GpsService() {
         logger.info("GpsService()");
-
-        gpsUtil = new GpsUtil();
     }
 
-    public GpsService(GpsUtil gpsUtil) {
-        logger.info("GpsService(" + gpsUtil + ")");
+    public GpsService(UserProxy userProxy, RewardProxy rewardProxy) {
+        logger.info("GpsService(" + userProxy + "," + rewardProxy + ")");
 
-        this.gpsUtil = gpsUtil;
+        this.userProxy = userProxy;
+        this.rewardProxy = rewardProxy;
     }
 
     @Override
@@ -72,6 +71,7 @@ public class GpsService implements GpsServiceInterface {
             if (a.attractionName.equals(attractionName)) {
 
                 attraction = a;
+                break;
             }
         }
 
@@ -116,22 +116,20 @@ public class GpsService implements GpsServiceInterface {
 
         List<UserNearestAttraction> userNearestAttractionList = new ArrayList<>();
 
-        int counter = 0;
-
         for (Map.Entry<Double, Attraction> entry : attractionMap.entrySet()) {
 
-            if (counter < 5) {
+            String attractionName = entry.getValue().attractionName;
+            Location attractionLocation = new Location(entry.getValue().latitude, entry.getValue().longitude);
+            Location userLocation = visitedLocation.location;
+            double attractionMilesDistance = entry.getKey();
+            int rewardPoints = rewardProxy.getRewardPoints(attractionName, userName);
 
-                String attractionName = entry.getValue().attractionName;
-                Location attractionLocation = new Location(entry.getValue().latitude, entry.getValue().longitude);
-                Location userLocation = visitedLocation.location;
-                double attractionMilesDistance = entry.getKey();
-                int rewardPoints = rewardProxy.getRewardPoints(attractionName, userName);
+            userNearestAttractionList.add(new UserNearestAttraction(attractionName,
+                    attractionLocation, userLocation, attractionMilesDistance, rewardPoints));
 
-                userNearestAttractionList.add(new UserNearestAttraction(attractionName,
-                        attractionLocation, userLocation, attractionMilesDistance, rewardPoints));
+            if (userNearestAttractionList.size() >= 5) {
 
-                counter++;
+                break;
             }
         }
 

@@ -22,18 +22,17 @@ public class RewardService implements RewardServiceInterface {
     private UserProxy userProxy;
     private GpsProxy gpsProxy;
 
-    private RewardCentral rewardCentral;
+    private RewardCentral rewardCentral = new RewardCentral();
 
     public RewardService() {
         logger.info("RewardService()");
-
-        rewardCentral = new RewardCentral();
     }
 
-    public RewardService(RewardCentral rewardsCentral) {
-        logger.info("RewardService(" + rewardsCentral + ")");
+    public RewardService(UserProxy userProxy, GpsProxy gpsProxy) {
+        logger.info("RewardService(" + userProxy + "," + gpsProxy + ")");
 
-        this.rewardCentral = rewardsCentral;
+        this.userProxy = userProxy;
+        this.gpsProxy = gpsProxy;
     }
 
     public int getRewardPoints(String attractionName, String userName) {

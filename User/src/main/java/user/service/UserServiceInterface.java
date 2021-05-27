@@ -5,7 +5,7 @@ import gpsUtil.location.VisitedLocation;
 import user.model.User;
 import user.model.UserReward;
 
-import java.util.Map;
+import java.util.List;
 
 public interface UserServiceInterface {
 
@@ -17,5 +17,5 @@ public interface UserServiceInterface {
 
     public User getUser(String userName);
 
-    public Map<String, User> getAllUser();
+    public List<User> getAllUser();
 }

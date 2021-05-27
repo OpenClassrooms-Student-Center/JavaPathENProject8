@@ -1,6 +1,7 @@
 package user.controller;
 
-import com.jsoniter.output.JsonStream;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
@@ -21,6 +22,8 @@ import java.util.UUID;
 public class UserController {
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     private UserServiceInterface userServiceInterface;
 
@@ -44,11 +47,21 @@ public class UserController {
     }
 
     @PostMapping(value = "/addToVisitedLocations")
-    public void addToVisitedLocations(@RequestParam String userName, @RequestParam double longitude, @RequestParam double latitude, @RequestParam String timeVisited) throws ParseException {
+    public void addToVisitedLocations(@RequestParam String userName, @RequestParam double longitude, @RequestParam double latitude, @RequestParam String timeVisited) {
         logger.info("addToVisitedLocations(" + userName + ","+ longitude + ","+ latitude + ","+ timeVisited + ")");
 
         User user = userServiceInterface.getUser(userName);
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(timeVisited);
+
+        Date date = null;
+
+        try {
+
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(timeVisited);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         VisitedLocation visitedLocation = new VisitedLocation(user.getUserId(), new Location(longitude, latitude), date);
 
         userServiceInterface.addToVisitedLocations(userName, visitedLocation);
@@ -68,16 +81,16 @@ public class UserController {
     }
 
     @GetMapping(value = "/getUser")
-    public String getUser(@RequestParam String userName) {
+    public String getUser(@RequestParam String userName) throws JsonProcessingException {
         logger.info("getUser(" + userName + ")");
 
-        return JsonStream.serialize(userServiceInterface.getUser(userName));
+        return objectMapper.writeValueAsString(userServiceInterface.getUser(userName));
     }
 
     @GetMapping(value = "/getAllUser")
-    public String getAllUser() {
+    public String getAllUser() throws JsonProcessingException {
         logger.info("getAllUser()");
 
-        return JsonStream.serialize(userServiceInterface.getAllUser());
+        return objectMapper.writeValueAsString(userServiceInterface.getAllUser());
     }
 }

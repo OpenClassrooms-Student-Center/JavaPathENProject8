@@ -1,6 +1,7 @@
 package gps.controller;
 
-import com.jsoniter.output.JsonStream;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import gps.service.GpsService;
 import gps.service.GpsServiceInterface;
 import gpsUtil.location.VisitedLocation;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class GpsController {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
@@ -31,32 +34,32 @@ public class GpsController {
     }
 
     @GetMapping("/getLocation")
-    public String getLocation(@RequestParam String userName) {
+    public String getLocation(@RequestParam String userName) throws JsonProcessingException {
         logger.info("getLocation(" + userName + ")");
 
-        return JsonStream.serialize(gpsServiceInterface.getUserLocation(userName));
+        return objectMapper.writeValueAsString(gpsServiceInterface.getUserLocation(userName));
     }
 
     @GetMapping("/getAttraction")
-    public String getAttraction(@RequestParam String attractionName) {
+    public String getAttraction(@RequestParam String attractionName) throws JsonProcessingException {
         logger.info("getAttraction(" + attractionName + ")");
 
-        return JsonStream.serialize(gpsServiceInterface.getAttraction(attractionName));
+        return objectMapper.writeValueAsString(gpsServiceInterface.getAttraction(attractionName));
     }
 
     @RequestMapping("/getAllCurrentLocations")
-    public String getAllCurrentLocations() {
+    public String getAllCurrentLocations() throws JsonProcessingException {
         logger.info("getAllCurrentLocations()");
 
-        return JsonStream.serialize(gpsServiceInterface.getAllCurrentLocations());
+        return objectMapper.writeValueAsString(gpsServiceInterface.getAllCurrentLocations());
     }
 
     @RequestMapping("/getNearbyAttractions")
-    public String getNearbyAttractions(@RequestParam String userName) {
+    public String getNearbyAttractions(@RequestParam String userName) throws JsonProcessingException {
         logger.info("getNearbyAttractions(" + userName + ")");
 
         VisitedLocation visitedLocation = gpsServiceInterface.getUserLocation(userName);
 
-        return JsonStream.serialize(gpsServiceInterface.getNearByAttractions(userName, visitedLocation));
+        return objectMapper.writeValueAsString(gpsServiceInterface.getNearByAttractions(userName, visitedLocation));
     }
 }

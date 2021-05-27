@@ -19,18 +19,16 @@ public class TripPricerService implements TripPricerServiceInterface {
 
     private UserProxy userProxy;
 
-    private TripPricer tripPricer;
+    private TripPricer tripPricer = new TripPricer();
 
     public TripPricerService() {
         logger.info("TripPricerService()");
-
-        tripPricer = new TripPricer();
     }
 
-    public TripPricerService(TripPricer tripPricer) {
-        logger.info("TripPricerService(" + tripPricer + ")");
+    public TripPricerService(UserProxy userProxy) {
+        logger.info("TripPricerService(" + userProxy + ")");
 
-        this.tripPricer = tripPricer;
+        this.userProxy = userProxy;
     }
 
     public List<Provider> getTripDeals(String userName) {

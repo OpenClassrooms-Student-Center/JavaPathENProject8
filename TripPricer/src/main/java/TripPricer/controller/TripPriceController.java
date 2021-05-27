@@ -2,7 +2,8 @@ package TripPricer.controller;
 
 import TripPricer.service.TripPricerService;
 import TripPricer.service.TripPricerServiceInterface;
-import com.jsoniter.output.JsonStream;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TripPriceController {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
@@ -29,9 +32,9 @@ public class TripPriceController {
     }
 
     @RequestMapping("/getTripDeals")
-    public String getTripDeals(@RequestParam String userName) {
+    public String getTripDeals(@RequestParam String userName) throws JsonProcessingException {
         logger.info("getTripDeals(" + userName + ")");
 
-        return JsonStream.serialize(tripPricerServiceInterface.getTripDeals(userName));
+        return objectMapper.writeValueAsString(tripPricerServiceInterface.getTripDeals(userName));
     }
 }
