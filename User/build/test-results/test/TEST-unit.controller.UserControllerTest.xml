@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="unit.controller.UserControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-05-27T17:19:03" hostname="PC-ANTOINE" time="0.302">
+  <properties/>
+  <testcase name="addToVisitedLocations" classname="unit.controller.UserControllerTest" time="0.278"/>
+  <testcase name="getAllUser" classname="unit.controller.UserControllerTest" time="0.023"/>
+  <system-out><![CDATA[19:19:03.427 [Test worker] INFO UserController - UserController(Mock for UserServiceInterface, hashCode: 1639829524)
+19:19:03.511 [Test worker] INFO UserController - addToVisitedLocations(userName,10.0,20.0,01/01/2021)
+19:19:03.530 [Test worker] INFO UserController - UserController(Mock for UserServiceInterface, hashCode: 1353507536)
+19:19:03.531 [Test worker] INFO UserController - getAllUser()
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

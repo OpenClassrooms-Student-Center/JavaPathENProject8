@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="unit.service.RewardServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-27T17:17:44" hostname="PC-ANTOINE" time="0.165">
+  <properties/>
+  <testcase name="getAttraction" classname="unit.service.RewardServiceTest" time="0.165"/>
+  <system-out><![CDATA[19:17:44.997 [Test worker] INFO RewardService - RewardService(Mock for UserProxy, hashCode: 2143323906,Mock for GpsProxy, hashCode: 1711912943)
+19:17:45.060 [Test worker] INFO RewardService - getRewardPoints(attractionName,userName)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GpsService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">GPS</a> &gt; <a href="index.source.html" class="el_package">gps.service</a> &gt; <span class="el_source">GpsService.java</span></div><h1>GpsService.java</h1><pre class="source lang-java linenums">package gps.service;
+
+import gps.model.User;
+import gps.model.UserNearestAttraction;
+import gps.proxy.RewardProxy;
+import gps.proxy.UserProxy;
+import gpsUtil.GpsUtil;
+import gpsUtil.location.Attraction;
+import gpsUtil.location.Location;
+import gpsUtil.location.VisitedLocation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+
+@Service
+public class GpsService implements GpsServiceInterface {
+
+<span class="pc" id="L20">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+
+    private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
+
+    private UserProxy userProxy;
+    private RewardProxy rewardProxy;
+
+<span class="pc" id="L27">    private GpsUtil gpsUtil = new GpsUtil();</span>
+
+<span class="nc" id="L29">    public GpsService() {</span>
+<span class="nc" id="L30">        logger.info(&quot;GpsService()&quot;);</span>
+<span class="nc" id="L31">    }</span>
+
+<span class="fc" id="L33">    public GpsService(UserProxy userProxy, RewardProxy rewardProxy) {</span>
+<span class="fc" id="L34">        logger.info(&quot;GpsService(&quot; + userProxy + &quot;,&quot; + rewardProxy + &quot;)&quot;);</span>
+
+<span class="fc" id="L36">        this.userProxy = userProxy;</span>
+<span class="fc" id="L37">        this.rewardProxy = rewardProxy;</span>
+<span class="fc" id="L38">    }</span>
+
+    @Override
+    public VisitedLocation getUserLocation(String userName) {
+<span class="fc" id="L42">        logger.info(&quot;getUserLocation(&quot; + userName + &quot;)&quot;);</span>
+
+        VisitedLocation visitedLocation;
+
+<span class="fc" id="L46">        User user = userProxy.getUser(userName);</span>
+
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if (user.getVisitedLocations().size() &lt;= 0) {</span>
+
+<span class="nc" id="L50">            visitedLocation = gpsUtil.getUserLocation(user.getUserId());</span>
+
+<span class="nc" id="L52">            userProxy.addToVisitedLocations(userName, visitedLocation);</span>
+<span class="nc" id="L53">            rewardProxy.calculateRewards(userName);</span>
+        }
+
+        else {
+
+<span class="nc" id="L58">            visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);</span>
+        }
+
+<span class="nc" id="L61">        return visitedLocation;</span>
+    }
+
+    @Override
+    public Attraction getAttraction(String attractionName) {
+
+<span class="fc" id="L67">        Attraction attraction = null;</span>
+
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        for (Attraction a : gpsUtil.getAttractions()) {</span>
+
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">            if (a.attractionName.equals(attractionName)) {</span>
+
+<span class="fc" id="L73">                attraction = a;</span>
+<span class="fc" id="L74">                break;</span>
+            }
+<span class="nc" id="L76">        }</span>
+
+<span class="fc" id="L78">        return attraction;</span>
+    }
+
+    @Override
+    public Map&lt;UUID, VisitedLocation&gt; getAllCurrentLocations() {
+<span class="fc" id="L83">        logger.info(&quot;getAllCurrentLocations()&quot;);</span>
+
+<span class="fc" id="L85">        Map&lt;UUID, VisitedLocation&gt; visitedLocationMap = new HashMap&lt;&gt;();</span>
+
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        for (User u : userProxy.getAllUser()) {</span>
+
+<span class="fc" id="L89">            visitedLocationMap.put(u.getUserId(), u.getVisitedLocations().get(u.getVisitedLocations().size()-1));</span>
+<span class="fc" id="L90">        }</span>
+
+<span class="fc" id="L92">        return visitedLocationMap;</span>
+    }
+
+    @Override
+    public List&lt;UserNearestAttraction&gt; getNearByAttractions(String userName, VisitedLocation visitedLocation) {
+<span class="nc" id="L97">        logger.info(&quot;getNearByAttractions(&quot; + visitedLocation + &quot;)&quot;);</span>
+
+<span class="nc" id="L99">        Map&lt;Double, Attraction&gt; attractionMap = new TreeMap&lt;Double, Attraction&gt;();</span>
+
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        for (Attraction attraction : gpsUtil.getAttractions()) {</span>
+
+<span class="nc" id="L103">            double lat1 = Math.toRadians(attraction.latitude);</span>
+<span class="nc" id="L104">            double lon1 = Math.toRadians(attraction.longitude);</span>
+<span class="nc" id="L105">            double lat2 = Math.toRadians(visitedLocation.location.latitude);</span>
+<span class="nc" id="L106">            double lon2 = Math.toRadians(visitedLocation.location.longitude);</span>
+
+<span class="nc" id="L108">            double angle = Math.acos(Math.sin(lat1) * Math.sin(lat2)</span>
+<span class="nc" id="L109">                    + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));</span>
+
+<span class="nc" id="L111">            double nauticalMiles = 60 * Math.toDegrees(angle);</span>
+<span class="nc" id="L112">            double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;</span>
+
+<span class="nc" id="L114">            attractionMap.put(statuteMiles, attraction);</span>
+<span class="nc" id="L115">        }</span>
+
+<span class="nc" id="L117">        List&lt;UserNearestAttraction&gt; userNearestAttractionList = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        for (Map.Entry&lt;Double, Attraction&gt; entry : attractionMap.entrySet()) {</span>
+
+<span class="nc" id="L121">            String attractionName = entry.getValue().attractionName;</span>
+<span class="nc" id="L122">            Location attractionLocation = new Location(entry.getValue().latitude, entry.getValue().longitude);</span>
+<span class="nc" id="L123">            Location userLocation = visitedLocation.location;</span>
+<span class="nc" id="L124">            double attractionMilesDistance = entry.getKey();</span>
+<span class="nc" id="L125">            int rewardPoints = rewardProxy.getRewardPoints(attractionName, userName);</span>
+
+<span class="nc" id="L127">            userNearestAttractionList.add(new UserNearestAttraction(attractionName,</span>
+                    attractionLocation, userLocation, attractionMilesDistance, rewardPoints));
+
+<span class="nc bnc" id="L130" title="All 2 branches missed.">            if (userNearestAttractionList.size() &gt;= 5) {</span>
+
+<span class="nc" id="L132">                break;</span>
+            }
+<span class="nc" id="L134">        }</span>
+
+<span class="nc" id="L136">        return userNearestAttractionList;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
