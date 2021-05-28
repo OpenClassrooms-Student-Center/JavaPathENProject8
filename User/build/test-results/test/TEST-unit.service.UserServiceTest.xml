@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.service.UserServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-05-27T17:19:03" hostname="PC-ANTOINE" time="0.07">
+<testsuite name="unit.service.UserServiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-05-28T17:15:13" hostname="PC-ANTOINE" time="0.029">
   <properties/>
-  <testcase name="addUser" classname="unit.service.UserServiceTest" time="0.004"/>
+  <testcase name="addUser" classname="unit.service.UserServiceTest" time="0.001"/>
   <testcase name="addToVisitedLocations" classname="unit.service.UserServiceTest" time="0.001"/>
   <testcase name="getUser" classname="unit.service.UserServiceTest" time="0.0"/>
-  <testcase name="getAllUser" classname="unit.service.UserServiceTest" time="0.001"/>
-  <testcase name="addUserReward" classname="unit.service.UserServiceTest" time="0.061"/>
-  <system-out><![CDATA[19:19:03.824 [Test worker] INFO UserService - UserService(Mock for UserRepositoryInterface, hashCode: 1939336954)
-19:19:03.826 [Test worker] INFO UserService - addUser(Mock for User, hashCode: 1889756507)
-19:19:03.827 [Test worker] INFO UserService - UserService(Mock for UserRepositoryInterface, hashCode: 1232915598)
-19:19:03.828 [Test worker] INFO UserService - addToVisitedLocations(userName,Mock for VisitedLocation, hashCode: 843129053)
-19:19:03.829 [Test worker] INFO UserService - UserService(Mock for UserRepositoryInterface, hashCode: 502694567)
-19:19:03.829 [Test worker] INFO UserService - getUser(userName)
-19:19:03.830 [Test worker] INFO UserService - UserService(Mock for UserRepositoryInterface, hashCode: 1980335712)
-19:19:03.830 [Test worker] INFO UserService - getAllUser()
-19:19:03.831 [Test worker] INFO UserService - UserService(Mock for UserRepositoryInterface, hashCode: 924038345)
-19:19:03.892 [Test worker] INFO UserService - addUserReward(userName,Mock for UserReward, hashCode: 780678697)
+  <testcase name="getAllUser" classname="unit.service.UserServiceTest" time="0.0"/>
+  <testcase name="addUserReward" classname="unit.service.UserServiceTest" time="0.025"/>
+  <system-out><![CDATA[19:15:13.667 [Test worker] INFO UserService - UserService(Mock for UserRepositoryInterface, hashCode: 787542442)
+19:15:13.667 [Test worker] INFO UserService - addUser(Mock for User, hashCode: 378333928)
+19:15:13.668 [Test worker] INFO UserService - UserService(Mock for UserRepositoryInterface, hashCode: 1723945622)
+19:15:13.669 [Test worker] INFO UserService - addToVisitedLocations(userName,Mock for VisitedLocation, hashCode: 884286726)
+19:15:13.669 [Test worker] INFO UserService - UserService(Mock for UserRepositoryInterface, hashCode: 1485604068)
+19:15:13.670 [Test worker] INFO UserService - getUser(userName)
+19:15:13.670 [Test worker] INFO UserService - UserService(Mock for UserRepositoryInterface, hashCode: 1755056821)
+19:15:13.671 [Test worker] INFO UserService - getAllUser()
+19:15:13.671 [Test worker] INFO UserService - UserService(Mock for UserRepositoryInterface, hashCode: 1465621429)
+19:15:13.695 [Test worker] INFO UserService - addUserReward(userName,Mock for UserReward, hashCode: 361400863)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

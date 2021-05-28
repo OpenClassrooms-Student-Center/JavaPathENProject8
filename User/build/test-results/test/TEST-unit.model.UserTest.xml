@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.model.UserTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-05-27T17:19:03" hostname="PC-ANTOINE" time="0.064">
+<testsuite name="unit.model.UserTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-05-28T17:15:13" hostname="PC-ANTOINE" time="0.044">
   <properties/>
-  <testcase name="setAndGetUserId" classname="unit.model.UserTest" time="0.001"/>
-  <testcase name="setAndGetUserRewards" classname="unit.model.UserTest" time="0.0"/>
+  <testcase name="setAndGetUserId" classname="unit.model.UserTest" time="0.0"/>
+  <testcase name="setAndGetUserRewards" classname="unit.model.UserTest" time="0.001"/>
   <testcase name="setAndGetUserName" classname="unit.model.UserTest" time="0.0"/>
-  <testcase name="setAndGetUserPreferences" classname="unit.model.UserTest" time="0.057"/>
-  <testcase name="setAndGetLatestLocationTimestamp" classname="unit.model.UserTest" time="0.0"/>
+  <testcase name="setAndGetUserPreferences" classname="unit.model.UserTest" time="0.041"/>
+  <testcase name="setAndGetLatestLocationTimestamp" classname="unit.model.UserTest" time="0.001"/>
   <testcase name="setAndGetEmailAddress" classname="unit.model.UserTest" time="0.0"/>
-  <testcase name="setAndGetPhoneNumber" classname="unit.model.UserTest" time="0.001"/>
+  <testcase name="setAndGetPhoneNumber" classname="unit.model.UserTest" time="0.0"/>
   <testcase name="setAndGetTripDeals" classname="unit.model.UserTest" time="0.001"/>
   <testcase name="setAndGetVisitedLocations" classname="unit.model.UserTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>

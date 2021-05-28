@@ -1,6 +1,5 @@
 package user.service;
 
-import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,8 +10,6 @@ import user.repository.UserRepository;
 import user.repository.UserRepositoryInterface;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserServiceInterface {
