@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="unit.controller.GpsControllerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-05-31T14:10:42" hostname="PC-ANTOINE" time="0.123">
+  <properties/>
+  <testcase name="getUserLocation" classname="unit.controller.GpsControllerTest" time="0.094"/>
+  <testcase name="getAttraction" classname="unit.controller.GpsControllerTest" time="0.006"/>
+  <testcase name="getAllCurrentLocations" classname="unit.controller.GpsControllerTest" time="0.021"/>
+  <system-out><![CDATA[16:10:42.970 [Test worker] INFO GpsController - GpsController(Mock for GpsServiceInterface, hashCode: 581828106)
+16:10:42.971 [Test worker] INFO GpsController - getLocation(userName)
+16:10:43.064 [Test worker] INFO GpsController - GpsController(Mock for GpsServiceInterface, hashCode: 1252900341)
+16:10:43.065 [Test worker] INFO GpsController - getAttraction(attractionName)
+16:10:43.071 [Test worker] INFO GpsController - GpsController(Mock for GpsServiceInterface, hashCode: 161734977)
+16:10:43.072 [Test worker] INFO GpsController - getAllCurrentLocations()
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

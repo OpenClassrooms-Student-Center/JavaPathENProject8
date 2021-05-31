@@ -47,10 +47,10 @@ public class GpsService implements GpsServiceInterface {
 
 <span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if (user.getVisitedLocations().size() &lt;= 0) {</span>
 
-<span class="nc" id="L50">            visitedLocation = gpsUtil.getUserLocation(user.getUserId());</span>
+<span class="fc" id="L50">            visitedLocation = gpsUtil.getUserLocation(user.getUserId());</span>
 
-<span class="nc" id="L52">            userProxy.addToVisitedLocations(userName, visitedLocation);</span>
-<span class="nc" id="L53">            rewardProxy.calculateRewards(userName);</span>
+<span class="fc" id="L52">            userProxy.addToVisitedLocations(userName, visitedLocation);</span>
+<span class="fc" id="L53">            rewardProxy.calculateRewards(userName);</span>
         }
 
         else {
@@ -58,7 +58,7 @@ public class GpsService implements GpsServiceInterface {
 <span class="nc" id="L58">            visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);</span>
         }
 
-<span class="nc" id="L61">        return visitedLocation;</span>
+<span class="fc" id="L61">        return visitedLocation;</span>
     }
 
     @Override

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="unit.model.UserPreferencesTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-05-31T14:10:43" hostname="PC-ANTOINE" time="0.173">
+  <properties/>
+  <testcase name="setAndGetTicketQuantity" classname="unit.model.UserPreferencesTest" time="0.144"/>
+  <testcase name="setAndGetCurrency" classname="unit.model.UserPreferencesTest" time="0.026"/>
+  <testcase name="setAndGetLowerPricePoint" classname="unit.model.UserPreferencesTest" time="0.0"/>
+  <testcase name="setAndGetNumberOfChildren" classname="unit.model.UserPreferencesTest" time="0.001"/>
+  <testcase name="setAndGetHighPricePoint" classname="unit.model.UserPreferencesTest" time="0.001"/>
+  <testcase name="setAndGetNumberOfAdults" classname="unit.model.UserPreferencesTest" time="0.0"/>
+  <testcase name="setAndGetTripDuration" classname="unit.model.UserPreferencesTest" time="0.001"/>
+  <testcase name="setAndGetAttractionProximity" classname="unit.model.UserPreferencesTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[mai 31, 2021 4:10:43 PM org.javamoney.moneta.DefaultMonetaryContextFactory createMonetaryContextNonNullConfig
+INFO: Using custom MathContext: precision=256, roundingMode=HALF_EVEN
+]]></system-err>
+</testsuite>

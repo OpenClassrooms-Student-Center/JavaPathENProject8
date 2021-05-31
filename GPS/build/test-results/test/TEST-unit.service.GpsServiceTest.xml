@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.service.GpsServiceTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2021-05-27T17:53:16" hostname="PC-ANTOINE" time="0.359">
+<testsuite name="unit.service.GpsServiceTest" tests="3" skipped="0" failures="1" errors="0" timestamp="2021-05-31T14:10:42" hostname="PC-ANTOINE" time="0.395">
   <properties/>
-  <testcase name="getUserLocation" classname="unit.service.GpsServiceTest" time="0.359">
-    <failure message="java.lang.NumberFormatException: For input string: &quot;105,329294&quot;" type="java.lang.NumberFormatException">java.lang.NumberFormatException: For input string: &quot;105,329294&quot;
+  <testcase name="getUserLocation" classname="unit.service.GpsServiceTest" time="0.38">
+    <failure message="java.lang.NumberFormatException: For input string: &quot;30,263730&quot;" type="java.lang.NumberFormatException">java.lang.NumberFormatException: For input string: &quot;30,263730&quot;
 	at java.base/jdk.internal.math.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:2054)
 	at java.base/jdk.internal.math.FloatingDecimal.parseDouble(FloatingDecimal.java:110)
 	at java.base/java.lang.Double.parseDouble(Double.java:549)
@@ -59,8 +59,13 @@
 	at java.base/java.lang.Thread.run(Thread.java:835)
 </failure>
   </testcase>
-  <system-out><![CDATA[19:53:16.896 [Test worker] INFO GpsService - GpsService(Mock for UserProxy, hashCode: 907595946,Mock for RewardProxy, hashCode: 1307448181)
-19:53:16.996 [Test worker] INFO GpsService - getUserLocation(userName)
+  <testcase name="getAttraction" classname="unit.service.GpsServiceTest" time="0.013"/>
+  <testcase name="getAllCurrentLocations" classname="unit.service.GpsServiceTest" time="0.001"/>
+  <system-out><![CDATA[16:10:42.266 [Test worker] INFO GpsService - GpsService(Mock for UserProxy, hashCode: 2069957846,Mock for RewardProxy, hashCode: 471837020)
+16:10:42.355 [Test worker] INFO GpsService - getUserLocation(userName)
+16:10:42.429 [Test worker] INFO GpsService - GpsService(Mock for UserProxy, hashCode: 1086903681,Mock for RewardProxy, hashCode: 660407112)
+16:10:42.442 [Test worker] INFO GpsService - GpsService(Mock for UserProxy, hashCode: 630182225,Mock for RewardProxy, hashCode: 952763541)
+16:10:42.443 [Test worker] INFO GpsService - getAllCurrentLocations()
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
