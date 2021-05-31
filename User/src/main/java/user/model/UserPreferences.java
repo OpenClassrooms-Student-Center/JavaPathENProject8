@@ -19,6 +19,17 @@ public class UserPreferences {
 
 	public UserPreferences() {}
 
+	public UserPreferences(int tripDuration, int ticketQuantity, int numberOfAdults, int numberOfChildren, int attractionProximity, Money highPricePoint, Money lowerPricePoint) {
+
+		this.tripDuration = tripDuration;
+		this.ticketQuantity = ticketQuantity;
+		this.numberOfAdults = numberOfAdults;
+		this.numberOfChildren = numberOfChildren;
+		this.attractionProximity = attractionProximity;
+		this.highPricePoint = highPricePoint;
+		this.lowerPricePoint = lowerPricePoint;
+	}
+
 	public int getTripDuration() {
 		return tripDuration;
 	}

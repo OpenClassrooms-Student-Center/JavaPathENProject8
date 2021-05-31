@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import user.model.User;
+import user.model.UserPreferences;
 import user.model.UserReward;
 import user.repository.UserRepository;
 import user.repository.UserRepositoryInterface;
@@ -72,6 +73,14 @@ public class UserService implements UserServiceInterface {
                 user.getUserRewards().add(userReward);
             }
         }
+    }
+
+    @Override
+    public void setUserPreferences(String userName, UserPreferences userPreferences) {
+
+        User user = userRepositoryInterface.getUser(userName);
+
+        user.setUserPreferences(userPreferences);
     }
 
     @Override
