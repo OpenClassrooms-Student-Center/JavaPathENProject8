@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import user.model.User;
+import user.model.UserPreferences;
 import user.model.UserReward;
 import user.repository.UserRepositoryInterface;
 import user.service.UserService;
@@ -77,6 +78,23 @@ public class UserServiceTest {
 
         //THEN
         Assert.assertTrue(userRewardList.contains(userReward));
+    }
+
+    @Test
+    public void setUserPreferences() {
+
+        //GIVEN
+        String userName = "userName";
+        User user = Mockito.mock(User.class);
+        UserPreferences userPreferences = Mockito.mock(UserPreferences.class);
+
+        //WHEN
+        Mockito.when(userRepositoryInterface.getUser(userName)).thenReturn(user);
+
+        userService.setUserPreferences(userName, userPreferences);
+
+        //THEN
+        Mockito.verify(user, Mockito.times(1)).setUserPreferences(userPreferences);
     }
 
     @Test

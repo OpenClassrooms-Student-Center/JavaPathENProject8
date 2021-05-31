@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.repository.UserRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-05-28T17:15:13" hostname="PC-ANTOINE" time="0.003">
+<testsuite name="unit.repository.UserRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-05-31T16:03:15" hostname="PC-ANTOINE" time="0.004">
   <properties/>
   <testcase name="getUser" classname="unit.repository.UserRepositoryTest" time="0.002"/>
   <testcase name="getAllUser" classname="unit.repository.UserRepositoryTest" time="0.001"/>
-  <system-out><![CDATA[19:15:13.649 [Test worker] INFO UserRepository - UserRepository()
-19:15:13.650 [Test worker] INFO UserRepository - addUser(Mock for User, hashCode: 617520261)
-19:15:13.650 [Test worker] INFO UserRepository - getUser(userName)
-19:15:13.651 [Test worker] INFO UserRepository - UserRepository()
-19:15:13.651 [Test worker] INFO UserRepository - addUser(Mock for User, hashCode: 2027623013)
-19:15:13.652 [Test worker] INFO UserRepository - getAllUser()
+  <system-out><![CDATA[18:03:15.205 [Test worker] INFO UserRepository - UserRepository()
+18:03:15.206 [Test worker] INFO UserRepository - addUser(Mock for User, hashCode: 870875211)
+18:03:15.206 [Test worker] INFO UserRepository - getUser(userName)
+18:03:15.207 [Test worker] INFO UserRepository - UserRepository()
+18:03:15.208 [Test worker] INFO UserRepository - addUser(Mock for User, hashCode: 2018281466)
+18:03:15.208 [Test worker] INFO UserRepository - getAllUser()
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
