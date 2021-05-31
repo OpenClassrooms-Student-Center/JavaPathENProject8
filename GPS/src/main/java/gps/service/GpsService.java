@@ -96,6 +96,8 @@ public class GpsService implements GpsServiceInterface {
     public List<UserNearestAttraction> getNearByAttractions(String userName, VisitedLocation visitedLocation) {
         logger.info("getNearByAttractions(" + visitedLocation + ")");
 
+        User user = userProxy.getUser(userName);
+
         Map<Double, Attraction> attractionMap = new TreeMap<Double, Attraction>();
 
         for (Attraction attraction : gpsUtil.getAttractions()) {
@@ -108,7 +110,7 @@ public class GpsService implements GpsServiceInterface {
             double angle = Math.acos(Math.sin(lat1) * Math.sin(lat2)
                     + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));
 
-            double nauticalMiles = 60 * Math.toDegrees(angle);
+            double nauticalMiles = user.getUserPreferences().getAttractionProximity() * Math.toDegrees(angle);
             double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
 
             attractionMap.put(statuteMiles, attraction);
