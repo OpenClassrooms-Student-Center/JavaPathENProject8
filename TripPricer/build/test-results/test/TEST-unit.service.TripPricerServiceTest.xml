@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.service.TripPricerServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-27T17:18:42" hostname="PC-ANTOINE" time="0.081">
+<testsuite name="unit.service.TripPricerServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-03T06:31:05" hostname="PC-ANTOINE" time="0.138">
   <properties/>
-  <testcase name="getTripDeals" classname="unit.service.TripPricerServiceTest" time="0.081"/>
-  <system-out><![CDATA[19:18:42.722 [Test worker] INFO TripPricerService - TripPricerService(Mock for UserProxy, hashCode: 1339597281)
-19:18:42.791 [Test worker] INFO TripPricerService - getTripDeals(userName)
+  <testcase name="getTripDeals" classname="unit.service.TripPricerServiceTest" time="0.138"/>
+  <system-out><![CDATA[08:31:05.119 [Test worker] INFO TripPricerService - TripPricerService(Mock for UserProxy, hashCode: 604750728)
+08:31:05.204 [Test worker] INFO TripPricerService - getTripDeals(userName)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

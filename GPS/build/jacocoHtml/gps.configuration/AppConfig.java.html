@@ -2,26 +2,16 @@
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 
 @Configuration
-<span class="nc" id="L11">public class AppConfig {</span>
+<span class="nc" id="L9">public class AppConfig {</span>
 
     @Bean
     public Locale getLocale() {
-<span class="nc" id="L15">        Locale.setDefault(Locale.US);</span>
-<span class="nc" id="L16">        return Locale.getDefault();</span>
-    }
-
-    @Bean
-    public LocaleResolver localeResolver() {
-<span class="nc" id="L21">        SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();</span>
-<span class="nc" id="L22">        Locale locale = Locale.US;</span>
-<span class="nc" id="L23">        sessionLocaleResolver.setDefaultLocale(locale);</span>
-<span class="nc" id="L24">        return sessionLocaleResolver;</span>
+<span class="nc" id="L13">        Locale.setDefault(Locale.US);</span>
+<span class="nc" id="L14">        return Locale.getDefault();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

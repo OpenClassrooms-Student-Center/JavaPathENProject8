@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +18,16 @@ public class RewardController {
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
+    @Autowired
     private RewardServiceInterface rewardServiceInterface;
+
+    @Autowired
+    private RewardService rewardService;
 
     public RewardController() {
         logger.info("RewardController()");
 
-        rewardServiceInterface = new RewardService();
+        rewardServiceInterface = rewardService;
     }
 
     public RewardController(RewardServiceInterface rewardServiceInterface) {

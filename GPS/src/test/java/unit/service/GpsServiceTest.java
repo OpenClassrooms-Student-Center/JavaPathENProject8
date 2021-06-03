@@ -24,6 +24,8 @@ public class GpsServiceTest {
     @Before
     public void beforeEach() {
 
+        Locale.setDefault(Locale.US);
+
         gpsService = new GpsService(userProxy, rewardProxy);
     }
 
@@ -41,6 +43,8 @@ public class GpsServiceTest {
         Mockito.when(userProxy.getUser(userName)).thenReturn(user);
         Mockito.when(user.getUserId()).thenReturn(UUID.randomUUID());
         Mockito.when(user.getVisitedLocations()).thenReturn(visitedLocationList);
+
+        visitedLocationList.add(visitedLocation);
 
         //THEN
         Assert.assertTrue(gpsService.getUserLocation(userName) == visitedLocation);

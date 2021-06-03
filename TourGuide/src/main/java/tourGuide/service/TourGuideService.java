@@ -30,7 +30,7 @@ import tripPricer.TripPricer;
 @Service
 public class TourGuideService {
 
-	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
+	private final Logger logger = LoggerFactory.getLogger(TourGuideService.class);
 
 	private final GpsUtil gpsUtil;
 	private final RewardsService rewardsService;

@@ -3,6 +3,7 @@ package user.service;
 import gpsUtil.location.VisitedLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import user.model.User;
 import user.model.UserPreferences;
@@ -17,12 +18,16 @@ public class UserService implements UserServiceInterface {
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
+    @Autowired
     private UserRepositoryInterface userRepositoryInterface;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public UserService() {
         logger.info("UserService()");
 
-        userRepositoryInterface = new UserRepository();
+        userRepositoryInterface = userRepository;
     }
 
     public UserService(UserRepositoryInterface userRepositoryInterface) {
@@ -77,6 +82,7 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public void setUserPreferences(String userName, UserPreferences userPreferences) {
+        logger.info("setUserPreferences(" + userName + "," + userPreferences + ")");
 
         User user = userRepositoryInterface.getUser(userName);
 

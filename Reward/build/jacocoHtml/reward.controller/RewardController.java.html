@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,36 +14,40 @@ import reward.service.RewardServiceInterface;
 @RestController
 public class RewardController {
 
-<span class="pc" id="L16">    private ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="pc" id="L17">    private ObjectMapper objectMapper = new ObjectMapper();</span>
 
-<span class="pc" id="L18">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="pc" id="L19">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
+    @Autowired
     private RewardServiceInterface rewardServiceInterface;
 
-<span class="nc" id="L22">    public RewardController() {</span>
-<span class="nc" id="L23">        logger.info(&quot;RewardController()&quot;);</span>
+    @Autowired
+    private RewardService rewardService;
 
-<span class="nc" id="L25">        rewardServiceInterface = new RewardService();</span>
-<span class="nc" id="L26">    }</span>
+<span class="nc" id="L27">    public RewardController() {</span>
+<span class="nc" id="L28">        logger.info(&quot;RewardController()&quot;);</span>
 
-<span class="fc" id="L28">    public RewardController(RewardServiceInterface rewardServiceInterface) {</span>
-<span class="fc" id="L29">        logger.info(&quot;RewardController(&quot; + rewardServiceInterface + &quot;)&quot;);</span>
+<span class="nc" id="L30">        rewardServiceInterface = rewardService;</span>
+<span class="nc" id="L31">    }</span>
 
-<span class="fc" id="L31">        this.rewardServiceInterface = rewardServiceInterface;</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L33">    public RewardController(RewardServiceInterface rewardServiceInterface) {</span>
+<span class="fc" id="L34">        logger.info(&quot;RewardController(&quot; + rewardServiceInterface + &quot;)&quot;);</span>
+
+<span class="fc" id="L36">        this.rewardServiceInterface = rewardServiceInterface;</span>
+<span class="fc" id="L37">    }</span>
 
     @RequestMapping(&quot;/getRewardPoints&quot;)
     public String getRewardPoints(@RequestParam String attractionName, @RequestParam String userName) throws JsonProcessingException {
-<span class="fc" id="L36">        logger.info(&quot;getRewardPoints(&quot; + attractionName + &quot;,&quot; + userName + &quot;)&quot;);</span>
+<span class="fc" id="L41">        logger.info(&quot;getRewardPoints(&quot; + attractionName + &quot;,&quot; + userName + &quot;)&quot;);</span>
 
-<span class="fc" id="L38">        return objectMapper.writeValueAsString(rewardServiceInterface.getRewardPoints(attractionName, userName));</span>
+<span class="fc" id="L43">        return objectMapper.writeValueAsString(rewardServiceInterface.getRewardPoints(attractionName, userName));</span>
     }
 
     @RequestMapping(&quot;/calculateRewards&quot;)
     public String calculateRewards(@RequestParam String userName) throws JsonProcessingException {
-<span class="nc" id="L43">        logger.info(&quot;calculateRewards(&quot; + userName + &quot;)&quot;);</span>
+<span class="nc" id="L48">        logger.info(&quot;calculateRewards(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="nc" id="L45">        return objectMapper.writeValueAsString(rewardServiceInterface.calculateRewards(userName));</span>
+<span class="nc" id="L50">        return objectMapper.writeValueAsString(rewardServiceInterface.calculateRewards(userName));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

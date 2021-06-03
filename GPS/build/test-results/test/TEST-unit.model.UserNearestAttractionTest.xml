@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.model.UserNearestAttractionTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-05-31T16:05:12" hostname="PC-ANTOINE" time="0.017">
+<testsuite name="unit.model.UserNearestAttractionTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-06-03T06:29:59" hostname="PC-ANTOINE" time="0.02">
   <properties/>
   <testcase name="setAndGetAttractionName" classname="unit.model.UserNearestAttractionTest" time="0.0"/>
-  <testcase name="setAndGetAttractionLocation" classname="unit.model.UserNearestAttractionTest" time="0.016"/>
+  <testcase name="setAndGetAttractionLocation" classname="unit.model.UserNearestAttractionTest" time="0.019"/>
   <testcase name="setAndGetUserLocation" classname="unit.model.UserNearestAttractionTest" time="0.0"/>
   <testcase name="setAndGetAttractionMilesDistance" classname="unit.model.UserNearestAttractionTest" time="0.0"/>
   <testcase name="setAndGetRewardPoints" classname="unit.model.UserNearestAttractionTest" time="0.0"/>

@@ -1,71 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.service.GpsServiceTest" tests="3" skipped="0" failures="1" errors="0" timestamp="2021-05-31T16:05:10" hostname="PC-ANTOINE" time="0.867">
+<testsuite name="unit.service.GpsServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-06-03T06:30:00" hostname="PC-ANTOINE" time="0.117">
   <properties/>
-  <testcase name="getUserLocation" classname="unit.service.GpsServiceTest" time="0.849">
-    <failure message="java.lang.NumberFormatException: For input string: &quot;-143,639285&quot;" type="java.lang.NumberFormatException">java.lang.NumberFormatException: For input string: &quot;-143,639285&quot;
-	at java.base/jdk.internal.math.FloatingDecimal.readJavaFormatString(FloatingDecimal.java:2054)
-	at java.base/jdk.internal.math.FloatingDecimal.parseDouble(FloatingDecimal.java:110)
-	at java.base/java.lang.Double.parseDouble(Double.java:549)
-	at gpsUtil.GpsUtil.getUserLocation(GpsUtil.java:30)
-	at gps.service.GpsService.getUserLocation(GpsService.java:50)
-	at unit.service.GpsServiceTest.getUserLocation(GpsServiceTest.java:46)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:106)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
-	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
-	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:66)
-	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:32)
-	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
-	at com.sun.proxy.$Proxy4.processTestClass(Unknown Source)
-	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:109)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
-	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:155)
-	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:137)
-	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:404)
-	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:63)
-	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:46)
-	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
-	at java.base/java.lang.Thread.run(Thread.java:835)
-</failure>
-  </testcase>
-  <testcase name="getAttraction" classname="unit.service.GpsServiceTest" time="0.015"/>
-  <testcase name="getAllCurrentLocations" classname="unit.service.GpsServiceTest" time="0.002"/>
-  <system-out><![CDATA[18:05:10.719 [Test worker] INFO GpsService - GpsService(Mock for UserProxy, hashCode: 291905881,Mock for RewardProxy, hashCode: 516598731)
-18:05:10.939 [Test worker] INFO GpsService - getUserLocation(userName)
-18:05:11.075 [Test worker] INFO GpsService - GpsService(Mock for UserProxy, hashCode: 1641888332,Mock for RewardProxy, hashCode: 811194644)
-18:05:11.090 [Test worker] INFO GpsService - GpsService(Mock for UserProxy, hashCode: 1296095685,Mock for RewardProxy, hashCode: 1599816638)
-18:05:11.091 [Test worker] INFO GpsService - getAllCurrentLocations()
+  <testcase name="getUserLocation" classname="unit.service.GpsServiceTest" time="0.09"/>
+  <testcase name="getAttraction" classname="unit.service.GpsServiceTest" time="0.025"/>
+  <testcase name="getAllCurrentLocations" classname="unit.service.GpsServiceTest" time="0.001"/>
+  <system-out><![CDATA[08:30:00.376 [Test worker] INFO GpsService - GpsService(Mock for UserProxy, hashCode: 94858906,Mock for RewardProxy, hashCode: 1133689508)
+08:30:00.444 [Test worker] INFO GpsService - getUserLocation(userName)
+08:30:00.445 [Test worker] INFO GpsService - GpsService(Mock for UserProxy, hashCode: 934769074,Mock for RewardProxy, hashCode: 1221798234)
+08:30:00.445 [Test worker] INFO GpsService - getAttraction(Disneyland)
+08:30:00.471 [Test worker] INFO GpsService - GpsService(Mock for UserProxy, hashCode: 1303411192,Mock for RewardProxy, hashCode: 1868102807)
+08:30:00.472 [Test worker] INFO GpsService - getAllCurrentLocations()
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

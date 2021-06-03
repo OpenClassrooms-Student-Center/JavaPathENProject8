@@ -10,6 +10,7 @@ import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -21,7 +22,10 @@ public class GpsService implements GpsServiceInterface {
 
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
+    @Autowired
     private UserProxy userProxy;
+
+    @Autowired
     private RewardProxy rewardProxy;
 
     private GpsUtil gpsUtil = new GpsUtil();
@@ -63,6 +67,7 @@ public class GpsService implements GpsServiceInterface {
 
     @Override
     public Attraction getAttraction(String attractionName) {
+        logger.info("getAttraction(" + attractionName + ")");
 
         Attraction attraction = null;
 

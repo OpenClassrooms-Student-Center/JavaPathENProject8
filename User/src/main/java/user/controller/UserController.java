@@ -8,6 +8,7 @@ import gpsUtil.location.VisitedLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.javamoney.moneta.Money;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import user.model.User;
 import user.model.UserPreferences;
@@ -28,12 +29,16 @@ public class UserController {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
+    @Autowired
     private UserServiceInterface userServiceInterface;
+
+    @Autowired
+    private UserService userService;
 
     public UserController() {
         logger.info("UserController()");
 
-        userServiceInterface = new UserService();
+        userServiceInterface = userService;
     }
 
     public UserController(UserServiceInterface userServiceInterface) {
@@ -98,8 +103,9 @@ public class UserController {
                                    @RequestParam int numberOfChildren, @RequestParam int attractionProximity,
                                    @RequestParam int highPricePoint, @RequestParam int lowerPricePoint) {
 
-        logger.info("addUserReward(" + userName + "," + tripDuration + "," + ticketQuantity + "," + numberOfAdults + ","
-                + numberOfChildren + "," + attractionProximity + "," + highPricePoint + "," + lowerPricePoint + ")");
+        logger.info("setUserPreferences(" + userName + "," + tripDuration + "," + ticketQuantity + ","
+                + numberOfAdults + "," + numberOfChildren + "," + attractionProximity + "," + highPricePoint
+                + "," + lowerPricePoint + ")");
 
         UserPreferences userPreferences = new UserPreferences(tripDuration, ticketQuantity, numberOfAdults,
                 numberOfChildren, attractionProximity, Money.of(highPricePoint, Monetary.getCurrency("USD")),

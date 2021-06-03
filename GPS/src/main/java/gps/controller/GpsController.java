@@ -7,24 +7,29 @@ import gps.service.GpsServiceInterface;
 import gpsUtil.location.VisitedLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class GpsController {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
+    @Autowired
     private GpsServiceInterface gpsServiceInterface;
+
+    @Autowired
+    private GpsService gpsService;
 
     public GpsController() {
         logger.info("GpsController()");
 
-        gpsServiceInterface = new GpsService();
+        gpsServiceInterface = gpsService;
     }
 
     public GpsController(GpsServiceInterface gpsServiceInterface) {

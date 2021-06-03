@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.controller.TripPricerControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-27T17:18:42" hostname="PC-ANTOINE" time="0.273">
+<testsuite name="unit.controller.TripPricerControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-03T06:31:04" hostname="PC-ANTOINE" time="0.277">
   <properties/>
-  <testcase name="getTripDeals" classname="unit.controller.TripPricerControllerTest" time="0.273"/>
-  <system-out><![CDATA[19:18:42.359 [Test worker] INFO TripPriceController - TripPriceController(Mock for TripPricerServiceInterface, hashCode: 474478373)
-19:18:42.373 [Test worker] INFO TripPriceController - getTripDeals(userName)
+  <testcase name="getTripDeals" classname="unit.controller.TripPricerControllerTest" time="0.277"/>
+  <system-out><![CDATA[08:31:04.688 [Test worker] INFO TripPriceController - TripPriceController(Mock for TripPricerServiceInterface, hashCode: 99024149)
+08:31:04.702 [Test worker] INFO TripPriceController - getTripDeals(userName)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
