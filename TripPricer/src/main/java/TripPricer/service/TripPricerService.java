@@ -4,6 +4,7 @@ import TripPricer.model.User;
 import TripPricer.proxy.UserProxy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
@@ -17,6 +18,7 @@ public class TripPricerService implements TripPricerServiceInterface {
 
     private static final String tripPricerApiKey = "test-server-api-key";
 
+    @Autowired
     private UserProxy userProxy;
 
     private TripPricer tripPricer = new TripPricer();

@@ -24,7 +24,6 @@ public class GpsService implements GpsServiceInterface {
 
     @Autowired
     private UserProxy userProxy;
-
     @Autowired
     private RewardProxy rewardProxy;
 

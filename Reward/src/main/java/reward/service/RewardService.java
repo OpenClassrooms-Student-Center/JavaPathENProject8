@@ -4,6 +4,7 @@ import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reward.model.User;
 import reward.model.UserReward;
@@ -19,7 +20,9 @@ public class RewardService implements RewardServiceInterface {
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
+    @Autowired
     private UserProxy userProxy;
+    @Autowired
     private GpsProxy gpsProxy;
 
     private RewardCentral rewardCentral = new RewardCentral();

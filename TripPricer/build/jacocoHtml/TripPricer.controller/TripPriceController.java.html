@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,29 +14,33 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TripPriceController {
 
-<span class="pc" id="L16">    private ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="pc" id="L17">    private ObjectMapper objectMapper = new ObjectMapper();</span>
 
-<span class="pc" id="L18">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="pc" id="L19">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
+    @Autowired
     private TripPricerServiceInterface tripPricerServiceInterface;
 
-<span class="nc" id="L22">    public TripPriceController() {</span>
-<span class="nc" id="L23">        logger.info(&quot;TripPriceController()&quot;);</span>
+    @Autowired
+    private TripPricerService tripPricerService;
 
-<span class="nc" id="L25">        tripPricerServiceInterface = new TripPricerService();</span>
-<span class="nc" id="L26">    }</span>
+<span class="nc" id="L27">    public TripPriceController() {</span>
+<span class="nc" id="L28">        logger.info(&quot;TripPriceController()&quot;);</span>
 
-<span class="fc" id="L28">    public TripPriceController(TripPricerServiceInterface tripPricerServiceInterface) {</span>
-<span class="fc" id="L29">        logger.info(&quot;TripPriceController(&quot; + tripPricerServiceInterface + &quot;)&quot;);</span>
+<span class="nc" id="L30">        tripPricerServiceInterface = tripPricerService;</span>
+<span class="nc" id="L31">    }</span>
 
-<span class="fc" id="L31">        this.tripPricerServiceInterface = tripPricerServiceInterface;</span>
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L33">    public TripPriceController(TripPricerServiceInterface tripPricerServiceInterface) {</span>
+<span class="fc" id="L34">        logger.info(&quot;TripPriceController(&quot; + tripPricerServiceInterface + &quot;)&quot;);</span>
+
+<span class="fc" id="L36">        this.tripPricerServiceInterface = tripPricerServiceInterface;</span>
+<span class="fc" id="L37">    }</span>
 
     @RequestMapping(&quot;/getTripDeals&quot;)
     public String getTripDeals(@RequestParam String userName) throws JsonProcessingException {
-<span class="fc" id="L36">        logger.info(&quot;getTripDeals(&quot; + userName + &quot;)&quot;);</span>
+<span class="fc" id="L41">        logger.info(&quot;getTripDeals(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="fc" id="L38">        return objectMapper.writeValueAsString(tripPricerServiceInterface.getTripDeals(userName));</span>
+<span class="fc" id="L43">        return objectMapper.writeValueAsString(tripPricerServiceInterface.getTripDeals(userName));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
