@@ -2,6 +2,9 @@ package gps.model;
 
 import gpsUtil.location.Location;
 
+/**
+ * This class stores the data of an user nearest attraction
+ */
 public class UserNearestAttraction {
 
     private String attractionName;

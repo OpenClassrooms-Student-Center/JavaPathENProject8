@@ -1,11 +1,15 @@
 package gps.model;
 
+import com.fasterxml.jackson.annotation.*;
 import org.javamoney.moneta.Money;
 
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 
-
+/**
+ * This class stores the data of an user preferences
+ */
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class UserPreferences {
 
 	private int tripDuration = 1;
@@ -19,6 +23,27 @@ public class UserPreferences {
 
 	public UserPreferences() {}
 
+/*
+	@JsonCreator
+	public UserPreferences(@JsonProperty("tripDuration") int tripDuration,
+						   @JsonProperty("ticketQuantity") int ticketQuantity,
+						   @JsonProperty("numberOfAdults") int numberOfAdults,
+						   @JsonProperty("numberOfChildren") int numberOfChildren,
+						   @JsonProperty("attractionProximity") int attractionProximity,
+						   @JsonProperty("currency") CurrencyUnit currency,
+						   @JsonProperty("highPricePoint") Money highPricePoint,
+						   @JsonProperty("lowerPricePoint") Money lowerPricePoint) {
+
+		this.tripDuration = tripDuration;
+		this.ticketQuantity = ticketQuantity;
+		this.numberOfAdults = numberOfAdults;
+		this.numberOfChildren = numberOfChildren;
+		this.attractionProximity = attractionProximity;
+		this.currency = currency;
+		this.highPricePoint = highPricePoint;
+		this.lowerPricePoint = lowerPricePoint;
+	}
+*/
 	public int getTripDuration() {
 		return tripDuration;
 	}

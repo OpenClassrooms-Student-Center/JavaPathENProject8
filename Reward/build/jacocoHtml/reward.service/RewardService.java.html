@@ -4,6 +4,7 @@ import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reward.model.User;
 import reward.model.UserReward;
@@ -14,59 +15,74 @@ import rewardCentral.RewardCentral;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class allows to interact with a RewardCentral
+ */
 @Service
 public class RewardService implements RewardServiceInterface {
 
-<span class="pc" id="L20">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="fc" id="L24">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
+    @Autowired
     private UserProxy userProxy;
+    @Autowired
     private GpsProxy gpsProxy;
 
-<span class="pc" id="L25">    private RewardCentral rewardCentral = new RewardCentral();</span>
+<span class="fc" id="L31">    private RewardCentral rewardCentral = new RewardCentral();</span>
 
-<span class="nc" id="L27">    public RewardService() {</span>
-<span class="nc" id="L28">        logger.info(&quot;RewardService()&quot;);</span>
-<span class="nc" id="L29">    }</span>
+    /**
+     * Creates a new RewardService
+     */
+<span class="fc" id="L36">    public RewardService() {</span>
+<span class="fc" id="L37">        logger.info(&quot;RewardService()&quot;);</span>
+<span class="fc" id="L38">    }</span>
 
-<span class="fc" id="L31">    public RewardService(UserProxy userProxy, GpsProxy gpsProxy) {</span>
-<span class="fc" id="L32">        logger.info(&quot;RewardService(&quot; + userProxy + &quot;,&quot; + gpsProxy + &quot;)&quot;);</span>
+    /**
+     * Creates a new RewardService with the specified UserProxy and GpsProxy
+     * @param userProxy : UserProxy that this service will use
+     * @param gpsProxy : GpsProxy that this service will use
+     */
+<span class="fc" id="L45">    public RewardService(UserProxy userProxy, GpsProxy gpsProxy) {</span>
+<span class="fc" id="L46">        logger.info(&quot;RewardService(&quot; + userProxy + &quot;,&quot; + gpsProxy + &quot;)&quot;);</span>
 
-<span class="fc" id="L34">        this.userProxy = userProxy;</span>
-<span class="fc" id="L35">        this.gpsProxy = gpsProxy;</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L48">        this.userProxy = userProxy;</span>
+<span class="fc" id="L49">        this.gpsProxy = gpsProxy;</span>
+<span class="fc" id="L50">    }</span>
 
+    @Override
     public int getRewardPoints(String attractionName, String userName) {
-<span class="fc" id="L39">        logger.info(&quot;getRewardPoints(&quot; + attractionName + &quot;,&quot; + userName + &quot;)&quot;);</span>
+<span class="fc" id="L54">        logger.info(&quot;getRewardPoints(&quot; + attractionName + &quot;,&quot; + userName + &quot;)&quot;);</span>
 
-<span class="fc" id="L41">        Attraction attraction = gpsProxy.getAttraction(attractionName);</span>
-<span class="fc" id="L42">        User user = userProxy.getUser(userName);</span>
+<span class="fc" id="L56">        Attraction attraction = gpsProxy.getAttraction(attractionName);</span>
+<span class="fc" id="L57">        User user = userProxy.getUser(userName);</span>
 
-<span class="fc" id="L44">        return rewardCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());</span>
+<span class="fc" id="L59">        return rewardCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());</span>
     }
 
+    @Override
     public List&lt;UserReward&gt; calculateRewards(String userName) {
-<span class="nc" id="L48">        logger.info(&quot;calculateRewards(&quot; + userName + &quot;)&quot;);</span>
+<span class="fc" id="L64">        logger.info(&quot;calculateRewards(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="nc" id="L50">        User user = userProxy.getUser(userName);</span>
+<span class="nc" id="L66">        User user = userProxy.getUser(userName);</span>
 
-<span class="nc" id="L52">        List&lt;Attraction&gt; attractionList = gpsProxy.getNearByAttractions();</span>
-<span class="nc" id="L53">        List&lt;VisitedLocation&gt; userLocations = user.getVisitedLocations();</span>
-<span class="nc" id="L54">        List&lt;UserReward&gt; userRewardList = new ArrayList&lt;UserReward&gt;();</span>
+<span class="nc" id="L68">        List&lt;Attraction&gt; attractionList = gpsProxy.getNearByAttractions();</span>
+<span class="nc" id="L69">        List&lt;VisitedLocation&gt; userLocations = user.getVisitedLocations();</span>
+<span class="nc" id="L70">        List&lt;UserReward&gt; userRewardList = new ArrayList&lt;UserReward&gt;();</span>
 
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        for(VisitedLocation visitedLocation : userLocations) {</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        for(VisitedLocation visitedLocation : userLocations) {</span>
 
-<span class="nc bnc" id="L58" title="All 2 branches missed.">            for(Attraction attraction : attractionList) {</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            for(Attraction attraction : attractionList) {</span>
 
-<span class="nc bnc" id="L60" title="All 2 branches missed.">                if(user.getUserRewards().stream().filter(r -&gt; r.getAttraction().equals(attraction.attractionName)).count() == 0) {</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">                if(user.getUserRewards().stream().filter(r -&gt; r.getAttraction().equals(attraction.attractionName)).count() == 0) {</span>
 
-<span class="nc" id="L62">                    int rewardPoints = rewardCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());</span>
+<span class="nc" id="L78">                    int rewardPoints = rewardCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());</span>
 
-<span class="nc" id="L64">                    userRewardList.add(new UserReward(visitedLocation, attraction, rewardPoints));</span>
+<span class="nc" id="L80">                    userRewardList.add(new UserReward(visitedLocation, attraction, rewardPoints));</span>
                 }
-<span class="nc" id="L66">            }</span>
-<span class="nc" id="L67">        }</span>
+<span class="nc" id="L82">            }</span>
+<span class="nc" id="L83">        }</span>
 
-<span class="nc" id="L69">        return userRewardList;</span>
+<span class="nc" id="L85">        return userRewardList;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

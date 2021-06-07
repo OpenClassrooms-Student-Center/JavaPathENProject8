@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.controller.RewardControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-03T06:30:32" hostname="PC-ANTOINE" time="0.278">
+<testsuite name="unit.controller.RewardControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-07T13:51:15" hostname="PC-ANTOINE" time="0.117">
   <properties/>
-  <testcase name="getRewardPoints" classname="unit.controller.RewardControllerTest" time="0.278"/>
-  <system-out><![CDATA[08:30:32.829 [Test worker] INFO RewardController - RewardController(Mock for RewardServiceInterface, hashCode: 1867977753)
-08:30:32.849 [Test worker] INFO RewardController - getRewardPoints(attractionName,userName)
+  <testcase name="getRewardPoints" classname="unit.controller.RewardControllerTest" time="0.117"/>
+  <system-out><![CDATA[2021-06-07 15:51:15.533  INFO 12156 --- [    Test worker] RewardController                         : RewardController(Mock for RewardServiceInterface, hashCode: 534166339)
+2021-06-07 15:51:15.540  INFO 12156 --- [    Test worker] RewardController                         : getRewardPoints(attractionName,userName)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

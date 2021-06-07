@@ -15,6 +15,9 @@ import rewardCentral.RewardCentral;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class allows to interact with a RewardCentral
+ */
 @Service
 public class RewardService implements RewardServiceInterface {
 
@@ -27,10 +30,18 @@ public class RewardService implements RewardServiceInterface {
 
     private RewardCentral rewardCentral = new RewardCentral();
 
+    /**
+     * Creates a new RewardService
+     */
     public RewardService() {
         logger.info("RewardService()");
     }
 
+    /**
+     * Creates a new RewardService with the specified UserProxy and GpsProxy
+     * @param userProxy : UserProxy that this service will use
+     * @param gpsProxy : GpsProxy that this service will use
+     */
     public RewardService(UserProxy userProxy, GpsProxy gpsProxy) {
         logger.info("RewardService(" + userProxy + "," + gpsProxy + ")");
 
@@ -38,6 +49,7 @@ public class RewardService implements RewardServiceInterface {
         this.gpsProxy = gpsProxy;
     }
 
+    @Override
     public int getRewardPoints(String attractionName, String userName) {
         logger.info("getRewardPoints(" + attractionName + "," + userName + ")");
 
@@ -47,6 +59,7 @@ public class RewardService implements RewardServiceInterface {
         return rewardCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
     }
 
+    @Override
     public List<UserReward> calculateRewards(String userName) {
         logger.info("calculateRewards(" + userName + ")");
 

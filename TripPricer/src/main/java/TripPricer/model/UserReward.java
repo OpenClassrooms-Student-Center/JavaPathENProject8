@@ -3,6 +3,9 @@ package TripPricer.model;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 
+/**
+ * This class stores the data of an user reward
+ */
 public class UserReward {
 
 	private VisitedLocation visitedLocation;

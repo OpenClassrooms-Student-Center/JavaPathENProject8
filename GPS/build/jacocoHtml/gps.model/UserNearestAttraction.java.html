@@ -2,6 +2,9 @@
 
 import gpsUtil.location.Location;
 
+/**
+ * This class stores the data of an user nearest attraction
+ */
 public class UserNearestAttraction {
 
     private String attractionName;
@@ -10,53 +13,53 @@ public class UserNearestAttraction {
     private double attractionMilesDistance;
     private int rewardPoints;
 
-<span class="fc" id="L13">    public UserNearestAttraction(String attractionName, Location attractionLocation, Location userLocation, double attractionMilesDistance, int rewardPoints) {</span>
+<span class="fc" id="L16">    public UserNearestAttraction(String attractionName, Location attractionLocation, Location userLocation, double attractionMilesDistance, int rewardPoints) {</span>
 
-<span class="fc" id="L15">        this.attractionName = attractionName;</span>
-<span class="fc" id="L16">        this.attractionLocation = attractionLocation;</span>
-<span class="fc" id="L17">        this.userLocation = userLocation;</span>
-<span class="fc" id="L18">        this.attractionMilesDistance = attractionMilesDistance;</span>
-<span class="fc" id="L19">        this.rewardPoints = rewardPoints;</span>
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L18">        this.attractionName = attractionName;</span>
+<span class="fc" id="L19">        this.attractionLocation = attractionLocation;</span>
+<span class="fc" id="L20">        this.userLocation = userLocation;</span>
+<span class="fc" id="L21">        this.attractionMilesDistance = attractionMilesDistance;</span>
+<span class="fc" id="L22">        this.rewardPoints = rewardPoints;</span>
+<span class="fc" id="L23">    }</span>
 
     public String getAttractionName() {
-<span class="fc" id="L23">        return attractionName;</span>
+<span class="fc" id="L26">        return attractionName;</span>
     }
 
     public void setAttractionName(String attractionName) {
-<span class="fc" id="L27">        this.attractionName = attractionName;</span>
-<span class="fc" id="L28">    }</span>
+<span class="fc" id="L30">        this.attractionName = attractionName;</span>
+<span class="fc" id="L31">    }</span>
 
     public Location getAttractionLocation() {
-<span class="fc" id="L31">        return attractionLocation;</span>
+<span class="fc" id="L34">        return attractionLocation;</span>
     }
 
     public void setAttractionLocation(Location attractionLocation) {
-<span class="fc" id="L35">        this.attractionLocation = attractionLocation;</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L38">        this.attractionLocation = attractionLocation;</span>
+<span class="fc" id="L39">    }</span>
 
     public Location getUserLocation() {
-<span class="fc" id="L39">        return userLocation;</span>
+<span class="fc" id="L42">        return userLocation;</span>
     }
 
     public void setUserLocation(Location userLocation) {
-<span class="fc" id="L43">        this.userLocation = userLocation;</span>
-<span class="fc" id="L44">    }</span>
+<span class="fc" id="L46">        this.userLocation = userLocation;</span>
+<span class="fc" id="L47">    }</span>
 
     public double getAttractionMilesDistance() {
-<span class="fc" id="L47">        return attractionMilesDistance;</span>
+<span class="fc" id="L50">        return attractionMilesDistance;</span>
     }
 
     public void setAttractionMilesDistance(double attractionMilesDistance) {
-<span class="fc" id="L51">        this.attractionMilesDistance = attractionMilesDistance;</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L54">        this.attractionMilesDistance = attractionMilesDistance;</span>
+<span class="fc" id="L55">    }</span>
 
     public int getRewardPoints() {
-<span class="fc" id="L55">        return rewardPoints;</span>
+<span class="fc" id="L58">        return rewardPoints;</span>
     }
 
     public void setRewardPoints(int rewardPoints) {
-<span class="fc" id="L59">        this.rewardPoints = rewardPoints;</span>
-<span class="fc" id="L60">    }</span>
+<span class="fc" id="L62">        this.rewardPoints = rewardPoints;</span>
+<span class="fc" id="L63">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -5,7 +5,9 @@ import org.javamoney.moneta.Money;
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 
-
+/**
+ * This class stores the data of an user preferences
+ */
 public class UserPreferences {
 
 	private int tripDuration = 1;

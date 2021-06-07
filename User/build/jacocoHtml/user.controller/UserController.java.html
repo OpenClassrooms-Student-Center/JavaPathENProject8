@@ -9,7 +9,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.javamoney.moneta.Money;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import user.model.User;
 import user.model.UserPreferences;
@@ -23,12 +22,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
-@Controller
+/**
+ * This class allows to intercept user requests
+ */
+@RestController
 public class UserController {
 
-<span class="fc" id="L29">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="fc" id="L31">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
-<span class="fc" id="L31">    private ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="fc" id="L33">    private ObjectMapper objectMapper = new ObjectMapper();</span>
 
     @Autowired
     private UserServiceInterface userServiceInterface;
@@ -36,97 +38,147 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-<span class="fc" id="L39">    public UserController() {</span>
-<span class="fc" id="L40">        logger.info(&quot;UserController()&quot;);</span>
+    /**
+     * Creates a new UserController
+     */
+<span class="fc" id="L44">    public UserController() {</span>
+<span class="fc" id="L45">        logger.info(&quot;UserController()&quot;);</span>
 
-<span class="fc" id="L42">        userServiceInterface = userService;</span>
-<span class="fc" id="L43">    }</span>
+<span class="fc" id="L47">        userServiceInterface = userService;</span>
+<span class="fc" id="L48">    }</span>
 
-<span class="fc" id="L45">    public UserController(UserServiceInterface userServiceInterface) {</span>
-<span class="fc" id="L46">        logger.info(&quot;UserController(&quot; + userServiceInterface + &quot;)&quot;);</span>
+    /**
+     * Creates a new UserController with the specified UserServiceInterface
+     * @param userServiceInterface : service that this controller will use
+     */
+<span class="fc" id="L54">    public UserController(UserServiceInterface userServiceInterface) {</span>
+<span class="fc" id="L55">        logger.info(&quot;UserController(&quot; + userServiceInterface + &quot;)&quot;);</span>
 
-<span class="fc" id="L48">        this.userServiceInterface = userServiceInterface;</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L57">        this.userServiceInterface = userServiceInterface;</span>
+<span class="fc" id="L58">    }</span>
 
+    /**
+     * Intercepts the user adding request
+     * @param userName : Name of the User to add
+     * @param phoneNumber : Phone number of the User to add
+     * @param emailAddress : Email address of the User to add
+     */
     @PostMapping(value = &quot;/addUser&quot;)
     public void addUser(@RequestParam String userName, @RequestParam String phoneNumber,
                         @RequestParam String emailAddress) {
 
-<span class="fc" id="L55">        logger.info(&quot;addUser(&quot; + userName + &quot;,&quot; + phoneNumber + &quot;,&quot; + emailAddress + &quot;)&quot;);</span>
+<span class="fc" id="L70">        logger.info(&quot;addUser(&quot; + userName + &quot;,&quot; + phoneNumber + &quot;,&quot; + emailAddress + &quot;)&quot;);</span>
 
-<span class="fc" id="L57">        userServiceInterface.addUser(new User(UUID.randomUUID(), userName, phoneNumber, emailAddress));</span>
-<span class="fc" id="L58">    }</span>
+<span class="fc" id="L72">        userServiceInterface.addUser(new User(UUID.randomUUID(), userName, phoneNumber, emailAddress));</span>
+<span class="fc" id="L73">    }</span>
 
+    /**
+     * Intercepts the user visited location adding request
+     * @param userName : Name of the User to add
+     * @param longitude : Longitude of the visited location
+     * @param latitude : Latitude of the visited location
+     * @param timeVisited : Time of the visited location
+     */
     @PostMapping(value = &quot;/addToVisitedLocations&quot;)
     public void addToVisitedLocations(@RequestParam String userName, @RequestParam double longitude,
                                       @RequestParam double latitude, @RequestParam String timeVisited) {
 
-<span class="fc" id="L64">        logger.info(&quot;addToVisitedLocations(&quot; + userName + &quot;,&quot; + longitude + &quot;,&quot; + latitude + &quot;,&quot; + timeVisited + &quot;)&quot;);</span>
+<span class="fc" id="L86">        logger.info(&quot;addToVisitedLocations(&quot; + userName + &quot;,&quot; + longitude + &quot;,&quot; + latitude + &quot;,&quot; + timeVisited + &quot;)&quot;);</span>
 
-<span class="fc" id="L66">        User user = userServiceInterface.getUser(userName);</span>
+<span class="fc" id="L88">        User user = userServiceInterface.getUser(userName);</span>
 
-<span class="fc" id="L68">        Date date = null;</span>
+<span class="fc" id="L90">        Date date = null;</span>
 
         try {
 
-<span class="fc" id="L72">            date = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;).parse(timeVisited);</span>
+<span class="fc" id="L94">            date = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;).parse(timeVisited);</span>
 
-<span class="nc" id="L74">        } catch (ParseException e) {</span>
-<span class="nc" id="L75">            e.printStackTrace();</span>
-<span class="fc" id="L76">        }</span>
+<span class="nc" id="L96">        } catch (ParseException e) {</span>
+<span class="nc" id="L97">            e.printStackTrace();</span>
+<span class="fc" id="L98">        }</span>
 
-<span class="fc" id="L78">        VisitedLocation visitedLocation = new VisitedLocation(user.getUserId(), new Location(longitude,latitude), date);</span>
+<span class="fc" id="L100">        VisitedLocation visitedLocation = new VisitedLocation(user.getUserId(), new Location(longitude,latitude), date);</span>
 
-<span class="fc" id="L80">        userServiceInterface.addToVisitedLocations(userName, visitedLocation);</span>
-<span class="fc" id="L81">    }</span>
+<span class="fc" id="L102">        userServiceInterface.addToVisitedLocations(userName, visitedLocation);</span>
+<span class="fc" id="L103">    }</span>
 
+    /**
+     * Intercepts the user reward adding request
+     * @param userName : Name of the User to add
+     * @param longitude : Longitude of the visited location
+     * @param latitude : Latitude of the visited location
+     * @param timeVisited : Time of the visited location
+     * @param attractionName : Name of the attraction
+     * @param attractionCity : Name of the city of the attraction
+     * @param attractionState : Name of the state of the city
+     */
     @PostMapping(value = &quot;/addUserReward&quot;)
     public void addUserReward(@RequestParam String userName, @RequestParam double longitude,
                               @RequestParam double latitude, @RequestParam String timeVisited,
                               @RequestParam String attractionName, @RequestParam String attractionCity,
                               @RequestParam String attractionState) throws ParseException {
 
-<span class="fc" id="L89">        logger.info(&quot;addUserReward(&quot; + userName + &quot;,&quot; + longitude + &quot;,&quot; + latitude + &quot;,&quot; + timeVisited + &quot;,&quot;</span>
+<span class="fc" id="L121">        logger.info(&quot;addUserReward(&quot; + userName + &quot;,&quot; + longitude + &quot;,&quot; + latitude + &quot;,&quot; + timeVisited + &quot;,&quot;</span>
                 + attractionName + &quot;,&quot; + attractionCity + &quot;,&quot; + attractionState + &quot;)&quot;);
 
-<span class="fc" id="L92">        User user = userServiceInterface.getUser(userName);</span>
-<span class="fc" id="L93">        Date date = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;).parse(timeVisited);</span>
-<span class="fc" id="L94">        VisitedLocation visitedLocation = new VisitedLocation(user.getUserId(), new Location(longitude, latitude), date);</span>
-<span class="fc" id="L95">        Attraction attraction = new Attraction(attractionName, attractionCity, attractionState, latitude, longitude);</span>
-<span class="fc" id="L96">        UserReward userReward = new UserReward(visitedLocation, attraction, 0);</span>
+<span class="fc" id="L124">        User user = userServiceInterface.getUser(userName);</span>
+<span class="fc" id="L125">        Date date = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;).parse(timeVisited);</span>
+<span class="fc" id="L126">        VisitedLocation visitedLocation = new VisitedLocation(user.getUserId(), new Location(longitude, latitude), date);</span>
+<span class="fc" id="L127">        Attraction attraction = new Attraction(attractionName, attractionCity, attractionState, latitude, longitude);</span>
+<span class="fc" id="L128">        UserReward userReward = new UserReward(visitedLocation, attraction, 0);</span>
 
-<span class="fc" id="L98">        userServiceInterface.addUserReward(userName, userReward);</span>
-<span class="fc" id="L99">    }</span>
+<span class="fc" id="L130">        userServiceInterface.addUserReward(userName, userReward);</span>
+<span class="fc" id="L131">    }</span>
 
+    /**
+     * Intercepts the user preferences setting request
+     * @param userName : Name of the User to add
+     * @param tripDuration : Duration of the trip
+     * @param ticketQuantity : Quantity of ticket
+     * @param numberOfAdults : Number of adults
+     * @param numberOfChildren : Number of children
+     * @param attractionProximity : Proximity of attractions
+     * @param highPricePoint : Higher price
+     * @param lowerPricePoint : Lower price
+     */
     @PostMapping(value = &quot;/setUserPreferences&quot;)
     public void setUserPreferences(@RequestParam String userName, @RequestParam int tripDuration,
                                    @RequestParam int ticketQuantity, @RequestParam int numberOfAdults,
                                    @RequestParam int numberOfChildren, @RequestParam int attractionProximity,
                                    @RequestParam int highPricePoint, @RequestParam int lowerPricePoint) {
 
-<span class="fc" id="L107">        logger.info(&quot;setUserPreferences(&quot; + userName + &quot;,&quot; + tripDuration + &quot;,&quot; + ticketQuantity + &quot;,&quot;</span>
+<span class="fc" id="L150">        logger.info(&quot;setUserPreferences(&quot; + userName + &quot;,&quot; + tripDuration + &quot;,&quot; + ticketQuantity + &quot;,&quot;</span>
                 + numberOfAdults + &quot;,&quot; + numberOfChildren + &quot;,&quot; + attractionProximity + &quot;,&quot; + highPricePoint
                 + &quot;,&quot; + lowerPricePoint + &quot;)&quot;);
 
-<span class="fc" id="L111">        UserPreferences userPreferences = new UserPreferences(tripDuration, ticketQuantity, numberOfAdults,</span>
-<span class="fc" id="L112">                numberOfChildren, attractionProximity, Money.of(highPricePoint, Monetary.getCurrency(&quot;USD&quot;)),</span>
-<span class="fc" id="L113">                Money.of(lowerPricePoint, Monetary.getCurrency(&quot;USD&quot;)));</span>
+<span class="fc" id="L154">        UserPreferences userPreferences = new UserPreferences(tripDuration, ticketQuantity, numberOfAdults,</span>
+<span class="fc" id="L155">                numberOfChildren, attractionProximity, Money.of(highPricePoint, Monetary.getCurrency(&quot;USD&quot;)),</span>
+<span class="fc" id="L156">                Money.of(lowerPricePoint, Monetary.getCurrency(&quot;USD&quot;)));</span>
 
-<span class="fc" id="L115">        userServiceInterface.setUserPreferences(userName, userPreferences);</span>
-<span class="fc" id="L116">    }</span>
+<span class="fc" id="L158">        userServiceInterface.setUserPreferences(userName, userPreferences);</span>
+<span class="fc" id="L159">    }</span>
 
+    /**
+     * Intercepts the user getting request
+     * @param userName : Name of the User to found
+     * @return The User found (JSon)
+     */
     @GetMapping(value = &quot;/getUser&quot;)
     public String getUser(@RequestParam String userName) throws JsonProcessingException {
-<span class="fc" id="L120">        logger.info(&quot;getUser(&quot; + userName + &quot;)&quot;);</span>
+<span class="fc" id="L168">        logger.info(&quot;getUser(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="fc" id="L122">        return objectMapper.writeValueAsString(userServiceInterface.getUser(userName));</span>
+<span class="fc" id="L170">        return objectMapper.writeValueAsString(userServiceInterface.getUser(userName));</span>
     }
 
+    /**
+     * Intercepts the user list getting request
+     * @return The User list (JSon)
+     */
     @GetMapping(value = &quot;/getAllUser&quot;)
     public String getAllUser() throws JsonProcessingException {
-<span class="fc" id="L127">        logger.info(&quot;getAllUser()&quot;);</span>
+<span class="fc" id="L179">        logger.info(&quot;getAllUser()&quot;);</span>
 
-<span class="fc" id="L129">        return objectMapper.writeValueAsString(userServiceInterface.getAllUser());</span>
+<span class="fc" id="L181">        return objectMapper.writeValueAsString(userServiceInterface.getAllUser());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

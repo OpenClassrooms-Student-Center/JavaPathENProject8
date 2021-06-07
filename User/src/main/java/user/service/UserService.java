@@ -13,6 +13,9 @@ import user.repository.UserRepositoryInterface;
 
 import java.util.List;
 
+/**
+ * This class allows to interact with an user repository
+ */
 @Service
 public class UserService implements UserServiceInterface {
 
@@ -24,12 +27,19 @@ public class UserService implements UserServiceInterface {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Creates a new UserService
+     */
     public UserService() {
         logger.info("UserService()");
 
         userRepositoryInterface = userRepository;
     }
 
+    /**
+     * Creates a new UserService with the specified UserRepositoryInterface
+     * @param userRepositoryInterface : repository that this service will use
+     */
     public UserService(UserRepositoryInterface userRepositoryInterface) {
         logger.info("UserService(" + userRepositoryInterface + ")");
 

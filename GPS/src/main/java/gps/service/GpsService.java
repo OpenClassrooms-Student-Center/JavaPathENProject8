@@ -13,8 +13,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * This class allows to interact with a GpsUtil
+ */
 @Service
 public class GpsService implements GpsServiceInterface {
 
@@ -29,10 +33,18 @@ public class GpsService implements GpsServiceInterface {
 
     private GpsUtil gpsUtil = new GpsUtil();
 
+    /**
+     * Creates a new GpsService
+     */
     public GpsService() {
         logger.info("GpsService()");
     }
 
+    /**
+     * Creates a new GpsService with the specified UserProxy and RewardProxy
+     * @param userProxy : UserProxy that this service will use
+     * @param rewardProxy : RewardProxy that this service will use
+     */
     public GpsService(UserProxy userProxy, RewardProxy rewardProxy) {
         logger.info("GpsService(" + userProxy + "," + rewardProxy + ")");
 
@@ -52,7 +64,11 @@ public class GpsService implements GpsServiceInterface {
 
             visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 
-            userProxy.addToVisitedLocations(userName, visitedLocation);
+            String timeVisited = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss").format(visitedLocation.timeVisited);
+
+            userProxy.addToVisitedLocations(userName, visitedLocation.location.longitude,
+                    visitedLocation.location.latitude, timeVisited);
+
             rewardProxy.calculateRewards(userName);
         }
 
@@ -97,10 +113,12 @@ public class GpsService implements GpsServiceInterface {
     }
 
     @Override
-    public List<UserNearestAttraction> getNearByAttractions(String userName, VisitedLocation visitedLocation) {
-        logger.info("getNearByAttractions(" + visitedLocation + ")");
+    public List<UserNearestAttraction> getNearByAttractions(String userName) {
+        logger.info("getNearByAttractions(" + userName + ")");
 
         User user = userProxy.getUser(userName);
+
+        VisitedLocation visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);
 
         Map<Double, Attraction> attractionMap = new TreeMap<Double, Attraction>();
 

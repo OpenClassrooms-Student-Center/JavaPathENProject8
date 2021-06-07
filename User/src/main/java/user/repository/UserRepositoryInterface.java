@@ -4,9 +4,27 @@ import user.model.User;
 
 import java.util.List;
 
+/**
+ * This interface allows to implement user repository methods
+ */
 public interface UserRepositoryInterface {
 
+    /**
+     * Add an User in the User list
+     * @param user : data of the User to add to the User list
+     */
     public void addUser(User user);
-    public User getUser(String userName);
+
+    /**
+     * Get an User in the User list
+     * @param username : Name of the User to select in the User list
+     * @return The User that was found by his username
+     */
+    public User getUser(String username);
+
+    /**
+     * Get the User List
+     * @return The User List
+     */
     public List<User> getAllUser();
 }

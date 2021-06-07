@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.model.UserPreferencesTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-06-03T06:30:32" hostname="PC-ANTOINE" time="0.116">
+<testsuite name="unit.model.UserPreferencesTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-06-07T13:51:15" hostname="PC-ANTOINE" time="0.184">
   <properties/>
-  <testcase name="setAndGetTicketQuantity" classname="unit.model.UserPreferencesTest" time="0.075"/>
-  <testcase name="setAndGetCurrency" classname="unit.model.UserPreferencesTest" time="0.038"/>
+  <testcase name="setAndGetTicketQuantity" classname="unit.model.UserPreferencesTest" time="0.072"/>
+  <testcase name="setAndGetCurrency" classname="unit.model.UserPreferencesTest" time="0.106"/>
   <testcase name="setAndGetLowerPricePoint" classname="unit.model.UserPreferencesTest" time="0.001"/>
   <testcase name="setAndGetNumberOfChildren" classname="unit.model.UserPreferencesTest" time="0.0"/>
   <testcase name="setAndGetHighPricePoint" classname="unit.model.UserPreferencesTest" time="0.001"/>
   <testcase name="setAndGetNumberOfAdults" classname="unit.model.UserPreferencesTest" time="0.0"/>
-  <testcase name="setAndGetTripDuration" classname="unit.model.UserPreferencesTest" time="0.001"/>
-  <testcase name="setAndGetAttractionProximity" classname="unit.model.UserPreferencesTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[juin 03, 2021 8:30:32 AM org.javamoney.moneta.DefaultMonetaryContextFactory createMonetaryContextNonNullConfig
-INFO: Using custom MathContext: precision=256, roundingMode=HALF_EVEN
-]]></system-err>
+  <testcase name="setAndGetTripDuration" classname="unit.model.UserPreferencesTest" time="0.0"/>
+  <testcase name="setAndGetAttractionProximity" classname="unit.model.UserPreferencesTest" time="0.004"/>
+  <system-out><![CDATA[2021-06-07 15:51:15.695  INFO 12156 --- [    Test worker] o.j.m.DefaultMonetaryContextFactory      : Using custom MathContext: precision=256, roundingMode=HALF_EVEN
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.controller.GpsControllerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-06-03T06:29:59" hostname="PC-ANTOINE" time="0.31">
+<testsuite name="unit.controller.GpsControllerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-06-07T13:51:16" hostname="PC-ANTOINE" time="0.172">
   <properties/>
-  <testcase name="getUserLocation" classname="unit.controller.GpsControllerTest" time="0.289"/>
-  <testcase name="getAttraction" classname="unit.controller.GpsControllerTest" time="0.003"/>
-  <testcase name="getAllCurrentLocations" classname="unit.controller.GpsControllerTest" time="0.016"/>
-  <system-out><![CDATA[08:29:59.860 [Test worker] INFO GpsController - GpsController(Mock for GpsServiceInterface, hashCode: 1470110645)
-08:29:59.878 [Test worker] INFO GpsController - getLocation(userName)
-08:29:59.965 [Test worker] INFO GpsController - GpsController(Mock for GpsServiceInterface, hashCode: 1543621333)
-08:29:59.966 [Test worker] INFO GpsController - getAttraction(attractionName)
-08:29:59.969 [Test worker] INFO GpsController - GpsController(Mock for GpsServiceInterface, hashCode: 1746418278)
-08:29:59.970 [Test worker] INFO GpsController - getAllCurrentLocations()
+  <testcase name="getUserLocation" classname="unit.controller.GpsControllerTest" time="0.143"/>
+  <testcase name="getAttraction" classname="unit.controller.GpsControllerTest" time="0.008"/>
+  <testcase name="getAllCurrentLocations" classname="unit.controller.GpsControllerTest" time="0.019"/>
+  <system-out><![CDATA[2021-06-07 15:51:16.332  INFO 9992 --- [    Test worker] GpsController                            : GpsController(Mock for GpsServiceInterface, hashCode: 400925084)
+2021-06-07 15:51:16.342  INFO 9992 --- [    Test worker] GpsController                            : getLocation(userName)
+2021-06-07 15:51:16.451  INFO 9992 --- [    Test worker] GpsController                            : GpsController(Mock for GpsServiceInterface, hashCode: 1989814196)
+2021-06-07 15:51:16.452  INFO 9992 --- [    Test worker] GpsController                            : getAttraction(attractionName)
+2021-06-07 15:51:16.459  INFO 9992 --- [    Test worker] GpsController                            : GpsController(Mock for GpsServiceInterface, hashCode: 1112003066)
+2021-06-07 15:51:16.460  INFO 9992 --- [    Test worker] GpsController                            : getAllCurrentLocations()
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

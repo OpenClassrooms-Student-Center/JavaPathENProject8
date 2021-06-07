@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This class allows to intercept trip pricer requests
+ */
 @RestController
 public class TripPriceController {
 
@@ -24,18 +27,30 @@ public class TripPriceController {
     @Autowired
     private TripPricerService tripPricerService;
 
+    /**
+     * Creates a new TripPriceController
+     */
     public TripPriceController() {
         logger.info("TripPriceController()");
 
         tripPricerServiceInterface = tripPricerService;
     }
 
+    /**
+     * Creates a new TripPriceController with the specified TripPricerServiceInterface
+     * @param tripPricerServiceInterface : service that this controller will use
+     */
     public TripPriceController(TripPricerServiceInterface tripPricerServiceInterface) {
         logger.info("TripPriceController(" + tripPricerServiceInterface + ")");
 
         this.tripPricerServiceInterface = tripPricerServiceInterface;
     }
 
+    /**
+     * Intercepts the provider list getting request
+     * @param userName : Name of the User to use for creating the Provider list
+     * @return The Provider list (JSon)
+     */
     @RequestMapping("/getTripDeals")
     public String getTripDeals(@RequestParam String userName) throws JsonProcessingException {
         logger.info("getTripDeals(" + userName + ")");

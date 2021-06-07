@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Locale;
 
+/**
+ * This class allows to configure this application
+ */
 @Configuration
 public class AppConfig {
 

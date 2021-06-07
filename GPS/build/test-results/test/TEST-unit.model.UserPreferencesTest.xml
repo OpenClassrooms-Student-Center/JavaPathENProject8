@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.model.UserPreferencesTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-06-03T06:30:00" hostname="PC-ANTOINE" time="0.151">
+<testsuite name="unit.model.UserPreferencesTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-06-07T13:51:16" hostname="PC-ANTOINE" time="0.082">
   <properties/>
-  <testcase name="setAndGetTicketQuantity" classname="unit.model.UserPreferencesTest" time="0.102"/>
-  <testcase name="setAndGetCurrency" classname="unit.model.UserPreferencesTest" time="0.045"/>
+  <testcase name="setAndGetTicketQuantity" classname="unit.model.UserPreferencesTest" time="0.042"/>
+  <testcase name="setAndGetCurrency" classname="unit.model.UserPreferencesTest" time="0.037"/>
   <testcase name="setAndGetLowerPricePoint" classname="unit.model.UserPreferencesTest" time="0.0"/>
   <testcase name="setAndGetNumberOfChildren" classname="unit.model.UserPreferencesTest" time="0.0"/>
-  <testcase name="setAndGetHighPricePoint" classname="unit.model.UserPreferencesTest" time="0.001"/>
+  <testcase name="setAndGetHighPricePoint" classname="unit.model.UserPreferencesTest" time="0.0"/>
   <testcase name="setAndGetNumberOfAdults" classname="unit.model.UserPreferencesTest" time="0.0"/>
   <testcase name="setAndGetTripDuration" classname="unit.model.UserPreferencesTest" time="0.001"/>
   <testcase name="setAndGetAttractionProximity" classname="unit.model.UserPreferencesTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[juin 03, 2021 8:30:00 AM org.javamoney.moneta.DefaultMonetaryContextFactory createMonetaryContextNonNullConfig
-INFO: Using custom MathContext: precision=256, roundingMode=HALF_EVEN
-]]></system-err>
+  <system-out><![CDATA[2021-06-07 15:51:16.547  INFO 9992 --- [    Test worker] o.j.m.DefaultMonetaryContextFactory      : Using custom MathContext: precision=256, roundingMode=HALF_EVEN
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

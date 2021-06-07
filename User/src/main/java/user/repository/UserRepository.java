@@ -10,6 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class allows to manage an User list
+ */
 @Component
 public class UserRepository implements UserRepositoryInterface {
 
@@ -17,6 +20,9 @@ public class UserRepository implements UserRepositoryInterface {
 
     private static Map<String, User> userMap = new HashMap<>();
 
+    /**
+     * Creates a new UserRepository
+     */
     public UserRepository() {
         logger.info("UserRepository()");
     }

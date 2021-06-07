@@ -11,6 +11,9 @@ import tripPricer.TripPricer;
 
 import java.util.List;
 
+/**
+ * This class allows to interact with a TripPricer
+ */
 @Service
 public class TripPricerService implements TripPricerServiceInterface {
 
@@ -23,16 +26,24 @@ public class TripPricerService implements TripPricerServiceInterface {
 
     private TripPricer tripPricer = new TripPricer();
 
+    /**
+     * Creates a new TripPricerService
+     */
     public TripPricerService() {
         logger.info("TripPricerService()");
     }
 
+    /**
+     * Creates a new TripPricerService with the specified UserProxy
+     * @param userProxy : UserProxy that this service will use
+     */
     public TripPricerService(UserProxy userProxy) {
         logger.info("TripPricerService(" + userProxy + ")");
 
         this.userProxy = userProxy;
     }
 
+    @Override
     public List<Provider> getTripDeals(String userName) {
         logger.info("getTripDeals(" + userName + ")");
 

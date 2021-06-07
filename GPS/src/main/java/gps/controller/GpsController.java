@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This class allows to intercept gps requests
+ */
 @RestController
 public class GpsController {
 
@@ -26,18 +29,30 @@ public class GpsController {
     @Autowired
     private GpsService gpsService;
 
+    /**
+     * Creates a new GpsController
+     */
     public GpsController() {
         logger.info("GpsController()");
 
         gpsServiceInterface = gpsService;
     }
 
+    /**
+     * Creates a new GpsController with the specified GpsServiceInterface
+     * @param gpsServiceInterface : service that this controller will use
+     */
     public GpsController(GpsServiceInterface gpsServiceInterface) {
         logger.info("GpsController(" + gpsServiceInterface + ")");
 
         this.gpsServiceInterface = gpsServiceInterface;
     }
 
+    /**
+     * Intercepts the user location getting request
+     * @param userName : Name of the User to use for find his location
+     * @return The VisitedLocation of the User (JSon)
+     */
     @GetMapping("/getLocation")
     public String getLocation(@RequestParam String userName) throws JsonProcessingException {
         logger.info("getLocation(" + userName + ")");
@@ -45,6 +60,11 @@ public class GpsController {
         return objectMapper.writeValueAsString(gpsServiceInterface.getUserLocation(userName));
     }
 
+    /**
+     * Intercepts the attraction getting request
+     * @param attractionName : Name of the Attraction to found
+     * @return The Attraction found (JSon)
+     */
     @GetMapping("/getAttraction")
     public String getAttraction(@RequestParam String attractionName) throws JsonProcessingException {
         logger.info("getAttraction(" + attractionName + ")");
@@ -52,6 +72,10 @@ public class GpsController {
         return objectMapper.writeValueAsString(gpsServiceInterface.getAttraction(attractionName));
     }
 
+    /**
+     * Intercepts the user location list getting request
+     * @return The locations of all users (JSon)
+     */
     @RequestMapping("/getAllCurrentLocations")
     public String getAllCurrentLocations() throws JsonProcessingException {
         logger.info("getAllCurrentLocations()");
@@ -59,12 +83,17 @@ public class GpsController {
         return objectMapper.writeValueAsString(gpsServiceInterface.getAllCurrentLocations());
     }
 
+    /**
+     * Intercepts the nearest attraction getting request
+     * @param userName : Name of the User to use for find his location
+     * @return The nearest attraction list (JSon)
+     */
     @RequestMapping("/getNearbyAttractions")
     public String getNearbyAttractions(@RequestParam String userName) throws JsonProcessingException {
         logger.info("getNearbyAttractions(" + userName + ")");
 
-        VisitedLocation visitedLocation = gpsServiceInterface.getUserLocation(userName);
+        gpsServiceInterface.getUserLocation(userName);
 
-        return objectMapper.writeValueAsString(gpsServiceInterface.getNearByAttractions(userName, visitedLocation));
+        return objectMapper.writeValueAsString(gpsServiceInterface.getNearByAttractions(userName));
     }
 }

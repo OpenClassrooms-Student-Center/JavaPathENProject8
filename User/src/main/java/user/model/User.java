@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * This class stores the data of an user
+ */
 public class User {
 
 	private UUID userId;
