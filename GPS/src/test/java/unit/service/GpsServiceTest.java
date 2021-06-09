@@ -40,7 +40,7 @@ public class GpsServiceTest {
         List<VisitedLocation> visitedLocationList = new ArrayList<VisitedLocation>();
 
         //WHEN
-        Mockito.when(userProxy.getUser(userName)).thenReturn(user);
+//        Mockito.when(userProxy.getUser(userName)).thenReturn(user);
         Mockito.when(user.getUserId()).thenReturn(UUID.randomUUID());
         Mockito.when(user.getVisitedLocations()).thenReturn(visitedLocationList);
 

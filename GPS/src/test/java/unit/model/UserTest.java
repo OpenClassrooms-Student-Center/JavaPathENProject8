@@ -24,7 +24,7 @@ public class UserTest {
     @Before
     public void beforeEach() {
 
-        user = new User(null, null, null, null);
+ //       user = new User(null, null, null, null);
     }
 
     @Test

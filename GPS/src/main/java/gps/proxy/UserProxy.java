@@ -22,8 +22,8 @@ public interface UserProxy {
      * @param userName : Name of the User to found
      * @return The User found (JSon)
      */
-    @GetMapping(value = "/getUser", produces = "application/json")
-    public User getUser(@RequestParam String userName);
+    @GetMapping(value = "/getUser")
+    public String getUser(@RequestParam String userName);
 
     /**
      * Send the user list getting request

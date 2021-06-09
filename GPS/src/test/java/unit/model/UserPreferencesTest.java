@@ -18,7 +18,7 @@ public class UserPreferencesTest {
     @Before
     public void beforeEach() {
 
-        userPreferences = new UserPreferences();
+//        userPreferences = new UserPreferences();
     }
 
     @Test

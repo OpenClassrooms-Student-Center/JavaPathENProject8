@@ -1,5 +1,7 @@
 package gps.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import gps.model.User;
 import gps.model.UserNearestAttraction;
 import gps.proxy.RewardProxy;
@@ -12,7 +14,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zalando.jackson.datatype.money.MoneyModule;
 
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -21,6 +27,8 @@ import java.util.*;
  */
 @Service
 public class GpsService implements GpsServiceInterface {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
@@ -58,7 +66,7 @@ public class GpsService implements GpsServiceInterface {
 
         VisitedLocation visitedLocation;
 
-        User user = userProxy.getUser(userName);
+        User user = getUserFromProxy(userName);
 
         if (user.getVisitedLocations().size() <= 0) {
 
@@ -116,7 +124,7 @@ public class GpsService implements GpsServiceInterface {
     public List<UserNearestAttraction> getNearByAttractions(String userName) {
         logger.info("getNearByAttractions(" + userName + ")");
 
-        User user = userProxy.getUser(userName);
+        User user = getUserFromProxy(userName);
 
         VisitedLocation visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);
 
@@ -158,5 +166,23 @@ public class GpsService implements GpsServiceInterface {
         }
 
         return userNearestAttractionList;
+    }
+
+    private User getUserFromProxy(String userName) {
+
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        objectMapper.registerModule(new MoneyModule());
+
+        User user = null;
+
+        try {
+
+            user = objectMapper.readValue(userProxy.getUser(userName), User.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return user;
     }
 }
