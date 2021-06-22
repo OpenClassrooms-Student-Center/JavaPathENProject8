@@ -1,4 +1,4 @@
-package gps.model;
+package user.model;
 
 import gpsUtil.location.Location;
 

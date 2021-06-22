@@ -1,10 +1,5 @@
 package reward.model;
 
-import org.javamoney.moneta.Money;
-
-import javax.money.CurrencyUnit;
-import javax.money.Monetary;
-
 /**
  * This class stores the data of an user preferences
  */
@@ -15,11 +10,17 @@ public class UserPreferences {
 	private int numberOfAdults = 1;
 	private int numberOfChildren = 0;
 	private int attractionProximity = Integer.MAX_VALUE;
-	private CurrencyUnit currency = Monetary.getCurrency("USD");
-	private Money highPricePoint = Money.of(Integer.MAX_VALUE, currency);
-	private Money lowerPricePoint = Money.of(0, currency);
 
 	public UserPreferences() {}
+
+	public UserPreferences(int tripDuration, int ticketQuantity, int numberOfAdults, int numberOfChildren, int attractionProximity) {
+
+		this.tripDuration = tripDuration;
+		this.ticketQuantity = ticketQuantity;
+		this.numberOfAdults = numberOfAdults;
+		this.numberOfChildren = numberOfChildren;
+		this.attractionProximity = attractionProximity;
+	}
 
 	public int getTripDuration() {
 		return tripDuration;
@@ -59,29 +60,5 @@ public class UserPreferences {
 
 	public void setAttractionProximity(int attractionProximity) {
 		this.attractionProximity = attractionProximity;
-	}
-
-	public CurrencyUnit getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(CurrencyUnit currency) {
-		this.currency = currency;
-	}
-
-	public Money getHighPricePoint() {
-		return highPricePoint;
-	}
-
-	public void setHighPricePoint(Money highPricePoint) {
-		this.highPricePoint = highPricePoint;
-	}
-
-	public Money getLowerPricePoint() {
-		return lowerPricePoint;
-	}
-
-	public void setLowerPricePoint(Money lowerPricePoint) {
-		this.lowerPricePoint = lowerPricePoint;
 	}
 }

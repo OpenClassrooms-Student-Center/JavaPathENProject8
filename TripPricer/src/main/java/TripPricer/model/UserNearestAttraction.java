@@ -1,4 +1,4 @@
-package gps.model;
+package TripPricer.model;
 
 import gpsUtil.location.Location;
 

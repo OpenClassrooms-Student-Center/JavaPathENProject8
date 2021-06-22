@@ -20,14 +20,14 @@ public interface UserProxy {
     /**
      * Send the user getting request
      * @param userName : Name of the User to found
-     * @return The User found (JSon)
+     * @return The User found
      */
-    @GetMapping(value = "/getUser")
-    public String getUser(@RequestParam String userName);
+    @GetMapping(value = "/getUser", produces = "application/json")
+    public User getUser(@RequestParam String userName);
 
     /**
      * Send the user list getting request
-     * @return The User list (JSon)
+     * @return The User list
      */
     @GetMapping(value = "/getAllUser", produces = "application/json")
     public List<User> getAllUser();

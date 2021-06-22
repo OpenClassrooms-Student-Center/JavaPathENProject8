@@ -1,7 +1,5 @@
 package gps.model;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.InjectableValues;
 import gpsUtil.location.VisitedLocation;
 import tripPricer.Provider;
 
@@ -13,7 +11,6 @@ import java.util.UUID;
 /**
  * This class stores the data of an user
  */
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class User {
 
 	private UUID userId;
@@ -37,29 +34,7 @@ public class User {
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
 	}
-/*
-	@JsonCreator
-	public User(@JsonProperty("userId") UUID userId,
-				@JsonProperty("userName") String userName,
-				@JsonProperty("phoneNumber") String phoneNumber,
-				@JsonProperty("emailAddress") String emailAddress,
-				@JsonProperty("latestLocationTimestamp") Date latestLocationTimestamp,
-				@JsonProperty("userPreferences") UserPreferences userPreferences,
-				@JsonProperty("visitedLocations") List<VisitedLocation> visitedLocations,
-				@JsonProperty("userRewards") List<UserReward> userRewards,
-				@JsonProperty("tripDeals") List<Provider> tripDeals) {
 
-		this.userId = userId;
-		this.userName = userName;
-		this.phoneNumber = phoneNumber;
-		this.emailAddress = emailAddress;
-		this.latestLocationTimestamp = latestLocationTimestamp;
-		this.userPreferences = userPreferences;
-		this.visitedLocations = visitedLocations;
-		this.userRewards = userRewards;
-		this.tripDeals = tripDeals;
-	}
-*/
 	public UUID getUserId() {
 		return userId;
 	}

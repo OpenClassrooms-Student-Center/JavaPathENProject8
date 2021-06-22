@@ -7,7 +7,6 @@ import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.javamoney.moneta.Money;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import user.model.User;
@@ -16,7 +15,6 @@ import user.model.UserReward;
 import user.service.UserService;
 import user.service.UserServiceInterface;
 
-import javax.money.Monetary;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -91,7 +89,7 @@ public class UserController {
 
         try {
 
-            date = new SimpleDateFormat("dd/MM/yyyy").parse(timeVisited);
+            date = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").parse(timeVisited);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -152,8 +150,7 @@ public class UserController {
                 + "," + lowerPricePoint + ")");
 
         UserPreferences userPreferences = new UserPreferences(tripDuration, ticketQuantity, numberOfAdults,
-                numberOfChildren, attractionProximity, Money.of(highPricePoint, Monetary.getCurrency("USD")),
-                Money.of(lowerPricePoint, Monetary.getCurrency("USD")));
+                numberOfChildren, attractionProximity);
 
         userServiceInterface.setUserPreferences(userName, userPreferences);
     }

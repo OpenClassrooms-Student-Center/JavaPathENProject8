@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,17 +48,22 @@ public class TripPricerService implements TripPricerServiceInterface {
     public List<Provider> getTripDeals(String userName) {
         logger.info("getTripDeals(" + userName + ")");
 
+        List<Provider> providerList = new ArrayList<Provider>();
+
         User user = userProxy.getUser(userName);
 
-        int cumulativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
+        if (user != null) {
 
-        List<Provider> providers = tripPricer.getPrice(tripPricerApiKey,
-                user.getUserId(),
-                user.getUserPreferences().getNumberOfAdults(),
-                user.getUserPreferences().getNumberOfChildren(),
-                user.getUserPreferences().getTripDuration(),
-                cumulativeRewardPoints);
+            int cumulativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
 
-        return providers;
+            providerList = tripPricer.getPrice(tripPricerApiKey,
+                    user.getUserId(),
+                    user.getUserPreferences().getNumberOfAdults(),
+                    user.getUserPreferences().getNumberOfChildren(),
+                    user.getUserPreferences().getTripDuration(),
+                    cumulativeRewardPoints);
+        }
+
+        return providerList;
     }
 }

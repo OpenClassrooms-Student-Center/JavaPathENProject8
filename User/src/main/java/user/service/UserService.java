@@ -77,7 +77,7 @@ public class UserService implements UserServiceInterface {
 
             for (UserReward r : user.getUserRewards()) {
 
-                if (r.getAttraction().attractionName.equals(userReward.getAttraction().attractionName)) {
+                if (r.getAttraction().getAttractionName().equals(userReward.getAttraction().getAttractionName())) {
 
                     alreadyExist = true;
                 }
@@ -96,7 +96,10 @@ public class UserService implements UserServiceInterface {
 
         User user = userRepositoryInterface.getUser(userName);
 
-        user.setUserPreferences(userPreferences);
+        if (user != null) {
+
+            user.setUserPreferences(userPreferences);
+        }
     }
 
     @Override

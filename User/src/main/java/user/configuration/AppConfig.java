@@ -13,7 +13,9 @@ public class AppConfig {
 
     @Bean
     public Locale getLocale() {
+
         Locale.setDefault(Locale.US);
+
         return Locale.getDefault();
     }
 }

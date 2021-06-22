@@ -53,31 +53,39 @@ public class RewardService implements RewardServiceInterface {
     public int getRewardPoints(String attractionName, String userName) {
         logger.info("getRewardPoints(" + attractionName + "," + userName + ")");
 
+        int rewardPoint = -1;
+
         Attraction attraction = gpsProxy.getAttraction(attractionName);
         User user = userProxy.getUser(userName);
 
-        return rewardCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
+        if (attraction != null && user != null) {
+
+            rewardPoint = rewardCentral.getAttractionRewardPoints(attraction.getAttractionId(), user.getUserId());
+        }
+
+        return rewardPoint;
     }
 
     @Override
     public List<UserReward> calculateRewards(String userName) {
         logger.info("calculateRewards(" + userName + ")");
 
-        User user = userProxy.getUser(userName);
-
-        List<Attraction> attractionList = gpsProxy.getNearByAttractions();
-        List<VisitedLocation> userLocations = user.getVisitedLocations();
         List<UserReward> userRewardList = new ArrayList<UserReward>();
 
-        for(VisitedLocation visitedLocation : userLocations) {
+        User user = userProxy.getUser(userName);
 
-            for(Attraction attraction : attractionList) {
+        if (user != null) {
 
-                if(user.getUserRewards().stream().filter(r -> r.getAttraction().equals(attraction.attractionName)).count() == 0) {
+            for(VisitedLocation visitedLocation : user.getVisitedLocations()) {
 
-                    int rewardPoints = rewardCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
+                for(Attraction attraction : gpsProxy.getAllAttraction()) {
 
-                    userRewardList.add(new UserReward(visitedLocation, attraction, rewardPoints));
+                    if (user.getUserRewards().stream().filter(r -> r.getAttraction().equals(attraction.getAttractionName())).count() == 0) {
+
+                        int rewardPoints = rewardCentral.getAttractionRewardPoints(attraction.getAttractionId(), user.getUserId());
+
+                        userRewardList.add(new UserReward(visitedLocation, attraction, rewardPoints));
+                    }
                 }
             }
         }

@@ -17,7 +17,7 @@ public interface RewardProxy {
      * Send the reward points getting request
      * @param attractionName : Name of the Attraction to use for calculate reward points
      * @param userName : Name of the User to use for calculate reward points
-     * @return The reward points amount (JSon)
+     * @return The reward points amount
      */
     @GetMapping(value = "/getRewardPoints", produces = "application/json")
     public int getRewardPoints(@RequestParam String attractionName, @RequestParam String userName);
@@ -25,7 +25,7 @@ public interface RewardProxy {
     /**
      * Send the rewards calculating request
      * @param userName : Name of the User to use for creating the UserReward list
-     * @return The UserReward list (JSon)
+     * @return The UserReward list
      */
     @PostMapping(value = "/calculateRewards", produces = "application/json")
     public void calculateRewards(@RequestParam String userName);

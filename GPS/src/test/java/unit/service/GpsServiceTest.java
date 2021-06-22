@@ -59,7 +59,7 @@ public class GpsServiceTest {
         //WHEN
 
         //THEN
-        Assert.assertTrue(gpsService.getAttraction(attractionName).attractionName == attractionName);
+        Assert.assertTrue(gpsService.getAttraction(attractionName).getAttractionName() == attractionName);
     }
 
     @Test

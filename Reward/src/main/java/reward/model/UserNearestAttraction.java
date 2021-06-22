@@ -1,4 +1,4 @@
-package gps.model;
+package reward.model;
 
 import gpsUtil.location.Location;
 

@@ -85,45 +85,4 @@ public class UserPreferencesTest {
         //THEN
         Assert.assertTrue(userPreferences.getAttractionProximity() == attractionProximity);
     }
-
-    @Test
-    public void setAndGetCurrency() {
-
-        //GIVEN
-        CurrencyUnit currencyUnit = Mockito.mock(CurrencyUnit.class);
-
-        //WHEN
-        userPreferences.setCurrency(currencyUnit);
-
-        //THEN
-        Assert.assertTrue(userPreferences.getCurrency() == currencyUnit);
-    }
-
-    @Test
-    public void setAndGetHighPricePoint() {
-
-        //GIVEN
-        CurrencyUnit currencyUnit = Mockito.mock(CurrencyUnit.class);
-        Money highPricePoint = Money.of(10, currencyUnit);
-
-        //WHEN
-        userPreferences.setHighPricePoint(highPricePoint);
-
-        //THEN
-        Assert.assertTrue(userPreferences.getHighPricePoint() == highPricePoint);
-    }
-
-    @Test
-    public void setAndGetLowerPricePoint() {
-
-        //GIVEN
-        CurrencyUnit currencyUnit = Mockito.mock(CurrencyUnit.class);
-        Money lowerPricePoint = Money.of(1, currencyUnit);
-
-        //WHEN
-        userPreferences.setLowerPricePoint(lowerPricePoint);
-
-        //THEN
-        Assert.assertTrue(userPreferences.getLowerPricePoint() == lowerPricePoint);
-    }
 }

@@ -36,10 +36,15 @@ public interface GpsServiceInterface {
     public Attraction getAttraction(String attractionName);
 
     /**
+     * Get all Attraction
+     * @return The List of all Attraction
+     */
+    public List<Attraction> getAllAttraction();
+
+    /**
      * Get the list of the nearest Attraction
      * @param userName : Name of the User to use for getting the nearest Attraction
      * @return The Attraction found
      */
     public List<UserNearestAttraction> getNearByAttractions(String userName);
-
 }

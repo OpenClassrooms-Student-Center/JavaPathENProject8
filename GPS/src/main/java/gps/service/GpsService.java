@@ -1,7 +1,5 @@
 package gps.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import gps.model.User;
 import gps.model.UserNearestAttraction;
 import gps.proxy.RewardProxy;
@@ -14,11 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.zalando.jackson.datatype.money.MoneyModule;
 
-import javax.money.CurrencyUnit;
-import javax.money.Monetary;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -27,8 +21,6 @@ import java.util.*;
  */
 @Service
 public class GpsService implements GpsServiceInterface {
-
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
@@ -64,25 +56,28 @@ public class GpsService implements GpsServiceInterface {
     public VisitedLocation getUserLocation(String userName) {
         logger.info("getUserLocation(" + userName + ")");
 
-        VisitedLocation visitedLocation;
+        VisitedLocation visitedLocation = new VisitedLocation();
 
-        User user = getUserFromProxy(userName);
+        User user = userProxy.getUser(userName);
 
-        if (user.getVisitedLocations().size() <= 0) {
+        if (user != null) {
 
-            visitedLocation = gpsUtil.getUserLocation(user.getUserId());
+            if (user.getVisitedLocations().size() <= 0) {
 
-            String timeVisited = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss").format(visitedLocation.timeVisited);
+                visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 
-            userProxy.addToVisitedLocations(userName, visitedLocation.location.longitude,
-                    visitedLocation.location.latitude, timeVisited);
+                String timeVisited = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(visitedLocation.getTimeVisited());
 
-            rewardProxy.calculateRewards(userName);
-        }
+                userProxy.addToVisitedLocations(userName, visitedLocation.getLocation().getLongitude(),
+                        visitedLocation.getLocation().getLatitude(), timeVisited);
 
-        else {
+                rewardProxy.calculateRewards(userName);
+            }
 
-            visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);
+            else {
+
+                visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);
+            }
         }
 
         return visitedLocation;
@@ -96,7 +91,7 @@ public class GpsService implements GpsServiceInterface {
 
         for (Attraction a : gpsUtil.getAttractions()) {
 
-            if (a.attractionName.equals(attractionName)) {
+            if (a.getAttractionName().equals(attractionName)) {
 
                 attraction = a;
                 break;
@@ -107,6 +102,13 @@ public class GpsService implements GpsServiceInterface {
     }
 
     @Override
+    public List<Attraction> getAllAttraction() {
+        logger.info("getAllAttraction()");
+
+        return gpsUtil.getAttractions();
+    }
+
+    @Override
     public Map<UUID, VisitedLocation> getAllCurrentLocations() {
         logger.info("getAllCurrentLocations()");
 
@@ -114,7 +116,7 @@ public class GpsService implements GpsServiceInterface {
 
         for (User u : userProxy.getAllUser()) {
 
-            visitedLocationMap.put(u.getUserId(), u.getVisitedLocations().get(u.getVisitedLocations().size()-1));
+            visitedLocationMap.put(u.getUserId(), getUserLocation(u.getUserName()));
         }
 
         return visitedLocationMap;
@@ -124,65 +126,50 @@ public class GpsService implements GpsServiceInterface {
     public List<UserNearestAttraction> getNearByAttractions(String userName) {
         logger.info("getNearByAttractions(" + userName + ")");
 
-        User user = getUserFromProxy(userName);
-
-        VisitedLocation visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);
-
-        Map<Double, Attraction> attractionMap = new TreeMap<Double, Attraction>();
-
-        for (Attraction attraction : gpsUtil.getAttractions()) {
-
-            double lat1 = Math.toRadians(attraction.latitude);
-            double lon1 = Math.toRadians(attraction.longitude);
-            double lat2 = Math.toRadians(visitedLocation.location.latitude);
-            double lon2 = Math.toRadians(visitedLocation.location.longitude);
-
-            double angle = Math.acos(Math.sin(lat1) * Math.sin(lat2)
-                    + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));
-
-            double nauticalMiles = user.getUserPreferences().getAttractionProximity() * Math.toDegrees(angle);
-            double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
-
-            attractionMap.put(statuteMiles, attraction);
-        }
-
         List<UserNearestAttraction> userNearestAttractionList = new ArrayList<>();
 
-        for (Map.Entry<Double, Attraction> entry : attractionMap.entrySet()) {
+        User user = userProxy.getUser(userName);
 
-            String attractionName = entry.getValue().attractionName;
-            Location attractionLocation = new Location(entry.getValue().latitude, entry.getValue().longitude);
-            Location userLocation = visitedLocation.location;
-            double attractionMilesDistance = entry.getKey();
-            int rewardPoints = rewardProxy.getRewardPoints(attractionName, userName);
+        if (user != null) {
 
-            userNearestAttractionList.add(new UserNearestAttraction(attractionName,
-                    attractionLocation, userLocation, attractionMilesDistance, rewardPoints));
+            VisitedLocation visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);
 
-            if (userNearestAttractionList.size() >= 5) {
+            Map<Double, Attraction> attractionMap = new TreeMap<Double, Attraction>();
 
-                break;
+            for (Attraction attraction : gpsUtil.getAttractions()) {
+
+                double lat1 = Math.toRadians(attraction.getLatitude());
+                double lon1 = Math.toRadians(attraction.getLongitude());
+                double lat2 = Math.toRadians(visitedLocation.getLocation().getLatitude());
+                double lon2 = Math.toRadians(visitedLocation.getLocation().getLongitude());
+
+                double angle = Math.acos(Math.sin(lat1) * Math.sin(lat2)
+                        + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));
+
+                double nauticalMiles = user.getUserPreferences().getAttractionProximity() * Math.toDegrees(angle);
+                double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
+
+                attractionMap.put(statuteMiles, attraction);
+            }
+
+            for (Map.Entry<Double, Attraction> entry : attractionMap.entrySet()) {
+
+                String attractionName = entry.getValue().getAttractionName();
+                Location attractionLocation = new Location(entry.getValue().getLatitude(), entry.getValue().getLongitude());
+                Location userLocation = visitedLocation.getLocation();
+                double attractionMilesDistance = entry.getKey();
+                int rewardPoints = rewardProxy.getRewardPoints(attractionName, userName);
+
+                userNearestAttractionList.add(new UserNearestAttraction(attractionName,
+                        attractionLocation, userLocation, attractionMilesDistance, rewardPoints));
+
+                if (userNearestAttractionList.size() >= 5) {
+
+                    break;
+                }
             }
         }
 
         return userNearestAttractionList;
-    }
-
-    private User getUserFromProxy(String userName) {
-
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-        objectMapper.registerModule(new MoneyModule());
-
-        User user = null;
-
-        try {
-
-            user = objectMapper.readValue(userProxy.getUser(userName), User.class);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return user;
     }
 }

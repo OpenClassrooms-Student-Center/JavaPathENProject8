@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gps.service.GpsService;
 import gps.service.GpsServiceInterface;
-import gpsUtil.location.VisitedLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +69,17 @@ public class GpsController {
         logger.info("getAttraction(" + attractionName + ")");
 
         return objectMapper.writeValueAsString(gpsServiceInterface.getAttraction(attractionName));
+    }
+
+    /**
+     * Intercepts the attraction list getting request
+     * @return The all Attraction (JSon)
+     */
+    @GetMapping("/getAllAttraction")
+    public String getAllAttraction() throws JsonProcessingException {
+        logger.info("getAllAttraction()");
+
+        return objectMapper.writeValueAsString(gpsServiceInterface.getAllAttraction());
     }
 
     /**

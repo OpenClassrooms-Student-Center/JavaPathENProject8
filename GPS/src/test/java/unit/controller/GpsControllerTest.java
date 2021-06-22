@@ -74,7 +74,7 @@ public class GpsControllerTest {
         //WHEN
         Mockito.when(gpsServiceInterface.getAllCurrentLocations()).thenReturn(visitedLocationList);
 
-        visitedLocationList.put(visitedLocation.userId, visitedLocation);
+        visitedLocationList.put(visitedLocation.getUserId(), visitedLocation);
 
         //THEN
         Assert.assertTrue(gpsController.getAllCurrentLocations().equals(objectMapper.writeValueAsString(gpsServiceInterface.getAllCurrentLocations())));

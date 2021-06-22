@@ -25,6 +25,8 @@ public class User {
 	private List<UserReward> userRewards = new ArrayList<>();
 	private List<Provider> tripDeals = new ArrayList<>();
 
+	public User() {}
+
 	public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
 
 		this.userId = userId;
