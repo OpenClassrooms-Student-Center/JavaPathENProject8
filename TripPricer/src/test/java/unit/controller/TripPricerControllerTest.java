@@ -31,20 +31,15 @@ public class TripPricerControllerTest {
     }
 
     @Test
-    public void getTripDeals() throws JsonProcessingException {
+    public void calculateTripDeals() throws JsonProcessingException {
 
         //GIVEN
         String userName = "userName";
-        Provider provider = new Provider(UUID.randomUUID(), "name", 10);
-
-        List<Provider> providerList = new ArrayList<Provider>();
 
         //WHEN
-        Mockito.when(tripPricerServiceInterface.getTripDeals(userName)).thenReturn(providerList);
-
-        providerList.add(provider);
+        tripPriceController.calculateTripDeals(userName);
 
         //THEN
-        Assert.assertTrue(tripPriceController.getTripDeals(userName).equals(objectMapper.writeValueAsString(providerList)));
+        Mockito.verify(tripPricerServiceInterface, Mockito.times(1)).calculateTripDeals(userName);
     }
 }

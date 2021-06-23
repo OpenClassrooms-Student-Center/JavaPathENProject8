@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tripPricer.Provider;
 import user.model.User;
 import user.model.UserPreferences;
 import user.model.UserReward;
@@ -99,6 +100,18 @@ public class UserService implements UserServiceInterface {
         if (user != null) {
 
             user.setUserPreferences(userPreferences);
+        }
+    }
+
+    @Override
+    public void setTripDeals(String userName, List<Provider> tripDeals) {
+        logger.info("setTripDeals(" + userName + "," + tripDeals + ")");
+
+        User user = userRepositoryInterface.getUser(userName);
+
+        if (user != null) {
+
+            user.setTripDeals(tripDeals);
         }
     }
 

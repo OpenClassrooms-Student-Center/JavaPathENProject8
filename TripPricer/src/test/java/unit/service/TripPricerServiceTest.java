@@ -29,7 +29,7 @@ public class TripPricerServiceTest {
     }
 
     @Test
-    public void getTripDeals() {
+    public void calculateTripDeals() {
 
         //GIVEN
         String userName = "userName";
@@ -50,7 +50,9 @@ public class TripPricerServiceTest {
         Mockito.when(userPreferences.getNumberOfChildren()).thenReturn(2);
         Mockito.when(userPreferences.getTripDuration()).thenReturn(3);
 
+        tripPricerService.calculateTripDeals(userName);
+
         //THEN
-        Assert.assertTrue(tripPricerService.getTripDeals(userName).size() > 0);
+        Mockito.verify(userProxy, Mockito.times(1)).setTripDeals(Mockito.any(String.class), Mockito.any(List.class));
     }
 }

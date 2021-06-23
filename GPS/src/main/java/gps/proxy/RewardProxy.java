@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.UUID;
+
 /**
  * This interface allows to send requests to the reward api
  */
@@ -20,13 +22,13 @@ public interface RewardProxy {
      * @return The reward points amount
      */
     @GetMapping(value = "/getRewardPoints", produces = "application/json")
-    public int getRewardPoints(@RequestParam String attractionName, @RequestParam String userName);
+    public int getRewardPoints(@RequestParam UUID attractionId, @RequestParam UUID userId);
 
     /**
      * Send the rewards calculating request
      * @param userName : Name of the User to use for creating the UserReward list
      * @return The UserReward list
      */
-    @PostMapping(value = "/calculateRewards", produces = "application/json")
+    @GetMapping(value = "/calculateRewards", produces = "application/json")
     public void calculateRewards(@RequestParam String userName);
 }

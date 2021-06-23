@@ -51,10 +51,10 @@ public class TripPriceController {
      * @param userName : Name of the User to use for creating the Provider list
      * @return The Provider list (JSon)
      */
-    @GetMapping("/getTripDeals")
-    public String getTripDeals(@RequestParam String userName) throws JsonProcessingException {
-        logger.info("getTripDeals(" + userName + ")");
+    @GetMapping("/calculateTripDeals")
+    public String calculateTripDeals(@RequestParam String userName) throws JsonProcessingException {
+        logger.info("calculateTripDeals(" + userName + ")");
 
-        return objectMapper.writeValueAsString(tripPricerServiceInterface.getTripDeals(userName));
+        return objectMapper.writeValueAsString(tripPricerServiceInterface.calculateTripDeals(userName));
     }
 }

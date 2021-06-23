@@ -31,19 +31,12 @@ public class RewardServiceTest {
     public void getAttraction() {
 
         //GIVEN
-        String userName = "userName";
-        String attractionName = "attractionName";
-
-        User user = Mockito.mock(User.class);
-        Attraction attraction = new Attraction(attractionName, "attractionCity", "attractionState", 0, 0);
+        UUID userId = UUID.randomUUID();
+        UUID attractionId = UUID.randomUUID();
 
         //WHEN
-        Mockito.when(gpsProxy.getAttraction(attractionName)).thenReturn(attraction);
-        Mockito.when(userProxy.getUser(userName)).thenReturn(user);
-
-        Mockito.when(user.getUserId()).thenReturn(UUID.randomUUID());
 
         //THEN
-        Assert.assertTrue(rewardService.getRewardPoints(attractionName, userName) >= 1);
+        Assert.assertTrue(rewardService.getRewardPoints(attractionId, userId) >= 0);
     }
 }

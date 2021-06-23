@@ -110,7 +110,7 @@ public class TourGuideService {
 		List<Attraction> nearbyAttractions = new ArrayList<>();
 
 		for(Attraction attraction : gpsUtil.getAttractions()) {
-			if(rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
+			if(rewardsService.isWithinAttractionProximity(attraction, visitedLocation.getLocation())) {
 				nearbyAttractions.add(attraction);
 			}
 		}

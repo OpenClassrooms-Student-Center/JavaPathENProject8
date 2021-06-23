@@ -45,8 +45,8 @@ public class TripPricerService implements TripPricerServiceInterface {
     }
 
     @Override
-    public List<Provider> getTripDeals(String userName) {
-        logger.info("getTripDeals(" + userName + ")");
+    public List<Provider> calculateTripDeals(String userName) {
+        logger.info("calculateTripDeals(" + userName + ")");
 
         List<Provider> providerList = new ArrayList<Provider>();
 
@@ -56,12 +56,11 @@ public class TripPricerService implements TripPricerServiceInterface {
 
             int cumulativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
 
-            providerList = tripPricer.getPrice(tripPricerApiKey,
-                    user.getUserId(),
-                    user.getUserPreferences().getNumberOfAdults(),
-                    user.getUserPreferences().getNumberOfChildren(),
-                    user.getUserPreferences().getTripDuration(),
-                    cumulativeRewardPoints);
+            providerList = tripPricer.getPrice(tripPricerApiKey,user.getUserId(),
+                    user.getUserPreferences().getNumberOfAdults(), user.getUserPreferences().getNumberOfChildren(),
+                    user.getUserPreferences().getTripDuration(), cumulativeRewardPoints);
+
+            userProxy.setTripDeals(userName, providerList);
         }
 
         return providerList;

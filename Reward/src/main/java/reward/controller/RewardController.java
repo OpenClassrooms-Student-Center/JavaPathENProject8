@@ -6,10 +6,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reward.service.RewardService;
 import reward.service.RewardServiceInterface;
+
+import java.util.UUID;
 
 /**
  * This class allows to intercept reward requests
@@ -48,15 +51,15 @@ public class RewardController {
 
     /**
      * Intercepts the reward points getting request
-     * @param attractionName : Name of the Attraction to use for calculate reward points
-     * @param userName : Name of the User to use for calculate reward points
+     * @param attractionId : Id of the Attraction to use for calculate reward points
+     * @param userId : Id of the User to use for calculate reward points
      * @return The reward points amount (JSon)
      */
     @GetMapping("/getRewardPoints")
-    public String getRewardPoints(@RequestParam String attractionName, @RequestParam String userName) throws JsonProcessingException {
-        logger.info("getRewardPoints(" + attractionName + "," + userName + ")");
+    public String getRewardPoints(@RequestParam UUID attractionId, @RequestParam UUID userId) throws JsonProcessingException {
+        logger.info("getRewardPoints(" + attractionId + "," + userId + ")");
 
-        return objectMapper.writeValueAsString(rewardServiceInterface.getRewardPoints(attractionName, userName));
+        return objectMapper.writeValueAsString(rewardServiceInterface.getRewardPoints(attractionId, userId));
     }
 
     /**

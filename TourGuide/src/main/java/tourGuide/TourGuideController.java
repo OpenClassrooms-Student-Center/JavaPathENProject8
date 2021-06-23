@@ -32,7 +32,7 @@ public class TourGuideController {
 
     	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
 
-		return objectMapper.writeValueAsString(visitedLocation.location);
+		return objectMapper.writeValueAsString(visitedLocation.getLocation());
     }
     
     //  TODO: Change this method to no longer return a List of Attractions.

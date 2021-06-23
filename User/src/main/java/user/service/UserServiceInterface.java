@@ -2,6 +2,7 @@ package user.service;
 
 
 import gpsUtil.location.VisitedLocation;
+import tripPricer.Provider;
 import user.model.User;
 import user.model.UserPreferences;
 import user.model.UserReward;
@@ -39,6 +40,13 @@ public interface UserServiceInterface {
      * @param userPreferences : UserPreferences to set on the found User
      */
     public void setUserPreferences(String userName, UserPreferences userPreferences);
+
+    /**
+     * Set the trip deals of an User
+     * @param userName : Name of the User to found
+     * @param tripDeals : List of trip deals to set on the found User
+     */
+    void setTripDeals(String userName, List<Provider> tripDeals);
 
     /**
      * Get an User

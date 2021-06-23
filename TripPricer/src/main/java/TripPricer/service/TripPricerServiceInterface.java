@@ -14,5 +14,5 @@ public interface TripPricerServiceInterface {
      * @param userName : Name of the User to found
      * @return The Provider list
      */
-    public List<Provider> getTripDeals(String userName);
+    public List<Provider> calculateTripDeals(String userName);
 }

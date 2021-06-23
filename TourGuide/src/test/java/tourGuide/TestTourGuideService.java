@@ -31,7 +31,7 @@ public class TestTourGuideService {
 		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
 		VisitedLocation visitedLocation = tourGuideService.trackUserLocation(user);
 		tourGuideService.tracker.stopTracking();
-		assertTrue(visitedLocation.userId.equals(user.getUserId()));
+		assertTrue(visitedLocation.getUserId().equals(user.getUserId()));
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ public class TestTourGuideService {
 		
 		tourGuideService.tracker.stopTracking();
 		
-		assertEquals(user.getUserId(), visitedLocation.userId);
+		assertEquals(user.getUserId(), visitedLocation.getUserId());
 	}
 	
 	@Ignore // Not yet implemented

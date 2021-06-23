@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import reward.controller.RewardController;
 import reward.service.RewardServiceInterface;
 
+import java.util.UUID;
+
 @SpringBootTest
 public class RewardControllerTest {
 
@@ -29,13 +31,13 @@ public class RewardControllerTest {
     public void getRewardPoints() throws JsonProcessingException {
 
         //GIVEN
-        String userName = "userName";
-        String attractionName = "attractionName";
+        UUID userId = UUID.randomUUID();
+        UUID attractionId = UUID.randomUUID();
 
         //WHEN
-        Mockito.when(rewardServiceInterface.getRewardPoints(attractionName, userName)).thenReturn(10);
+        Mockito.when(rewardServiceInterface.getRewardPoints(attractionId, userId)).thenReturn(10);
 
         //THEN
-        Assert.assertTrue(rewardController.getRewardPoints(attractionName, userName).equals(objectMapper.writeValueAsString(10)));
+        Assert.assertTrue(rewardController.getRewardPoints(attractionId, userId).equals(objectMapper.writeValueAsString(10)));
     }
 }

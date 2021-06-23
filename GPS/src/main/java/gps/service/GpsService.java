@@ -66,11 +66,7 @@ public class GpsService implements GpsServiceInterface {
 
                 visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 
-                String timeVisited = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss").format(visitedLocation.getTimeVisited());
-
-                userProxy.addToVisitedLocations(userName, visitedLocation.getLocation().getLongitude(),
-                        visitedLocation.getLocation().getLatitude(), timeVisited);
-
+                userProxy.addToVisitedLocations(userName, visitedLocation);
                 rewardProxy.calculateRewards(userName);
             }
 
@@ -161,7 +157,7 @@ public class GpsService implements GpsServiceInterface {
                 Location attractionLocation = new Location(entry.getValue().getLatitude(), entry.getValue().getLongitude());
                 Location userLocation = visitedLocation.getLocation();
                 double attractionMilesDistance = entry.getKey();
-                int rewardPoints = rewardProxy.getRewardPoints(attractionName, userName);
+                int rewardPoints = rewardProxy.getRewardPoints(entry.getValue().getAttractionId(), user.getUserId());
 
                 userNearestAttractionList.add(new UserNearestAttraction(attractionName,
                         attractionLocation, userLocation, attractionMilesDistance, rewardPoints));

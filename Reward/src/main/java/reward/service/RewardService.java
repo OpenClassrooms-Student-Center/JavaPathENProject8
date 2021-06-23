@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import reward.model.User;
 import reward.model.UserReward;
 import reward.proxy.GpsProxy;
@@ -14,6 +15,7 @@ import rewardCentral.RewardCentral;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * This class allows to interact with a RewardCentral
@@ -50,20 +52,10 @@ public class RewardService implements RewardServiceInterface {
     }
 
     @Override
-    public int getRewardPoints(String attractionName, String userName) {
-        logger.info("getRewardPoints(" + attractionName + "," + userName + ")");
+    public int getRewardPoints(UUID attractionId, UUID userId) {
+        logger.info("getRewardPoints(" + attractionId + "," + userId + ")");
 
-        int rewardPoint = -1;
-
-        Attraction attraction = gpsProxy.getAttraction(attractionName);
-        User user = userProxy.getUser(userName);
-
-        if (attraction != null && user != null) {
-
-            rewardPoint = rewardCentral.getAttractionRewardPoints(attraction.getAttractionId(), user.getUserId());
-        }
-
-        return rewardPoint;
+        return rewardCentral.getAttractionRewardPoints(attractionId, userId);
     }
 
     @Override
@@ -80,11 +72,19 @@ public class RewardService implements RewardServiceInterface {
 
                 for(Attraction attraction : gpsProxy.getAllAttraction()) {
 
-                    if (user.getUserRewards().stream().filter(r -> r.getAttraction().equals(attraction.getAttractionName())).count() == 0) {
+                    if (visitedLocation.getLocation().getLatitude() == attraction.getLatitude() &&
+                            visitedLocation.getLocation().getLongitude() == attraction.getLongitude()) {
 
-                        int rewardPoints = rewardCentral.getAttractionRewardPoints(attraction.getAttractionId(), user.getUserId());
+                        if (user.getUserRewards().stream().filter(r -> r.getAttraction().equals(attraction.getAttractionName())).count() == 0) {
 
-                        userRewardList.add(new UserReward(visitedLocation, attraction, rewardPoints));
+                            int rewardPoints = rewardCentral.getAttractionRewardPoints(attraction.getAttractionId(), user.getUserId());
+
+                            UserReward userReward = new UserReward(visitedLocation, attraction, rewardPoints);
+
+                            userRewardList.add(userReward);
+
+                            userProxy.addUserReward(userName, userReward);
+                        }
                     }
                 }
             }

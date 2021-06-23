@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -34,12 +35,9 @@ public interface UserProxy {
 
     /**
      * Send the user visited location adding request
-     * @param userName : Name of the User to add
-     * @param longitude : Longitude of the visited location
-     * @param latitude : Latitude of the visited location
-     * @param timeVisited : Time of the visited location
+     * @param userName : Name of the User
+     * @param visitedLocation : Visited location to add to the user
      */
     @PostMapping(value = "/addToVisitedLocations", produces = "application/json")
-    public void addToVisitedLocations(@RequestParam String userName, @RequestParam double longitude,
-                                      @RequestParam double latitude, @RequestParam String timeVisited);
+    public void addToVisitedLocations(@RequestParam String userName, @RequestBody VisitedLocation visitedLocation);
 }

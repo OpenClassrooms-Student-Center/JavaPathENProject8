@@ -10,11 +10,11 @@ public interface RewardServiceInterface {
 
     /**
      * Get the reward points amount of an attraction
-     * @param attractionName : Name of the attraction
-     * @param userName : Name of the User to found
+     * @param attractionId : Id of the attraction
+     * @param userId : Id of the User to found
      * @return The User that was found
      */
-    public int getRewardPoints(String attractionName, String userName);
+    public int getRewardPoints(UUID attractionId, UUID userId);
 
     /**
      * Get the UserReward list

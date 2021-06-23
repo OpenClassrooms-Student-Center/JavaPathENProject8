@@ -35,15 +35,16 @@ public class UserControllerTest {
         //GIVEN
         String userName = "userName";
         User user = Mockito.mock(User.class);
+        VisitedLocation visitedLocation = Mockito.mock(VisitedLocation.class);
 
         //WHEN
         Mockito.when(userServiceInterface.getUser(userName)).thenReturn(user);
         Mockito.when(user.getUserId()).thenReturn(UUID.randomUUID());
 
-        userController.addToVisitedLocations(userName, 10, 20, "01-01-2021 12:13:14");
+        userController.addToVisitedLocations(userName, visitedLocation);
 
         //THEN
-        Mockito.verify(userServiceInterface, Mockito.times(1)).addToVisitedLocations(Mockito.any(String.class), Mockito.any(VisitedLocation.class));
+        Mockito.verify(userServiceInterface, Mockito.times(1)).addToVisitedLocations(userName, visitedLocation);
     }
 
     @Test
