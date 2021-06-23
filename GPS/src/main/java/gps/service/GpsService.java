@@ -116,7 +116,10 @@ public class GpsService implements GpsServiceInterface {
 
         for (User u : userProxy.getAllUser()) {
 
-            visitedLocationMap.put(u.getUserId(), getUserLocation(u.getUserName()));
+            if (u.getVisitedLocations().size() > 0) {
+
+                visitedLocationMap.put(u.getUserId(), u.getVisitedLocations().get(u.getVisitedLocations().size()-1));
+            }
         }
 
         return visitedLocationMap;

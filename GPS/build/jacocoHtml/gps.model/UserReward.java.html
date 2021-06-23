@@ -12,35 +12,37 @@ public class UserReward {
 	private Attraction attraction;
 	private int rewardPoints;
 
-<span class="fc" id="L15">	public UserReward(VisitedLocation visitedLocation, Attraction attraction, int rewardPoints) {</span>
+<span class="nc" id="L15">	public UserReward() {}</span>
 
-<span class="fc" id="L17">		this.visitedLocation = visitedLocation;</span>
-<span class="fc" id="L18">		this.attraction = attraction;</span>
-<span class="fc" id="L19">		this.rewardPoints = rewardPoints;</span>
-<span class="fc" id="L20">	}</span>
+<span class="nc" id="L17">	public UserReward(VisitedLocation visitedLocation, Attraction attraction, int rewardPoints) {</span>
+
+<span class="nc" id="L19">		this.visitedLocation = visitedLocation;</span>
+<span class="nc" id="L20">		this.attraction = attraction;</span>
+<span class="nc" id="L21">		this.rewardPoints = rewardPoints;</span>
+<span class="nc" id="L22">	}</span>
 
 	public VisitedLocation getVisitedLocation() {
-<span class="fc" id="L23">		return visitedLocation;</span>
+<span class="nc" id="L25">		return visitedLocation;</span>
 	}
 
 	public void setVisitedLocation(VisitedLocation visitedLocation) {
-<span class="fc" id="L27">		this.visitedLocation = visitedLocation;</span>
-<span class="fc" id="L28">	}</span>
+<span class="nc" id="L29">		this.visitedLocation = visitedLocation;</span>
+<span class="nc" id="L30">	}</span>
 
 	public Attraction getAttraction() {
-<span class="fc" id="L31">		return attraction;</span>
+<span class="nc" id="L33">		return attraction;</span>
 	}
 
 	public void setAttraction(Attraction attraction) {
-<span class="fc" id="L35">		this.attraction = attraction;</span>
-<span class="fc" id="L36">	}</span>
+<span class="nc" id="L37">		this.attraction = attraction;</span>
+<span class="nc" id="L38">	}</span>
 
 	public int getRewardPoints() {
-<span class="fc" id="L39">		return rewardPoints;</span>
+<span class="nc" id="L41">		return rewardPoints;</span>
 	}
 
 	public void setRewardPoints(int rewardPoints) {
-<span class="fc" id="L43">		this.rewardPoints = rewardPoints;</span>
-<span class="fc" id="L44">	}</span>
+<span class="nc" id="L45">		this.rewardPoints = rewardPoints;</span>
+<span class="nc" id="L46">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

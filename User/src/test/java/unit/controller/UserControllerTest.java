@@ -40,7 +40,7 @@ public class UserControllerTest {
         Mockito.when(userServiceInterface.getUser(userName)).thenReturn(user);
         Mockito.when(user.getUserId()).thenReturn(UUID.randomUUID());
 
-        userController.addToVisitedLocations(userName, 10, 20, "01/01/2021");
+        userController.addToVisitedLocations(userName, 10, 20, "01-01-2021 12:13:14");
 
         //THEN
         Mockito.verify(userServiceInterface, Mockito.times(1)).addToVisitedLocations(Mockito.any(String.class), Mockito.any(VisitedLocation.class));

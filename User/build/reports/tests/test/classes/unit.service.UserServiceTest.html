@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">6</div>
+<div class="counter">7</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.121s</div>
+<div class="counter">0.138s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,32 +79,37 @@
 </thead>
 <tr>
 <td class="success">addToVisitedLocations</td>
-<td class="success">0.016s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">addUser</td>
-<td class="success">0.005s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">addUserReward</td>
-<td class="success">0.095s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">getAllUser</td>
 <td class="success">0.001s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
-<td class="success">getUser</td>
+<td class="success">addUserReward_thatAlreadyExist</td>
+<td class="success">0.120s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">addUserReward_thatDoesNotExist</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getAllUser</td>
 <td class="success">0.002s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
+<td class="success">getUser</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">setUserPreferences</td>
-<td class="success">0.002s</td>
+<td class="success">0.006s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -112,18 +117,20 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2021-06-07 15:50:30.074  INFO 12668 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 552669250)
-2021-06-07 15:50:30.075  INFO 12668 --- [    Test worker] UserService                              : addUser(Mock for User, hashCode: 217457455)
-2021-06-07 15:50:30.079  INFO 12668 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1571842814)
-2021-06-07 15:50:30.093  INFO 12668 --- [    Test worker] UserService                              : addToVisitedLocations(userName,Mock for VisitedLocation, hashCode: 847706454)
-2021-06-07 15:50:30.095  INFO 12668 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1824490082)
-2021-06-07 15:50:30.095  INFO 12668 --- [    Test worker] UserService                              : getUser(userName)
-2021-06-07 15:50:30.096  INFO 12668 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 850737277)
-2021-06-07 15:50:30.097  INFO 12668 --- [    Test worker] UserService                              : setUserPreferences(userName,Mock for UserPreferences, hashCode: 451122821)
-2021-06-07 15:50:30.098  INFO 12668 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 288492751)
-2021-06-07 15:50:30.098  INFO 12668 --- [    Test worker] UserService                              : getAllUser()
-2021-06-07 15:50:30.104  INFO 12668 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1515212670)
-2021-06-07 15:50:30.197  INFO 12668 --- [    Test worker] UserService                              : addUserReward(userName,Mock for UserReward, hashCode: 1087802493)
+<pre>2021-06-23 14:32:05.911  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 325038293)
+2021-06-23 14:32:06.029  INFO 6136 --- [    Test worker] UserService                              : addUserReward(userName,Mock for UserReward, hashCode: 621766600)
+2021-06-23 14:32:06.031  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1223758557)
+2021-06-23 14:32:06.031  INFO 6136 --- [    Test worker] UserService                              : addUser(Mock for User, hashCode: 1063637551)
+2021-06-23 14:32:06.033  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1563930286)
+2021-06-23 14:32:06.034  INFO 6136 --- [    Test worker] UserService                              : addUserReward(userName,Mock for UserReward, hashCode: 56144871)
+2021-06-23 14:32:06.037  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1140797099)
+2021-06-23 14:32:06.039  INFO 6136 --- [    Test worker] UserService                              : addToVisitedLocations(userName,Mock for VisitedLocation, hashCode: 1949934681)
+2021-06-23 14:32:06.041  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1317623299)
+2021-06-23 14:32:06.044  INFO 6136 --- [    Test worker] UserService                              : getUser(userName)
+2021-06-23 14:32:06.045  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1339058019)
+2021-06-23 14:32:06.049  INFO 6136 --- [    Test worker] UserService                              : setUserPreferences(userName,Mock for UserPreferences, hashCode: 63749117)
+2021-06-23 14:32:06.051  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1263949867)
+2021-06-23 14:32:06.052  INFO 6136 --- [    Test worker] UserService                              : getAllUser()
 </pre>
 </span>
 </div>
@@ -135,7 +142,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 4.8.1</a> at 7 juin 2021 à 15:50:31</p>
+<a href="http://www.gradle.org">Gradle 4.8.1</a> at 23 juin 2021 à 14:32:06</p>
 </div>
 </div>
 </body>

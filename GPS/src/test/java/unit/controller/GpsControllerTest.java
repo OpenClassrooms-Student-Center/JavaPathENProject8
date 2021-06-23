@@ -59,11 +59,22 @@ public class GpsControllerTest {
     }
 
     @Test
+    public void getAllAttraction() throws JsonProcessingException {
+
+        //GIVEN
+        Attraction attraction = new Attraction("attractionName", "attractionCity", "attractionState", 0, 0);
+        List<Attraction> attractionList = new ArrayList<Attraction>();
+
+        //WHEN
+        Mockito.when(gpsServiceInterface.getAllAttraction()).thenReturn(attractionList);
+        attractionList.add(attraction);
+
+        //THEN
+        Assert.assertTrue(gpsController.getAllAttraction().equals(objectMapper.writeValueAsString(attractionList)));
+    }
+
+    @Test
     public void getAllCurrentLocations() throws JsonProcessingException {
-
-
-        ObjectMapper objectMapper = new ObjectMapper();
-
 
         //GIVEN
         String userName = "userName";

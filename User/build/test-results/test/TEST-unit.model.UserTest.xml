@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.model.UserTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-06-07T13:50:29" hostname="PC-ANTOINE" time="0.104">
+<testsuite name="unit.model.UserTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-06-23T12:32:05" hostname="PC-ANTOINE" time="0.091">
   <properties/>
   <testcase name="setAndGetUserId" classname="unit.model.UserTest" time="0.0"/>
   <testcase name="setAndGetUserRewards" classname="unit.model.UserTest" time="0.001"/>
   <testcase name="setAndGetUserName" classname="unit.model.UserTest" time="0.0"/>
-  <testcase name="setAndGetUserPreferences" classname="unit.model.UserTest" time="0.1"/>
+  <testcase name="setAndGetUserPreferences" classname="unit.model.UserTest" time="0.087"/>
   <testcase name="setAndGetLatestLocationTimestamp" classname="unit.model.UserTest" time="0.0"/>
-  <testcase name="setAndGetEmailAddress" classname="unit.model.UserTest" time="0.001"/>
+  <testcase name="setAndGetEmailAddress" classname="unit.model.UserTest" time="0.0"/>
   <testcase name="setAndGetPhoneNumber" classname="unit.model.UserTest" time="0.0"/>
   <testcase name="setAndGetTripDeals" classname="unit.model.UserTest" time="0.0"/>
   <testcase name="setAndGetVisitedLocations" classname="unit.model.UserTest" time="0.0"/>

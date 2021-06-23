@@ -1,5 +1,6 @@
 package unit.service;
 
+import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 import org.junit.Assert;
 import org.junit.Before;
@@ -61,7 +62,7 @@ public class UserServiceTest {
   }
 
     @Test
-    public void addUserReward() {
+    public void addUserReward_thatDoesNotExist() {
 
         //GIVEN
         String userName = "userName";
@@ -73,6 +74,32 @@ public class UserServiceTest {
         //WHEN
         Mockito.when(userRepositoryInterface.getUser(userName)).thenReturn(user);
         Mockito.when(user.getUserRewards()).thenReturn(userRewardList);
+
+        userService.addUserReward(userName, userReward);
+
+        //THEN
+        Assert.assertTrue(userRewardList.contains(userReward));
+    }
+
+    @Test
+    public void addUserReward_thatAlreadyExist() {
+
+        //GIVEN
+        String userName = "userName";
+        String attractionName = "attractionName";
+        User user = Mockito.mock(User.class);
+
+        UserReward userReward = Mockito.mock(UserReward.class);
+        Attraction attraction = Mockito.mock(Attraction.class);
+        List<UserReward> userRewardList = new ArrayList<UserReward>();
+
+        //WHEN
+        Mockito.when(userRepositoryInterface.getUser(userName)).thenReturn(user);
+        Mockito.when(user.getUserRewards()).thenReturn(userRewardList);
+        Mockito.when(userReward.getAttraction()).thenReturn(attraction);
+        Mockito.when(attraction.getAttractionName()).thenReturn(attractionName);
+
+        userRewardList.add(userReward);
 
         userService.addUserReward(userName, userReward);
 

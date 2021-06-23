@@ -1,6 +1,5 @@
 package integration;
 
-import gps.Application;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +15,12 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import reward.Application;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= Application.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class UserControllerIT {
+public class RewardControllerIT {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -37,10 +37,11 @@ public class UserControllerIT {
 
     @Test
     @Order(1)
-    public void getLocation() throws Exception {
+    public void getRewardPoints() throws Exception {
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/getLocation")
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getRewardPoints")
+                .param("attractionName", "attractionName")
                 .param("userName", "userName")).andReturn();
 
         // THEN
@@ -49,33 +50,10 @@ public class UserControllerIT {
 
     @Test
     @Order(2)
-    public void getAttraction() throws Exception {
+    public void calculateRewards() throws Exception {
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/getAttraction")
-                .param("attractionName", "attractionName")).andReturn();
-
-        // THEN
-        Assert.assertEquals(200, mvcResult.getResponse().getStatus());
-    }
-
-    @Test
-    @Order(3)
-    public void getAllCurrentLocations() throws Exception {
-
-        // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/getAllCurrentLocations")).andReturn();
-
-        // THEN
-        Assert.assertEquals(200, mvcResult.getResponse().getStatus());
-    }
-
-    @Test
-    @Order(4)
-    public void getNearbyAttractions() throws Exception {
-
-        // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/getNearbyAttractions")
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/calculateRewards")
                 .param("userName", "userName")).andReturn();
 
         // THEN

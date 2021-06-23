@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,48 +18,53 @@ import java.util.List;
 @Service
 public class TripPricerService implements TripPricerServiceInterface {
 
-<span class="fc" id="L20">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="nc" id="L21">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     private static final String tripPricerApiKey = &quot;test-server-api-key&quot;;
 
     @Autowired
     private UserProxy userProxy;
 
-<span class="fc" id="L27">    private TripPricer tripPricer = new TripPricer();</span>
+<span class="nc" id="L28">    private TripPricer tripPricer = new TripPricer();</span>
 
     /**
      * Creates a new TripPricerService
      */
-<span class="fc" id="L32">    public TripPricerService() {</span>
-<span class="fc" id="L33">        logger.info(&quot;TripPricerService()&quot;);</span>
-<span class="fc" id="L34">    }</span>
+<span class="nc" id="L33">    public TripPricerService() {</span>
+<span class="nc" id="L34">        logger.info(&quot;TripPricerService()&quot;);</span>
+<span class="nc" id="L35">    }</span>
 
     /**
      * Creates a new TripPricerService with the specified UserProxy
      * @param userProxy : UserProxy that this service will use
      */
-<span class="fc" id="L40">    public TripPricerService(UserProxy userProxy) {</span>
-<span class="fc" id="L41">        logger.info(&quot;TripPricerService(&quot; + userProxy + &quot;)&quot;);</span>
+<span class="nc" id="L41">    public TripPricerService(UserProxy userProxy) {</span>
+<span class="nc" id="L42">        logger.info(&quot;TripPricerService(&quot; + userProxy + &quot;)&quot;);</span>
 
-<span class="fc" id="L43">        this.userProxy = userProxy;</span>
-<span class="fc" id="L44">    }</span>
+<span class="nc" id="L44">        this.userProxy = userProxy;</span>
+<span class="nc" id="L45">    }</span>
 
     @Override
     public List&lt;Provider&gt; getTripDeals(String userName) {
-<span class="fc" id="L48">        logger.info(&quot;getTripDeals(&quot; + userName + &quot;)&quot;);</span>
+<span class="nc" id="L49">        logger.info(&quot;getTripDeals(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="fc" id="L50">        User user = userProxy.getUser(userName);</span>
+<span class="nc" id="L51">        List&lt;Provider&gt; providerList = new ArrayList&lt;Provider&gt;();</span>
 
-<span class="pc" id="L52">        int cumulativeRewardPoints = user.getUserRewards().stream().mapToInt(i -&gt; i.getRewardPoints()).sum();</span>
+<span class="nc" id="L53">        User user = userProxy.getUser(userName);</span>
 
-<span class="fc" id="L54">        List&lt;Provider&gt; providers = tripPricer.getPrice(tripPricerApiKey,</span>
-<span class="fc" id="L55">                user.getUserId(),</span>
-<span class="fc" id="L56">                user.getUserPreferences().getNumberOfAdults(),</span>
-<span class="fc" id="L57">                user.getUserPreferences().getNumberOfChildren(),</span>
-<span class="fc" id="L58">                user.getUserPreferences().getTripDuration(),</span>
-                cumulativeRewardPoints);
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (user != null) {</span>
 
-<span class="fc" id="L61">        return providers;</span>
+<span class="nc" id="L57">            int cumulativeRewardPoints = user.getUserRewards().stream().mapToInt(i -&gt; i.getRewardPoints()).sum();</span>
+
+<span class="nc" id="L59">            providerList = tripPricer.getPrice(tripPricerApiKey,</span>
+<span class="nc" id="L60">                    user.getUserId(),</span>
+<span class="nc" id="L61">                    user.getUserPreferences().getNumberOfAdults(),</span>
+<span class="nc" id="L62">                    user.getUserPreferences().getNumberOfChildren(),</span>
+<span class="nc" id="L63">                    user.getUserPreferences().getTripDuration(),</span>
+                    cumulativeRewardPoints);
+        }
+
+<span class="nc" id="L67">        return providerList;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

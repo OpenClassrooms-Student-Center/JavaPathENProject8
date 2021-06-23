@@ -58,7 +58,7 @@ public class UserControllerIT {
                 .param("userName", "userName")
                 .param("longitude", "1.1")
                 .param("latitude", "2.2")
-                .param("timeVisited", "01/01/2021")).andReturn();
+                .param("timeVisited", "01-01-2021 12:13:14")).andReturn();
 
         // THEN
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());

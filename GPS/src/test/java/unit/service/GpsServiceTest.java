@@ -4,6 +4,8 @@ import gps.model.User;
 import gps.proxy.RewardProxy;
 import gps.proxy.UserProxy;
 import gps.service.GpsService;
+import gpsUtil.GpsUtil;
+import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 import org.junit.Assert;
 import org.junit.Before;
@@ -40,7 +42,7 @@ public class GpsServiceTest {
         List<VisitedLocation> visitedLocationList = new ArrayList<VisitedLocation>();
 
         //WHEN
-//        Mockito.when(userProxy.getUser(userName)).thenReturn(user);
+        Mockito.when(userProxy.getUser(userName)).thenReturn(user);
         Mockito.when(user.getUserId()).thenReturn(UUID.randomUUID());
         Mockito.when(user.getVisitedLocations()).thenReturn(visitedLocationList);
 
@@ -60,6 +62,21 @@ public class GpsServiceTest {
 
         //THEN
         Assert.assertTrue(gpsService.getAttraction(attractionName).getAttractionName() == attractionName);
+    }
+
+    @Test
+    public void getAllAttraction() {
+
+        //GIVEN
+        GpsUtil gpsUtil = new GpsUtil();
+
+        Attraction attraction = gpsUtil.getAttractions().get(0);
+        Attraction attractionReturned = gpsService.getAllAttraction().get(0);
+
+        //WHEN
+
+        //THEN
+        Assert.assertTrue(attraction.getAttractionName().equals(attractionReturned.getAttractionName()));
     }
 
     @Test

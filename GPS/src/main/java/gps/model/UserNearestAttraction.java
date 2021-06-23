@@ -13,6 +13,8 @@ public class UserNearestAttraction {
     private double attractionMilesDistance;
     private int rewardPoints;
 
+    public UserNearestAttraction() {}
+
     public UserNearestAttraction(String attractionName, Location attractionLocation, Location userLocation, double attractionMilesDistance, int rewardPoints) {
 
         this.attractionName = attractionName;

@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">2.064s</div>
+<div class="counter">1.673s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,32 +79,32 @@
 </thead>
 <tr>
 <td class="success">addToVisitedLocations</td>
-<td class="success">0.026s</td>
+<td class="success">0.023s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">addUserForm</td>
-<td class="success">1.711s</td>
+<td class="success">1.428s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">addUserReward</td>
-<td class="success">0.020s</td>
+<td class="success">0.019s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getAllUser</td>
-<td class="success">0.017s</td>
+<td class="success">0.016s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getUser</td>
-<td class="success">0.272s</td>
+<td class="success">0.166s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">setUserPreferences</td>
-<td class="success">0.018s</td>
+<td class="success">0.021s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -112,28 +112,28 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>15:50:08.649 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class integration.UserControllerIT]
-15:50:08.679 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-15:50:08.718 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-15:50:08.807 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [integration.UserControllerIT] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-15:50:08.841 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [integration.UserControllerIT], using SpringBootContextLoader
-15:50:08.854 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [integration.UserControllerIT]: class path resource [integration/UserControllerIT-context.xml] does not exist
-15:50:08.856 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [integration.UserControllerIT]: class path resource [integration/UserControllerITContext.groovy] does not exist
-15:50:08.856 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [integration.UserControllerIT]: no resource found for suffixes {-context.xml, Context.groovy}.
-15:50:09.026 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [integration.UserControllerIT]
-15:50:09.594 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [integration.UserControllerIT]: using defaults.
-15:50:09.595 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-15:50:09.637 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
-15:50:09.638 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
-15:50:09.639 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2f74fbaf, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@37112d1d, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5a592977, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@19ebc488, org.springframework.test.context.support.DirtiesContextTestExecutionListener@114aed99, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@2f8d5368, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3c0cc57f, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@7b8489f2, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@3de4853e, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@783787f9]
-15:50:09.648 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.UserControllerIT]
-15:50:09.649 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.UserControllerIT]
-15:50:09.651 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.UserControllerIT]
-15:50:09.651 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.UserControllerIT]
-15:50:09.669 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@4fe9e638 testClass = UserControllerIT, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@35545e78 testClass = UserControllerIT, locations = '{}', classes = '{class user.Application, class user.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@4b49e29e, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@4d28b176, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@678d6ce0, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@1d66fb6d], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
-15:50:09.671 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.UserControllerIT]
-15:50:09.671 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.UserControllerIT]
-15:50:09.781 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
+<pre>14:31:50.168 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class integration.UserControllerIT]
+14:31:50.204 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+14:31:50.287 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+14:31:50.426 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [integration.UserControllerIT] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+14:31:50.490 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [integration.UserControllerIT], using SpringBootContextLoader
+14:31:50.522 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [integration.UserControllerIT]: class path resource [integration/UserControllerIT-context.xml] does not exist
+14:31:50.523 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [integration.UserControllerIT]: class path resource [integration/UserControllerITContext.groovy] does not exist
+14:31:50.524 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [integration.UserControllerIT]: no resource found for suffixes {-context.xml, Context.groovy}.
+14:31:50.744 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [integration.UserControllerIT]
+14:31:51.439 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [integration.UserControllerIT]: using defaults.
+14:31:51.442 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+14:31:51.516 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
+14:31:51.517 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
+14:31:51.518 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@9cf3d09, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@33216eed, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@664bb10c, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@76ba4e0, org.springframework.test.context.support.DirtiesContextTestExecutionListener@773cf671, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@4fd2a87d, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@742aa35a, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2e3c559b, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@3e23b153, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@64e867aa]
+14:31:51.535 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.UserControllerIT]
+14:31:51.538 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.UserControllerIT]
+14:31:51.541 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.UserControllerIT]
+14:31:51.542 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.UserControllerIT]
+14:31:51.574 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@18e9cd4f testClass = UserControllerIT, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@2f0b69c4 testClass = UserControllerIT, locations = '{}', classes = '{class user.Application, class user.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@411d0d0a, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@32882619, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1cf8670e, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@4fa3e97b], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+14:31:51.578 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.UserControllerIT]
+14:31:51.579 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.UserControllerIT]
+14:31:51.813 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -143,59 +143,58 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.1.6.RELEASE)
 
-2021-06-07 15:50:16.990  INFO 12668 --- [    Test worker] integration.UserControllerIT             : No active profile set, falling back to default profiles: default
-2021-06-07 15:50:20.771  INFO 12668 --- [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=4f4642f5-389e-3208-b060-9f6c852c83df
-2021-06-07 15:50:21.245  INFO 12668 --- [    Test worker] UserController                           : UserController()
-2021-06-07 15:50:21.255  INFO 12668 --- [    Test worker] UserService                              : UserService()
-2021-06-07 15:50:21.262  INFO 12668 --- [    Test worker] UserRepository                           : UserRepository()
-2021-06-07 15:50:21.911  WARN 12668 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-06-07 15:50:21.912  INFO 12668 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-06-07 15:50:21.929  WARN 12668 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-06-07 15:50:21.930  INFO 12668 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-06-07 15:50:23.388  INFO 12668 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-06-07 15:50:26.808  INFO 12668 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2021-06-07 15:50:27.030  INFO 12668 --- [    Test worker] integration.UserControllerIT             : Started UserControllerIT in 17.197 seconds (JVM running for 21.398)
-2021-06-07 15:50:28.559  INFO 12668 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-06-07 15:50:28.559  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-06-07 15:50:28.604  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 45 ms
-2021-06-07 15:50:28.712  INFO 12668 --- [    Test worker] UserController                           : addUser(userName,phoneNumber,emailAddress)
-2021-06-07 15:50:28.765  INFO 12668 --- [    Test worker] o.j.m.DefaultMonetaryContextFactory      : Using custom MathContext: precision=256, roundingMode=HALF_EVEN
-2021-06-07 15:50:28.773  INFO 12668 --- [    Test worker] UserService                              : addUser(user.model.User@3190317d)
-2021-06-07 15:50:28.774  INFO 12668 --- [    Test worker] UserRepository                           : addUser(user.model.User@3190317d)
-2021-06-07 15:50:28.842  INFO 12668 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-06-07 15:50:28.843  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-06-07 15:50:28.854  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 9 ms
-2021-06-07 15:50:28.860  INFO 12668 --- [    Test worker] UserController                           : addToVisitedLocations(userName,1.1,2.2,01/01/2021)
-2021-06-07 15:50:28.861  INFO 12668 --- [    Test worker] UserService                              : getUser(userName)
-2021-06-07 15:50:28.861  INFO 12668 --- [    Test worker] UserRepository                           : getUser(userName)
-2021-06-07 15:50:28.863  INFO 12668 --- [    Test worker] UserService                              : addToVisitedLocations(userName,gpsUtil.location.VisitedLocation@5819f35b)
-2021-06-07 15:50:28.863  INFO 12668 --- [    Test worker] UserRepository                           : getUser(userName)
-2021-06-07 15:50:28.870  INFO 12668 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-06-07 15:50:28.870  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-06-07 15:50:28.876  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
-2021-06-07 15:50:28.880  INFO 12668 --- [    Test worker] UserController                           : getUser(userName)
-2021-06-07 15:50:28.908  INFO 12668 --- [    Test worker] UserService                              : getUser(userName)
-2021-06-07 15:50:28.909  INFO 12668 --- [    Test worker] UserRepository                           : getUser(userName)
-2021-06-07 15:50:29.141  INFO 12668 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-06-07 15:50:29.142  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-06-07 15:50:29.146  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
-2021-06-07 15:50:29.153  INFO 12668 --- [    Test worker] UserController                           : setUserPreferences(userName,7,5,2,3,30,10,1)
-2021-06-07 15:50:29.154  INFO 12668 --- [    Test worker] UserService                              : setUserPreferences(userName,user.model.UserPreferences@4e523953)
-2021-06-07 15:50:29.154  INFO 12668 --- [    Test worker] UserRepository                           : getUser(userName)
-2021-06-07 15:50:29.161  INFO 12668 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-06-07 15:50:29.162  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-06-07 15:50:29.166  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
-2021-06-07 15:50:29.168  INFO 12668 --- [    Test worker] UserController                           : getAllUser()
-2021-06-07 15:50:29.168  INFO 12668 --- [    Test worker] UserService                              : getAllUser()
-2021-06-07 15:50:29.168  INFO 12668 --- [    Test worker] UserRepository                           : getAllUser()
-2021-06-07 15:50:29.177  INFO 12668 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-06-07 15:50:29.177  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-06-07 15:50:29.181  INFO 12668 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
-2021-06-07 15:50:29.187  INFO 12668 --- [    Test worker] UserController                           : addUserReward(userName,1.1,2.2,01/01/2021,attractionName,attractionCity,attractionState)
-2021-06-07 15:50:29.188  INFO 12668 --- [    Test worker] UserService                              : getUser(userName)
-2021-06-07 15:50:29.188  INFO 12668 --- [    Test worker] UserRepository                           : getUser(userName)
-2021-06-07 15:50:29.190  INFO 12668 --- [    Test worker] UserService                              : addUserReward(userName,user.model.UserReward@2df10b48)
-2021-06-07 15:50:29.192  INFO 12668 --- [    Test worker] UserRepository                           : getUser(userName)
+2021-06-23 14:31:55.282  INFO 6136 --- [    Test worker] integration.UserControllerIT             : No active profile set, falling back to default profiles: default
+2021-06-23 14:31:58.297  INFO 6136 --- [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=4f4642f5-389e-3208-b060-9f6c852c83df
+2021-06-23 14:31:58.749  INFO 6136 --- [    Test worker] UserController                           : UserController()
+2021-06-23 14:31:58.760  INFO 6136 --- [    Test worker] UserService                              : UserService()
+2021-06-23 14:31:58.767  INFO 6136 --- [    Test worker] UserRepository                           : UserRepository()
+2021-06-23 14:31:59.506  WARN 6136 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-06-23 14:31:59.507  INFO 6136 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-06-23 14:31:59.538  WARN 6136 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-06-23 14:31:59.538  INFO 6136 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-06-23 14:32:00.661  INFO 6136 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-23 14:32:03.168  INFO 6136 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-06-23 14:32:03.313  INFO 6136 --- [    Test worker] integration.UserControllerIT             : Started UserControllerIT in 11.409 seconds (JVM running for 15.743)
+2021-06-23 14:32:04.543  INFO 6136 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-23 14:32:04.543  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-23 14:32:04.576  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 32 ms
+2021-06-23 14:32:04.725  INFO 6136 --- [    Test worker] UserController                           : addUser(userName,phoneNumber,emailAddress)
+2021-06-23 14:32:04.727  INFO 6136 --- [    Test worker] UserService                              : addUser(user.model.User@22fb8dff)
+2021-06-23 14:32:04.728  INFO 6136 --- [    Test worker] UserRepository                           : addUser(user.model.User@22fb8dff)
+2021-06-23 14:32:04.810  INFO 6136 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-23 14:32:04.810  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-23 14:32:04.816  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 6 ms
+2021-06-23 14:32:04.822  INFO 6136 --- [    Test worker] UserController                           : addToVisitedLocations(userName,1.1,2.2,01-01-2021 12:13:14)
+2021-06-23 14:32:04.822  INFO 6136 --- [    Test worker] UserService                              : getUser(userName)
+2021-06-23 14:32:04.822  INFO 6136 --- [    Test worker] UserRepository                           : getUser(userName)
+2021-06-23 14:32:04.825  INFO 6136 --- [    Test worker] UserService                              : addToVisitedLocations(userName,gpsUtil.location.VisitedLocation@7181b023)
+2021-06-23 14:32:04.826  INFO 6136 --- [    Test worker] UserRepository                           : getUser(userName)
+2021-06-23 14:32:04.834  INFO 6136 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-23 14:32:04.834  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-23 14:32:04.839  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
+2021-06-23 14:32:04.844  INFO 6136 --- [    Test worker] UserController                           : getUser(userName)
+2021-06-23 14:32:04.844  INFO 6136 --- [    Test worker] UserService                              : getUser(userName)
+2021-06-23 14:32:04.844  INFO 6136 --- [    Test worker] UserRepository                           : getUser(userName)
+2021-06-23 14:32:05.001  INFO 6136 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-23 14:32:05.001  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-23 14:32:05.006  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
+2021-06-23 14:32:05.015  INFO 6136 --- [    Test worker] UserController                           : setUserPreferences(userName,7,5,2,3,30,10,1)
+2021-06-23 14:32:05.016  INFO 6136 --- [    Test worker] UserService                              : setUserPreferences(userName,user.model.UserPreferences@478b6320)
+2021-06-23 14:32:05.016  INFO 6136 --- [    Test worker] UserRepository                           : getUser(userName)
+2021-06-23 14:32:05.022  INFO 6136 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-23 14:32:05.022  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-23 14:32:05.027  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2021-06-23 14:32:05.029  INFO 6136 --- [    Test worker] UserController                           : getAllUser()
+2021-06-23 14:32:05.030  INFO 6136 --- [    Test worker] UserService                              : getAllUser()
+2021-06-23 14:32:05.030  INFO 6136 --- [    Test worker] UserRepository                           : getAllUser()
+2021-06-23 14:32:05.040  INFO 6136 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-23 14:32:05.040  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-23 14:32:05.047  INFO 6136 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 6 ms
+2021-06-23 14:32:05.050  INFO 6136 --- [    Test worker] UserController                           : addUserReward(userName,1.1,2.2,01/01/2021,attractionName,attractionCity,attractionState)
+2021-06-23 14:32:05.051  INFO 6136 --- [    Test worker] UserService                              : getUser(userName)
+2021-06-23 14:32:05.051  INFO 6136 --- [    Test worker] UserRepository                           : getUser(userName)
+2021-06-23 14:32:05.053  INFO 6136 --- [    Test worker] UserService                              : addUserReward(userName,user.model.UserReward@45f62df4)
+2021-06-23 14:32:05.054  INFO 6136 --- [    Test worker] UserRepository                           : getUser(userName)
 </pre>
 </span>
 </div>
@@ -207,7 +206,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 4.8.1</a> at 7 juin 2021 à 15:50:31</p>
+<a href="http://www.gradle.org">Gradle 4.8.1</a> at 23 juin 2021 à 14:32:06</p>
 </div>
 </div>
 </body>

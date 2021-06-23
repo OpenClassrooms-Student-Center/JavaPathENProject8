@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.controller.UserControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-06-07T13:50:29" hostname="PC-ANTOINE" time="0.224">
+<testsuite name="unit.controller.UserControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-06-23T12:32:05" hostname="PC-ANTOINE" time="0.252">
   <properties/>
-  <testcase name="addToVisitedLocations" classname="unit.controller.UserControllerTest" time="0.215"/>
-  <testcase name="getAllUser" classname="unit.controller.UserControllerTest" time="0.009"/>
-  <system-out><![CDATA[2021-06-07 15:50:29.661  INFO 12668 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 1850232874)
-2021-06-07 15:50:29.803  INFO 12668 --- [    Test worker] UserController                           : addToVisitedLocations(userName,10.0,20.0,01/01/2021)
-2021-06-07 15:50:29.834  INFO 12668 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 764061495)
-2021-06-07 15:50:29.835  INFO 12668 --- [    Test worker] UserController                           : getAllUser()
+  <testcase name="addToVisitedLocations" classname="unit.controller.UserControllerTest" time="0.249"/>
+  <testcase name="getAllUser" classname="unit.controller.UserControllerTest" time="0.002"/>
+  <system-out><![CDATA[2021-06-23 14:32:05.345  INFO 6136 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 1030290089)
+2021-06-23 14:32:05.521  INFO 6136 --- [    Test worker] UserController                           : addToVisitedLocations(userName,10.0,20.0,01-01-2021 12:13:14)
+2021-06-23 14:32:05.560  INFO 6136 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 460519352)
+2021-06-23 14:32:05.560  INFO 6136 --- [    Test worker] UserController                           : getAllUser()
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

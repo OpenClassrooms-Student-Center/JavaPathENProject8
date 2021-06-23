@@ -8,7 +8,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -86,7 +85,7 @@ public class GpsController {
      * Intercepts the user location list getting request
      * @return The locations of all users (JSon)
      */
-    @RequestMapping("/getAllCurrentLocations")
+    @GetMapping("/getAllCurrentLocations")
     public String getAllCurrentLocations() throws JsonProcessingException {
         logger.info("getAllCurrentLocations()");
 
@@ -98,7 +97,7 @@ public class GpsController {
      * @param userName : Name of the User to use for find his location
      * @return The nearest attraction list (JSon)
      */
-    @RequestMapping("/getNearbyAttractions")
+    @GetMapping("/getNearbyAttractions")
     public String getNearbyAttractions(@RequestParam String userName) throws JsonProcessingException {
         logger.info("getNearbyAttractions(" + userName + ")");
 

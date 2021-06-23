@@ -16,7 +16,7 @@ public class UserNearestAttractionTest {
     @Before
     public void beforeEach() {
 
-        userNearestAttraction = new UserNearestAttraction(null, null, null, 0, 0);
+        userNearestAttraction = new UserNearestAttraction(null, null, null, 0.0, 0);
     }
 
     @Test

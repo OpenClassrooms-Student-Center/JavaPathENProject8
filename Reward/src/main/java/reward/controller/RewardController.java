@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reward.service.RewardService;
@@ -52,7 +52,7 @@ public class RewardController {
      * @param userName : Name of the User to use for calculate reward points
      * @return The reward points amount (JSon)
      */
-    @RequestMapping("/getRewardPoints")
+    @GetMapping("/getRewardPoints")
     public String getRewardPoints(@RequestParam String attractionName, @RequestParam String userName) throws JsonProcessingException {
         logger.info("getRewardPoints(" + attractionName + "," + userName + ")");
 
@@ -64,7 +64,7 @@ public class RewardController {
      * @param userName : Name of the User to use for creating the UserReward list
      * @return The UserReward list (JSon)
      */
-    @RequestMapping("/calculateRewards")
+    @GetMapping("/calculateRewards")
     public String calculateRewards(@RequestParam String userName) throws JsonProcessingException {
         logger.info("calculateRewards(" + userName + ")");
 

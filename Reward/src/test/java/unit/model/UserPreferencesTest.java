@@ -1,14 +1,10 @@
 package unit.model;
 
-import org.javamoney.moneta.Money;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import reward.model.UserPreferences;
-
-import javax.money.CurrencyUnit;
 
 @SpringBootTest
 public class UserPreferencesTest {
@@ -18,7 +14,7 @@ public class UserPreferencesTest {
     @Before
     public void beforeEach() {
 
-        userPreferences = new UserPreferences();
+        userPreferences = new UserPreferences(0, 0, 0, 0, 0);
     }
 
     @Test

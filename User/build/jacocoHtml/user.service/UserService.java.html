@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class UserService implements UserServiceInterface {
 
-<span class="fc" id="L22">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="pc" id="L22">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     @Autowired
     private UserRepositoryInterface userRepositoryInterface;
@@ -40,11 +40,11 @@ public class UserService implements UserServiceInterface {
      * Creates a new UserService with the specified UserRepositoryInterface
      * @param userRepositoryInterface : repository that this service will use
      */
-<span class="fc" id="L43">    public UserService(UserRepositoryInterface userRepositoryInterface) {</span>
-<span class="fc" id="L44">        logger.info(&quot;UserService(&quot; + userRepositoryInterface + &quot;)&quot;);</span>
+<span class="nc" id="L43">    public UserService(UserRepositoryInterface userRepositoryInterface) {</span>
+<span class="nc" id="L44">        logger.info(&quot;UserService(&quot; + userRepositoryInterface + &quot;)&quot;);</span>
 
-<span class="fc" id="L46">        this.userRepositoryInterface = userRepositoryInterface;</span>
-<span class="fc" id="L47">    }</span>
+<span class="nc" id="L46">        this.userRepositoryInterface = userRepositoryInterface;</span>
+<span class="nc" id="L47">    }</span>
 
     @Override
     public void addUser(User user) {
@@ -77,7 +77,7 @@ public class UserService implements UserServiceInterface {
 
 <span class="pc bpc" id="L78" title="1 of 2 branches missed.">            for (UserReward r : user.getUserRewards()) {</span>
 
-<span class="nc bnc" id="L80" title="All 2 branches missed.">                if (r.getAttraction().attractionName.equals(userReward.getAttraction().attractionName)) {</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">                if (r.getAttraction().getAttractionName().equals(userReward.getAttraction().getAttractionName())) {</span>
 
 <span class="nc" id="L82">                    alreadyExist = true;</span>
                 }
@@ -96,21 +96,24 @@ public class UserService implements UserServiceInterface {
 
 <span class="fc" id="L97">        User user = userRepositoryInterface.getUser(userName);</span>
 
-<span class="fc" id="L99">        user.setUserPreferences(userPreferences);</span>
-<span class="fc" id="L100">    }</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        if (user != null) {</span>
+
+<span class="fc" id="L101">            user.setUserPreferences(userPreferences);</span>
+        }
+<span class="fc" id="L103">    }</span>
 
     @Override
     public User getUser(String userName) {
-<span class="fc" id="L104">        logger.info(&quot;getUser(&quot; + userName + &quot;)&quot;);</span>
+<span class="fc" id="L107">        logger.info(&quot;getUser(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="fc" id="L106">        return userRepositoryInterface.getUser(userName);</span>
+<span class="fc" id="L109">        return userRepositoryInterface.getUser(userName);</span>
     }
 
     @Override
     public List&lt;User&gt; getAllUser() {
-<span class="fc" id="L111">        logger.info(&quot;getAllUser()&quot;);</span>
+<span class="fc" id="L114">        logger.info(&quot;getAllUser()&quot;);</span>
 
-<span class="fc" id="L113">        return userRepositoryInterface.getAllUser();</span>
+<span class="fc" id="L116">        return userRepositoryInterface.getAllUser();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
