@@ -31,7 +31,6 @@ public class GpsControllerIT {
     @Before
     public void beforeEach() {
 
-        // GIVEN
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
@@ -39,9 +38,12 @@ public class GpsControllerIT {
     @Order(1)
     public void getLocation() throws Exception {
 
+        // GIVEN
+        String userName = "userNameTest";
+
         // WHEN
         mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getLocation")
-                .param("userName", "userName")).andReturn();
+                .param("userName", userName)).andReturn();
 
         // THEN
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());
@@ -51,9 +53,12 @@ public class GpsControllerIT {
     @Order(2)
     public void getAttraction() throws Exception {
 
+        // GIVEN
+        String attractionName = "attractionNameTest";
+
         // WHEN
         mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getAttraction")
-                .param("attractionName", "attractionName")).andReturn();
+                .param("attractionName", attractionName)).andReturn();
 
         // THEN
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());
@@ -61,7 +66,22 @@ public class GpsControllerIT {
 
     @Test
     @Order(3)
+    public void getAllAttraction() throws Exception {
+
+        // GIVEN
+
+        // WHEN
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getAllAttraction")).andReturn();
+
+        // THEN
+        Assert.assertEquals(200, mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    @Order(4)
     public void getAllCurrentLocations() throws Exception {
+
+        // GIVEN
 
         // WHEN
         mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getAllCurrentLocations")).andReturn();
@@ -71,12 +91,15 @@ public class GpsControllerIT {
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     public void getNearbyAttractions() throws Exception {
+
+        // GIVEN
+        String userName = "userNameTest";
 
         // WHEN
         mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getNearbyAttractions")
-                .param("userName", "userName")).andReturn();
+                .param("userName", userName)).andReturn();
 
         // THEN
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());

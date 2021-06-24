@@ -4,7 +4,6 @@ import gpsUtil.location.Attraction;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import reward.model.UserNearestAttraction;
 
 import java.util.List;
 
@@ -20,12 +19,12 @@ public interface GpsProxy {
      * @return The Attraction found
      */
     @GetMapping(value = "/getAttraction", produces = "application/json")
-    public Attraction getAttraction(@RequestParam String attractionName);
+    Attraction getAttraction(@RequestParam String attractionName);
 
     /**
      * Send the attraction list getting request
      * @return The Attraction list
      */
     @GetMapping(value = "/getAllAttraction", produces = "application/json")
-    public List<Attraction> getAllAttraction();
+    List<Attraction> getAllAttraction();
 }

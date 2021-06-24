@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.service.GpsServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-06-23T12:34:08" hostname="PC-ANTOINE" time="0.243">
+<testsuite name="unit.service.GpsServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-06-24T10:27:22" hostname="PC-ANTOINE" time="0.151">
   <properties/>
-  <testcase name="getUserLocation" classname="unit.service.GpsServiceTest" time="0.184"/>
-  <testcase name="getAllAttraction" classname="unit.service.GpsServiceTest" time="0.04"/>
+  <testcase name="getUserLocation" classname="unit.service.GpsServiceTest" time="0.105"/>
+  <testcase name="getAllAttraction" classname="unit.service.GpsServiceTest" time="0.027"/>
   <testcase name="getAttraction" classname="unit.service.GpsServiceTest" time="0.015"/>
-  <testcase name="getAllCurrentLocations" classname="unit.service.GpsServiceTest" time="0.003"/>
-  <system-out><![CDATA[2021-06-23 14:34:08.312  INFO 10720 --- [    Test worker] GpsService                               : GpsService(Mock for UserProxy, hashCode: 1517306252,Mock for RewardProxy, hashCode: 200161833)
-2021-06-23 14:34:08.493  INFO 10720 --- [    Test worker] GpsService                               : getUserLocation(userName)
-2021-06-23 14:34:08.494  INFO 10720 --- [    Test worker] GpsService                               : GpsService(Mock for UserProxy, hashCode: 582786743,Mock for RewardProxy, hashCode: 751839367)
-2021-06-23 14:34:08.518  INFO 10720 --- [    Test worker] GpsService                               : getAllAttraction()
-2021-06-23 14:34:08.535  INFO 10720 --- [    Test worker] GpsService                               : GpsService(Mock for UserProxy, hashCode: 1401910393,Mock for RewardProxy, hashCode: 473549940)
-2021-06-23 14:34:08.535  INFO 10720 --- [    Test worker] GpsService                               : getAttraction(Disneyland)
-2021-06-23 14:34:08.550  INFO 10720 --- [    Test worker] GpsService                               : GpsService(Mock for UserProxy, hashCode: 1513529442,Mock for RewardProxy, hashCode: 2005872563)
-2021-06-23 14:34:08.552  INFO 10720 --- [    Test worker] GpsService                               : getAllCurrentLocations()
+  <testcase name="getAllCurrentLocations" classname="unit.service.GpsServiceTest" time="0.002"/>
+  <system-out><![CDATA[2021-06-24 12:27:22.752  INFO 5252 --- [    Test worker] GpsService                               : GpsService(Mock for UserProxy, hashCode: 1493427293,Mock for RewardProxy, hashCode: 1454843845)
+2021-06-24 12:27:22.856  INFO 5252 --- [    Test worker] GpsService                               : getUserLocation(userNameTest)
+2021-06-24 12:27:22.858  INFO 5252 --- [    Test worker] GpsService                               : GpsService(Mock for UserProxy, hashCode: 512455704,Mock for RewardProxy, hashCode: 1646116959)
+2021-06-24 12:27:22.869  INFO 5252 --- [    Test worker] GpsService                               : getAllAttraction()
+2021-06-24 12:27:22.886  INFO 5252 --- [    Test worker] GpsService                               : GpsService(Mock for UserProxy, hashCode: 741839389,Mock for RewardProxy, hashCode: 2054145409)
+2021-06-24 12:27:22.886  INFO 5252 --- [    Test worker] GpsService                               : getAttraction(Disneyland)
+2021-06-24 12:27:22.901  INFO 5252 --- [    Test worker] GpsService                               : GpsService(Mock for UserProxy, hashCode: 1065440608,Mock for RewardProxy, hashCode: 865232375)
+2021-06-24 12:27:22.902  INFO 5252 --- [    Test worker] GpsService                               : getAllCurrentLocations()
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

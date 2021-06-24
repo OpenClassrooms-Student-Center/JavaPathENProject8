@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.service.RewardServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-23T12:33:10" hostname="PC-ANTOINE" time="0.485">
+<testsuite name="unit.service.RewardServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-24T10:28:23" hostname="PC-ANTOINE" time="0.22">
   <properties/>
-  <testcase name="getAttraction" classname="unit.service.RewardServiceTest" time="0.485"/>
-  <system-out><![CDATA[2021-06-23 14:33:10.810  INFO 2132 --- [    Test worker] RewardService                            : RewardService(Mock for UserProxy, hashCode: 1531295764,Mock for GpsProxy, hashCode: 1497209285)
-2021-06-23 14:33:10.941  INFO 2132 --- [    Test worker] RewardService                            : getRewardPoints(attractionName,userName)
+  <testcase name="getRewardPoints" classname="unit.service.RewardServiceTest" time="0.22"/>
+  <system-out><![CDATA[2021-06-24 12:28:23.680  INFO 15540 --- [    Test worker] RewardService                            : RewardService(Mock for UserProxy, hashCode: 1308182483,Mock for GpsProxy, hashCode: 1717487625)
+2021-06-24 12:28:23.681  INFO 15540 --- [    Test worker] RewardService                            : getRewardPoints(21e58898-860d-490d-83a6-0c730be5ed7b,fd23ccc1-3f67-48bb-ae97-34e16a5514b5)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

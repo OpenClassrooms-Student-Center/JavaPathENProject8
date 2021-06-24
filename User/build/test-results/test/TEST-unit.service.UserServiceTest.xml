@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.service.UserServiceTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-06-23T12:32:05" hostname="PC-ANTOINE" time="0.143">
+<testsuite name="unit.service.UserServiceTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-06-24T10:30:38" hostname="PC-ANTOINE" time="0.024">
   <properties/>
-  <testcase name="addUserReward_thatAlreadyExist" classname="unit.service.UserServiceTest" time="0.12"/>
-  <testcase name="addUser" classname="unit.service.UserServiceTest" time="0.001"/>
-  <testcase name="addUserReward_thatDoesNotExist" classname="unit.service.UserServiceTest" time="0.003"/>
+  <testcase name="addUserReward_thatAlreadyExist" classname="unit.service.UserServiceTest" time="0.005"/>
+  <testcase name="addUser" classname="unit.service.UserServiceTest" time="0.002"/>
+  <testcase name="addUserReward_thatDoesNotExist" classname="unit.service.UserServiceTest" time="0.002"/>
   <testcase name="addToVisitedLocations" classname="unit.service.UserServiceTest" time="0.003"/>
-  <testcase name="getUser" classname="unit.service.UserServiceTest" time="0.003"/>
-  <testcase name="setUserPreferences" classname="unit.service.UserServiceTest" time="0.006"/>
+  <testcase name="getUser" classname="unit.service.UserServiceTest" time="0.002"/>
+  <testcase name="setUserPreferences" classname="unit.service.UserServiceTest" time="0.003"/>
   <testcase name="getAllUser" classname="unit.service.UserServiceTest" time="0.002"/>
-  <system-out><![CDATA[2021-06-23 14:32:05.911  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 325038293)
-2021-06-23 14:32:06.029  INFO 6136 --- [    Test worker] UserService                              : addUserReward(userName,Mock for UserReward, hashCode: 621766600)
-2021-06-23 14:32:06.031  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1223758557)
-2021-06-23 14:32:06.031  INFO 6136 --- [    Test worker] UserService                              : addUser(Mock for User, hashCode: 1063637551)
-2021-06-23 14:32:06.033  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1563930286)
-2021-06-23 14:32:06.034  INFO 6136 --- [    Test worker] UserService                              : addUserReward(userName,Mock for UserReward, hashCode: 56144871)
-2021-06-23 14:32:06.037  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1140797099)
-2021-06-23 14:32:06.039  INFO 6136 --- [    Test worker] UserService                              : addToVisitedLocations(userName,Mock for VisitedLocation, hashCode: 1949934681)
-2021-06-23 14:32:06.041  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1317623299)
-2021-06-23 14:32:06.044  INFO 6136 --- [    Test worker] UserService                              : getUser(userName)
-2021-06-23 14:32:06.045  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1339058019)
-2021-06-23 14:32:06.049  INFO 6136 --- [    Test worker] UserService                              : setUserPreferences(userName,Mock for UserPreferences, hashCode: 63749117)
-2021-06-23 14:32:06.051  INFO 6136 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1263949867)
-2021-06-23 14:32:06.052  INFO 6136 --- [    Test worker] UserService                              : getAllUser()
+  <testcase name="setTripDeals" classname="unit.service.UserServiceTest" time="0.003"/>
+  <system-out><![CDATA[2021-06-24 12:30:38.496  INFO 4676 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1864893457)
+2021-06-24 12:30:38.499  INFO 4676 --- [    Test worker] UserService                              : addUserReward(userNameTest,Mock for UserReward, hashCode: 797040184)
+2021-06-24 12:30:38.501  INFO 4676 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1392433057)
+2021-06-24 12:30:38.502  INFO 4676 --- [    Test worker] UserService                              : addUser(Mock for User, hashCode: 2106284321)
+2021-06-24 12:30:38.503  INFO 4676 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1330308963)
+2021-06-24 12:30:38.504  INFO 4676 --- [    Test worker] UserService                              : addUserReward(userNameTest,Mock for UserReward, hashCode: 1855688876)
+2021-06-24 12:30:38.505  INFO 4676 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1249640705)
+2021-06-24 12:30:38.507  INFO 4676 --- [    Test worker] UserService                              : addToVisitedLocations(userNameTest,Mock for VisitedLocation, hashCode: 1970309137)
+2021-06-24 12:30:38.509  INFO 4676 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1205631203)
+2021-06-24 12:30:38.510  INFO 4676 --- [    Test worker] UserService                              : getUser(userNameTest)
+2021-06-24 12:30:38.512  INFO 4676 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1837239568)
+2021-06-24 12:30:38.513  INFO 4676 --- [    Test worker] UserService                              : setUserPreferences(userNameTest,Mock for UserPreferences, hashCode: 1223113573)
+2021-06-24 12:30:38.515  INFO 4676 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 488210143)
+2021-06-24 12:30:38.516  INFO 4676 --- [    Test worker] UserService                              : getAllUser()
+2021-06-24 12:30:38.517  INFO 4676 --- [    Test worker] UserService                              : UserService(Mock for UserRepositoryInterface, hashCode: 1619925729)
+2021-06-24 12:30:38.518  INFO 4676 --- [    Test worker] UserService                              : setTripDeals(userNameTest,Mock for ArrayList, hashCode: 289618310)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

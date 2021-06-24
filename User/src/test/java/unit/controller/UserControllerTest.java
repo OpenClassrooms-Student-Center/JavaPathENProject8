@@ -8,8 +8,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import tripPricer.Provider;
 import user.controller.UserController;
 import user.model.User;
+import user.model.UserPreferences;
+import user.model.UserReward;
 import user.service.UserServiceInterface;
 
 import java.util.*;
@@ -30,17 +33,30 @@ public class UserControllerTest {
     }
 
     @Test
+    public void addUser() {
+
+        //GIVEN
+        User user = Mockito.mock(User.class);
+
+        //WHEN
+        Mockito.when(user.getUserName()).thenReturn("userNameTest");
+        Mockito.when(user.getPhoneNumber()).thenReturn("phoneNumberTest");
+        Mockito.when(user.getEmailAddress()).thenReturn("emailAddressTest");
+
+        userController.addUser(user);
+
+        //THEN
+        Mockito.verify(userServiceInterface, Mockito.times(1)).addUser(Mockito.any(User.class));
+    }
+
+    @Test
     public void addToVisitedLocations() {
 
         //GIVEN
-        String userName = "userName";
-        User user = Mockito.mock(User.class);
+        String userName = "userNameTest";
         VisitedLocation visitedLocation = Mockito.mock(VisitedLocation.class);
 
         //WHEN
-        Mockito.when(userServiceInterface.getUser(userName)).thenReturn(user);
-        Mockito.when(user.getUserId()).thenReturn(UUID.randomUUID());
-
         userController.addToVisitedLocations(userName, visitedLocation);
 
         //THEN
@@ -48,17 +64,57 @@ public class UserControllerTest {
     }
 
     @Test
+    public void addUserReward() {
+
+        //GIVEN
+        String userName = "userNameTest";
+        UserReward userReward = Mockito.mock(UserReward.class);
+
+        //WHEN
+        userController.addUserReward(userName, userReward);
+
+        //THEN
+        Mockito.verify(userServiceInterface, Mockito.times(1)).addUserReward(userName, userReward);
+    }
+
+    @Test
+    public void setUserPreferences() {
+
+        //GIVEN
+        String userName = "userNameTest";
+        UserPreferences userPreferences = Mockito.mock(UserPreferences.class);
+
+        //WHEN
+        userController.setUserPreferences(userName, userPreferences);
+
+        //THEN
+        Mockito.verify(userServiceInterface, Mockito.times(1)).setUserPreferences(userName, userPreferences);
+    }
+
+    @Test
+    public void setTripDeals() {
+
+        //GIVEN
+        String userName = "userNameTest";
+        ArrayList<Provider> tripDeals = Mockito.mock(ArrayList.class);
+
+        //WHEN
+        userController.setTripDeals(userName, tripDeals);
+
+        //THEN
+        Mockito.verify(userServiceInterface, Mockito.times(1)).setTripDeals(userName, tripDeals);
+    }
+
+    @Test
     public void getAllUser() throws JsonProcessingException {
 
         //GIVEN
-        String userName = "userName";
-
-        List<User> userList = new ArrayList<User>();
+        ArrayList<User> userList = Mockito.mock(ArrayList.class);
 
         //WHEN
         Mockito.when(userServiceInterface.getAllUser()).thenReturn(userList);
 
         //THEN
-        Assert.assertTrue(userController.getAllUser().equals(objectMapper.writeValueAsString(userList)));
+        Assert.assertEquals(userController.getAllUser(), objectMapper.writeValueAsString(userList));
     }
 }

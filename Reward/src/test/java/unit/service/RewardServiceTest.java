@@ -28,7 +28,7 @@ public class RewardServiceTest {
     }
 
     @Test
-    public void getAttraction() {
+    public void getRewardPoints() {
 
         //GIVEN
         UUID userId = UUID.randomUUID();

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.model.UserNearestAttractionTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-06-23T12:34:07" hostname="PC-ANTOINE" time="0.057">
+<testsuite name="unit.model.UserNearestAttractionTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-06-24T10:27:22" hostname="PC-ANTOINE" time="0.052">
   <properties/>
   <testcase name="setAndGetAttractionName" classname="unit.model.UserNearestAttractionTest" time="0.0"/>
-  <testcase name="setAndGetAttractionLocation" classname="unit.model.UserNearestAttractionTest" time="0.055"/>
-  <testcase name="setAndGetUserLocation" classname="unit.model.UserNearestAttractionTest" time="0.001"/>
+  <testcase name="setAndGetAttractionLocation" classname="unit.model.UserNearestAttractionTest" time="0.051"/>
+  <testcase name="setAndGetUserLocation" classname="unit.model.UserNearestAttractionTest" time="0.0"/>
   <testcase name="setAndGetAttractionMilesDistance" classname="unit.model.UserNearestAttractionTest" time="0.0"/>
-  <testcase name="setAndGetRewardPoints" classname="unit.model.UserNearestAttractionTest" time="0.0"/>
+  <testcase name="setAndGetRewardPoints" classname="unit.model.UserNearestAttractionTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

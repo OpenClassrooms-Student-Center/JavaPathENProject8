@@ -31,17 +31,19 @@ public class TripPricerControllerIT {
     @Before
     public void beforeEach() {
 
-        // GIVEN
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
     @Test
     @Order(1)
-    public void getTripDeals() throws Exception {
+    public void calculateTripDeals() throws Exception {
+
+        // GIVEN
+        String userName = "userNameTest";
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getTripDeals")
-                .param("userName", "userName")).andReturn();
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/calculateTripDeals")
+                .param("userName", userName)).andReturn();
 
         // THEN
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());

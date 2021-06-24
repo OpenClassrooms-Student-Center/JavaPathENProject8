@@ -14,7 +14,6 @@ import user.model.UserReward;
 import user.service.UserService;
 import user.service.UserServiceInterface;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

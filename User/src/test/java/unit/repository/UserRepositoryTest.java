@@ -23,7 +23,7 @@ public class UserRepositoryTest {
     public void getUser() {
 
         //GIVEN
-        String username = "userName";
+        String username = "userNameTest";
         User user = Mockito.mock(User.class);
 
         //WHEN
@@ -32,14 +32,14 @@ public class UserRepositoryTest {
         userRepository.addUser(user);
 
         //THEN
-        Assert.assertTrue(userRepository.getUser(username) == user);
+        Assert.assertSame(userRepository.getUser(username), user);
     }
 
     @Test
     public void getAllUser() {
 
         //GIVEN
-        String username = "userName";
+        String username = "userNameTest";
         User user = Mockito.mock(User.class);
 
         //WHEN

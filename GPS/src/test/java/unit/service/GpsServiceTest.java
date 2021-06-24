@@ -35,11 +35,11 @@ public class GpsServiceTest {
     public void getUserLocation() {
 
         //GIVEN
-        String userName = "userName";
+        String userName = "userNameTest";
         User user = Mockito.mock(User.class);
         VisitedLocation visitedLocation = Mockito.mock(VisitedLocation.class);
 
-        List<VisitedLocation> visitedLocationList = new ArrayList<VisitedLocation>();
+        List<VisitedLocation> visitedLocationList = new ArrayList<>();
 
         //WHEN
         Mockito.when(userProxy.getUser(userName)).thenReturn(user);
@@ -49,7 +49,7 @@ public class GpsServiceTest {
         visitedLocationList.add(visitedLocation);
 
         //THEN
-        Assert.assertTrue(gpsService.getUserLocation(userName) == visitedLocation);
+        Assert.assertSame(gpsService.getUserLocation(userName), visitedLocation);
     }
 
     @Test
@@ -61,7 +61,7 @@ public class GpsServiceTest {
         //WHEN
 
         //THEN
-        Assert.assertTrue(gpsService.getAttraction(attractionName).getAttractionName() == attractionName);
+        Assert.assertTrue(gpsService.getAttraction(attractionName).getAttractionName().equals(attractionName));
     }
 
     @Test
@@ -76,7 +76,7 @@ public class GpsServiceTest {
         //WHEN
 
         //THEN
-        Assert.assertTrue(attraction.getAttractionName().equals(attractionReturned.getAttractionName()));
+        Assert.assertEquals(attraction.getAttractionName(), attractionReturned.getAttractionName());
     }
 
     @Test
@@ -86,10 +86,10 @@ public class GpsServiceTest {
         UUID userId = UUID.randomUUID();
 
         User user = Mockito.mock(User.class);
-        List<User> userList = new ArrayList<User>();
+        List<User> userList = new ArrayList<>();
 
         VisitedLocation visitedLocation = Mockito.mock(VisitedLocation.class);
-        List<VisitedLocation> visitedLocationList = new ArrayList<VisitedLocation>();
+        List<VisitedLocation> visitedLocationList = new ArrayList<>();
 
         //WHEN
         Mockito.when(userProxy.getAllUser()).thenReturn(userList);
@@ -100,6 +100,6 @@ public class GpsServiceTest {
         visitedLocationList.add(visitedLocation);
 
         //THEN
-        Assert.assertTrue(gpsService.getAllCurrentLocations().get(userId) == visitedLocation);
+        Assert.assertSame(gpsService.getAllCurrentLocations().get(userId), visitedLocation);
     }
 }

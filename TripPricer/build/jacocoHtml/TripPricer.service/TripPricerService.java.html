@@ -18,21 +18,21 @@ import java.util.List;
 @Service
 public class TripPricerService implements TripPricerServiceInterface {
 
-<span class="nc" id="L21">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="pc" id="L21">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     private static final String tripPricerApiKey = &quot;test-server-api-key&quot;;
 
     @Autowired
     private UserProxy userProxy;
 
-<span class="nc" id="L28">    private TripPricer tripPricer = new TripPricer();</span>
+<span class="pc" id="L28">    private TripPricer tripPricer = new TripPricer();</span>
 
     /**
      * Creates a new TripPricerService
      */
-<span class="nc" id="L33">    public TripPricerService() {</span>
-<span class="nc" id="L34">        logger.info(&quot;TripPricerService()&quot;);</span>
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L33">    public TripPricerService() {</span>
+<span class="fc" id="L34">        logger.info(&quot;TripPricerService()&quot;);</span>
+<span class="fc" id="L35">    }</span>
 
     /**
      * Creates a new TripPricerService with the specified UserProxy
@@ -45,26 +45,25 @@ public class TripPricerService implements TripPricerServiceInterface {
 <span class="nc" id="L45">    }</span>
 
     @Override
-    public List&lt;Provider&gt; getTripDeals(String userName) {
-<span class="nc" id="L49">        logger.info(&quot;getTripDeals(&quot; + userName + &quot;)&quot;);</span>
+    public List&lt;Provider&gt; calculateTripDeals(String userName) {
+<span class="fc" id="L49">        logger.info(&quot;calculateTripDeals(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="nc" id="L51">        List&lt;Provider&gt; providerList = new ArrayList&lt;Provider&gt;();</span>
+<span class="fc" id="L51">        List&lt;Provider&gt; providerList = new ArrayList&lt;Provider&gt;();</span>
 
-<span class="nc" id="L53">        User user = userProxy.getUser(userName);</span>
+<span class="fc" id="L53">        User user = userProxy.getUser(userName);</span>
 
-<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (user != null) {</span>
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        if (user != null) {</span>
 
 <span class="nc" id="L57">            int cumulativeRewardPoints = user.getUserRewards().stream().mapToInt(i -&gt; i.getRewardPoints()).sum();</span>
 
-<span class="nc" id="L59">            providerList = tripPricer.getPrice(tripPricerApiKey,</span>
-<span class="nc" id="L60">                    user.getUserId(),</span>
-<span class="nc" id="L61">                    user.getUserPreferences().getNumberOfAdults(),</span>
-<span class="nc" id="L62">                    user.getUserPreferences().getNumberOfChildren(),</span>
-<span class="nc" id="L63">                    user.getUserPreferences().getTripDuration(),</span>
-                    cumulativeRewardPoints);
+<span class="nc" id="L59">            providerList = tripPricer.getPrice(tripPricerApiKey,user.getUserId(),</span>
+<span class="nc" id="L60">                    user.getUserPreferences().getNumberOfAdults(), user.getUserPreferences().getNumberOfChildren(),</span>
+<span class="nc" id="L61">                    user.getUserPreferences().getTripDuration(), cumulativeRewardPoints);</span>
+
+<span class="nc" id="L63">            userProxy.setTripDeals(userName, providerList);</span>
         }
 
-<span class="nc" id="L67">        return providerList;</span>
+<span class="fc" id="L66">        return providerList;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

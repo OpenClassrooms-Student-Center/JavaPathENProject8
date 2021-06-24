@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">4</div>
+<div class="counter">5</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1.835s</div>
+<div class="counter">4.176s</div>
 <p>duration</p>
 </div>
 </td>
@@ -78,23 +78,28 @@
 </tr>
 </thead>
 <tr>
+<td class="success">getAllAttraction</td>
+<td class="success">1.575s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">getAllCurrentLocations</td>
-<td class="success">0.032s</td>
+<td class="success">0.037s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getAttraction</td>
-<td class="success">0.038s</td>
+<td class="success">0.029s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getLocation</td>
-<td class="success">1.736s</td>
+<td class="success">0.352s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">getNearbyAttractions</td>
-<td class="success">0.029s</td>
+<td class="success">2.183s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -102,28 +107,28 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>14:33:51.868 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class integration.GpsControllerIT]
-14:33:51.904 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-14:33:51.973 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-14:33:52.119 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [integration.GpsControllerIT] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-14:33:52.194 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [integration.GpsControllerIT], using SpringBootContextLoader
-14:33:52.222 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [integration.GpsControllerIT]: class path resource [integration/GpsControllerIT-context.xml] does not exist
-14:33:52.224 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [integration.GpsControllerIT]: class path resource [integration/GpsControllerITContext.groovy] does not exist
-14:33:52.225 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [integration.GpsControllerIT]: no resource found for suffixes {-context.xml, Context.groovy}.
-14:33:52.603 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [integration.GpsControllerIT]
-14:33:53.391 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [integration.GpsControllerIT]: using defaults.
-14:33:53.394 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-14:33:53.466 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
-14:33:53.468 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
-14:33:53.468 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@16c3674f, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2fbaf547, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5ef217fe, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@53cc5065, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5e38ac4c, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@26506a01, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@68d3d4d2, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@592deed5, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@426c6370, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6749195e]
-14:33:53.480 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.GpsControllerIT]
-14:33:53.482 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.GpsControllerIT]
-14:33:53.485 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.GpsControllerIT]
-14:33:53.485 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.GpsControllerIT]
-14:33:53.503 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@5859994c testClass = GpsControllerIT, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@634c71ac testClass = GpsControllerIT, locations = '{}', classes = '{class gps.Application, class gps.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@2363b85d, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@319653ff, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@285d71bb, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@6261d304], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
-14:33:53.505 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.GpsControllerIT]
-14:33:53.506 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.GpsControllerIT]
-14:33:53.664 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
+<pre>12:27:05.778 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class integration.GpsControllerIT]
+12:27:05.829 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+12:27:05.925 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+12:27:06.114 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [integration.GpsControllerIT] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+12:27:06.190 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [integration.GpsControllerIT], using SpringBootContextLoader
+12:27:06.211 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [integration.GpsControllerIT]: class path resource [integration/GpsControllerIT-context.xml] does not exist
+12:27:06.212 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [integration.GpsControllerIT]: class path resource [integration/GpsControllerITContext.groovy] does not exist
+12:27:06.213 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [integration.GpsControllerIT]: no resource found for suffixes {-context.xml, Context.groovy}.
+12:27:06.446 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [integration.GpsControllerIT]
+12:27:06.955 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [integration.GpsControllerIT]: using defaults.
+12:27:06.958 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+12:27:07.014 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
+12:27:07.015 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
+12:27:07.015 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2fe86eb1, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@774958d6, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3b496758, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@19b24752, org.springframework.test.context.support.DirtiesContextTestExecutionListener@75433f33, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@487156a5, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@38729b54, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@3371d3df, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@5fa7c825, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1d21790a]
+12:27:07.027 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.GpsControllerIT]
+12:27:07.029 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.GpsControllerIT]
+12:27:07.032 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.GpsControllerIT]
+12:27:07.032 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.GpsControllerIT]
+12:27:07.050 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@12605f07 testClass = GpsControllerIT, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6bd0c30f testClass = GpsControllerIT, locations = '{}', classes = '{class gps.Application, class gps.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@19de86f2, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@5bdedfa6, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@5cb507b4, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@f0a70b5], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+12:27:07.053 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [integration.GpsControllerIT]
+12:27:07.054 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [integration.GpsControllerIT]
+12:27:07.229 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -133,40 +138,45 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.1.6.RELEASE)
 
-2021-06-23 14:33:57.089  INFO 10720 --- [    Test worker] integration.GpsControllerIT              : No active profile set, falling back to default profiles: default
-2021-06-23 14:34:00.210  INFO 10720 --- [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=621832cb-fce7-3faf-9c0b-228f17d4bf67
-2021-06-23 14:34:00.538  INFO 10720 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'gps.proxy.RewardProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-06-23 14:34:00.549  INFO 10720 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'gps.proxy.UserProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2021-06-23 14:34:00.743  INFO 10720 --- [    Test worker] GpsController                            : GpsController()
-2021-06-23 14:34:00.788  INFO 10720 --- [    Test worker] GpsService                               : GpsService()
-2021-06-23 14:34:02.480  WARN 10720 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-06-23 14:34:02.481  INFO 10720 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-06-23 14:34:02.510  WARN 10720 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-06-23 14:34:02.511  INFO 10720 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-06-23 14:34:03.198  INFO 10720 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-06-23 14:34:05.442  INFO 10720 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2021-06-23 14:34:05.581  INFO 10720 --- [    Test worker] integration.GpsControllerIT              : Started GpsControllerIT in 11.834 seconds (JVM running for 16.42)
-2021-06-23 14:34:06.814  INFO 10720 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-06-23 14:34:06.815  INFO 10720 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-06-23 14:34:06.846  INFO 10720 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 31 ms
-2021-06-23 14:34:06.994  INFO 10720 --- [    Test worker] GpsController                            : getLocation(userName)
-2021-06-23 14:34:06.995  INFO 10720 --- [    Test worker] GpsService                               : getUserLocation(userName)
-2021-06-23 14:34:07.403  INFO 10720 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-06-23 14:34:07.403  INFO 10720 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-06-23 14:34:07.407  INFO 10720 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
-2021-06-23 14:34:07.410  INFO 10720 --- [    Test worker] GpsController                            : getAttraction(attractionName)
-2021-06-23 14:34:07.411  INFO 10720 --- [    Test worker] GpsService                               : getAttraction(attractionName)
-2021-06-23 14:34:07.441  INFO 10720 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-06-23 14:34:07.442  INFO 10720 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-06-23 14:34:07.448  INFO 10720 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 6 ms
-2021-06-23 14:34:07.450  INFO 10720 --- [    Test worker] GpsController                            : getAllCurrentLocations()
-2021-06-23 14:34:07.451  INFO 10720 --- [    Test worker] GpsService                               : getAllCurrentLocations()
-2021-06-23 14:34:07.475  INFO 10720 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2021-06-23 14:34:07.475  INFO 10720 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2021-06-23 14:34:07.480  INFO 10720 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
-2021-06-23 14:34:07.483  INFO 10720 --- [    Test worker] GpsController                            : getNearbyAttractions(userName)
-2021-06-23 14:34:07.483  INFO 10720 --- [    Test worker] GpsService                               : getUserLocation(userName)
-2021-06-23 14:34:07.490  INFO 10720 --- [    Test worker] GpsService                               : getNearByAttractions(userName)
+2021-06-24 12:27:10.422  INFO 5252 --- [    Test worker] integration.GpsControllerIT              : No active profile set, falling back to default profiles: default
+2021-06-24 12:27:13.031  INFO 5252 --- [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=621832cb-fce7-3faf-9c0b-228f17d4bf67
+2021-06-24 12:27:13.305  INFO 5252 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'gps.proxy.RewardProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-24 12:27:13.311  INFO 5252 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'gps.proxy.UserProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-24 12:27:13.507  INFO 5252 --- [    Test worker] GpsController                            : GpsController()
+2021-06-24 12:27:13.543  INFO 5252 --- [    Test worker] GpsService                               : GpsService()
+2021-06-24 12:27:15.066  WARN 5252 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-06-24 12:27:15.067  INFO 5252 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-06-24 12:27:15.098  WARN 5252 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-06-24 12:27:15.099  INFO 5252 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-06-24 12:27:15.734  INFO 5252 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-24 12:27:17.739  INFO 5252 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-06-24 12:27:17.855  INFO 5252 --- [    Test worker] integration.GpsControllerIT              : Started GpsControllerIT in 10.539 seconds (JVM running for 15.481)
+2021-06-24 12:27:19.081  INFO 5252 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-24 12:27:19.081  INFO 5252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-24 12:27:19.109  INFO 5252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 27 ms
+2021-06-24 12:27:19.244  INFO 5252 --- [    Test worker] GpsController                            : getAllAttraction()
+2021-06-24 12:27:19.244  INFO 5252 --- [    Test worker] GpsService                               : getAllAttraction()
+2021-06-24 12:27:19.496  INFO 5252 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-24 12:27:19.497  INFO 5252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-24 12:27:19.503  INFO 5252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 6 ms
+2021-06-24 12:27:19.535  INFO 5252 --- [    Test worker] GpsController                            : getLocation(userNameTest)
+2021-06-24 12:27:19.535  INFO 5252 --- [    Test worker] GpsService                               : getUserLocation(userNameTest)
+2021-06-24 12:27:19.850  INFO 5252 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-24 12:27:19.851  INFO 5252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-24 12:27:19.857  INFO 5252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 6 ms
+2021-06-24 12:27:19.860  INFO 5252 --- [    Test worker] GpsController                            : getAttraction(attractionNameTest)
+2021-06-24 12:27:19.861  INFO 5252 --- [    Test worker] GpsService                               : getAttraction(attractionNameTest)
+2021-06-24 12:27:19.882  INFO 5252 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-24 12:27:19.882  INFO 5252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-24 12:27:19.888  INFO 5252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
+2021-06-24 12:27:19.891  INFO 5252 --- [    Test worker] GpsController                            : getAllCurrentLocations()
+2021-06-24 12:27:19.892  INFO 5252 --- [    Test worker] GpsService                               : getAllCurrentLocations()
+2021-06-24 12:27:19.920  INFO 5252 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2021-06-24 12:27:19.920  INFO 5252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2021-06-24 12:27:19.927  INFO 5252 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 7 ms
+2021-06-24 12:27:19.931  INFO 5252 --- [    Test worker] GpsController                            : getNearbyAttractions(userNameTest)
+2021-06-24 12:27:19.931  INFO 5252 --- [    Test worker] GpsService                               : getUserLocation(userNameTest)
+2021-06-24 12:27:19.940  INFO 5252 --- [    Test worker] GpsService                               : getNearByAttractions(userNameTest)
 </pre>
 </span>
 </div>
@@ -178,7 +188,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 4.8.1</a> at 23 juin 2021 à 14:34:09</p>
+<a href="http://www.gradle.org">Gradle 4.8.1</a> at 24 juin 2021 à 12:27:23</p>
 </div>
 </div>
 </body>

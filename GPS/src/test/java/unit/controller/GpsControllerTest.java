@@ -34,53 +34,53 @@ public class GpsControllerTest {
     public void getUserLocation() throws JsonProcessingException {
 
         //GIVEN
-        String userName = "userName";
+        String userName = "userNameTest";
         VisitedLocation visitedLocation = new VisitedLocation(UUID.randomUUID(), new Location(0,0), new Date());
 
         //WHEN
         Mockito.when(gpsServiceInterface.getUserLocation(userName)).thenReturn(visitedLocation);
 
         //THEN
-        Assert.assertTrue(gpsController.getLocation(userName).equals(objectMapper.writeValueAsString(visitedLocation)));
+        Assert.assertEquals(gpsController.getLocation(userName), objectMapper.writeValueAsString(visitedLocation));
     }
 
     @Test
     public void getAttraction() throws JsonProcessingException {
 
         //GIVEN
-        String attractionName = "attractionName";
-        Attraction attraction = new Attraction(attractionName, "attractionCity", "attractionState", 0, 0);
+        String attractionName = "attractionNameTest";
+        Attraction attraction = new Attraction(attractionName, "attractionCityTest", "attractionStateTest", 1.1, 2.2);
 
         //WHEN
         Mockito.when(gpsServiceInterface.getAttraction(attractionName)).thenReturn(attraction);
 
         //THEN
-        Assert.assertTrue(gpsController.getAttraction(attractionName).equals(objectMapper.writeValueAsString(attraction)));
+        Assert.assertEquals(gpsController.getAttraction(attractionName), objectMapper.writeValueAsString(attraction));
     }
 
     @Test
     public void getAllAttraction() throws JsonProcessingException {
 
         //GIVEN
-        Attraction attraction = new Attraction("attractionName", "attractionCity", "attractionState", 0, 0);
-        List<Attraction> attractionList = new ArrayList<Attraction>();
+        Attraction attraction = new Attraction("attractionNameTest", "attractionCityTest", "attractionStateTest", 1.1, 2.2);
+        List<Attraction> attractionList = new ArrayList<>();
 
         //WHEN
         Mockito.when(gpsServiceInterface.getAllAttraction()).thenReturn(attractionList);
         attractionList.add(attraction);
 
         //THEN
-        Assert.assertTrue(gpsController.getAllAttraction().equals(objectMapper.writeValueAsString(attractionList)));
+        Assert.assertEquals(gpsController.getAllAttraction(), objectMapper.writeValueAsString(attractionList));
     }
 
     @Test
     public void getAllCurrentLocations() throws JsonProcessingException {
 
         //GIVEN
-        String userName = "userName";
+        String userName = "userNameTest";
         VisitedLocation visitedLocation = new VisitedLocation(UUID.randomUUID(), new Location(0,0), new Date());
 
-        Map<UUID, VisitedLocation> visitedLocationList = new HashMap<UUID, VisitedLocation>();
+        Map<UUID, VisitedLocation> visitedLocationList = new HashMap<>();
 
         //WHEN
         Mockito.when(gpsServiceInterface.getAllCurrentLocations()).thenReturn(visitedLocationList);
@@ -88,6 +88,6 @@ public class GpsControllerTest {
         visitedLocationList.put(visitedLocation.getUserId(), visitedLocation);
 
         //THEN
-        Assert.assertTrue(gpsController.getAllCurrentLocations().equals(objectMapper.writeValueAsString(gpsServiceInterface.getAllCurrentLocations())));
+        Assert.assertEquals(gpsController.getAllCurrentLocations(), objectMapper.writeValueAsString(gpsServiceInterface.getAllCurrentLocations()));
     }
 }

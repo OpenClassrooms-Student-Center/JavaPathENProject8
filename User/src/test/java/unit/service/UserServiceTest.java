@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
+import tripPricer.Provider;
 import user.model.User;
 import user.model.UserPreferences;
 import user.model.UserReward;
@@ -45,10 +46,10 @@ public class UserServiceTest {
     public void addToVisitedLocations() {
 
         //GIVEN
-        String userName = "userName";
+        String userName = "userNameTest";
         User user = Mockito.mock(User.class);
 
-        List<VisitedLocation> visitedLocationList = new ArrayList<VisitedLocation>();
+        List<VisitedLocation> visitedLocationList = new ArrayList<>();
         VisitedLocation visitedLocation = Mockito.mock(VisitedLocation.class);
 
         //WHEN
@@ -65,11 +66,11 @@ public class UserServiceTest {
     public void addUserReward_thatDoesNotExist() {
 
         //GIVEN
-        String userName = "userName";
+        String userName = "userNameTest";
         User user = Mockito.mock(User.class);
 
         UserReward userReward = Mockito.mock(UserReward.class);
-        List<UserReward> userRewardList = new ArrayList<UserReward>();
+        List<UserReward> userRewardList = new ArrayList<>();
 
         //WHEN
         Mockito.when(userRepositoryInterface.getUser(userName)).thenReturn(user);
@@ -85,13 +86,13 @@ public class UserServiceTest {
     public void addUserReward_thatAlreadyExist() {
 
         //GIVEN
-        String userName = "userName";
-        String attractionName = "attractionName";
+        String userName = "userNameTest";
+        String attractionName = "attractionNameTest";
         User user = Mockito.mock(User.class);
 
         UserReward userReward = Mockito.mock(UserReward.class);
         Attraction attraction = Mockito.mock(Attraction.class);
-        List<UserReward> userRewardList = new ArrayList<UserReward>();
+        List<UserReward> userRewardList = new ArrayList<>();
 
         //WHEN
         Mockito.when(userRepositoryInterface.getUser(userName)).thenReturn(user);
@@ -111,7 +112,7 @@ public class UserServiceTest {
     public void setUserPreferences() {
 
         //GIVEN
-        String userName = "userName";
+        String userName = "userNameTest";
         User user = Mockito.mock(User.class);
         UserPreferences userPreferences = Mockito.mock(UserPreferences.class);
 
@@ -125,31 +126,48 @@ public class UserServiceTest {
     }
 
     @Test
+    public void setTripDeals() {
+
+        //GIVEN
+        String userName = "userNameTest";
+        User user = Mockito.mock(User.class);
+        ArrayList<Provider> tripDeals = Mockito.mock(ArrayList.class);
+
+        //WHEN
+        Mockito.when(userRepositoryInterface.getUser(userName)).thenReturn(user);
+
+        userService.setTripDeals(userName, tripDeals);
+
+        //THEN
+        Mockito.verify(user, Mockito.times(1)).setTripDeals(tripDeals);
+    }
+
+    @Test
     public void getUser() {
 
         //GIVEN
-        String userName = "userName";
+        String userName = "userNameTest";
         User user = Mockito.mock(User.class);
 
         //WHEN
         Mockito.when(userRepositoryInterface.getUser(userName)).thenReturn(user);
 
         //THEN
-        Assert.assertTrue(userService.getUser(userName) == user);
+        Assert.assertSame(userService.getUser(userName), user);
     }
 
     @Test
     public void getAllUser() {
 
         //GIVEN
-        String userName = "userName";
+        String userName = "userNameTest";
 
-        List<User> userList = new ArrayList<User>();
+        List<User> userList = new ArrayList<>();
 
         //WHEN
         Mockito.when(userRepositoryInterface.getAllUser()).thenReturn(userList);
 
         //THEN
-        Assert.assertTrue(userService.getAllUser() == userList);
+        Assert.assertSame(userService.getAllUser(), userList);
     }
 }

@@ -13,7 +13,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -133,7 +132,7 @@ public class GpsService implements GpsServiceInterface {
 
             VisitedLocation visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);
 
-            Map<Double, Attraction> attractionMap = new TreeMap<Double, Attraction>();
+            Map<Double, Attraction> attractionMap = new TreeMap<>();
 
             for (Attraction attraction : gpsUtil.getAttractions()) {
 

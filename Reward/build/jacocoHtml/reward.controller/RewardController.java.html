@@ -6,10 +6,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reward.service.RewardService;
 import reward.service.RewardServiceInterface;
+
+import java.util.UUID;
 
 /**
  * This class allows to intercept reward requests
@@ -17,9 +20,9 @@ import reward.service.RewardServiceInterface;
 @RestController
 public class RewardController {
 
-<span class="nc" id="L20">    private ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="pc" id="L23">    private ObjectMapper objectMapper = new ObjectMapper();</span>
 
-<span class="nc" id="L22">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="pc" id="L25">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     @Autowired
     private RewardServiceInterface rewardServiceInterface;
@@ -30,33 +33,33 @@ public class RewardController {
     /**
      * Creates a new RewardController
      */
-<span class="nc" id="L33">    public RewardController() {</span>
-<span class="nc" id="L34">        logger.info(&quot;RewardController()&quot;);</span>
+<span class="nc" id="L36">    public RewardController() {</span>
+<span class="nc" id="L37">        logger.info(&quot;RewardController()&quot;);</span>
 
-<span class="nc" id="L36">        rewardServiceInterface = rewardService;</span>
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L39">        rewardServiceInterface = rewardService;</span>
+<span class="nc" id="L40">    }</span>
 
     /**
      * Creates a new RewardController with the specified RewardServiceInterface
      * @param rewardServiceInterface : service that this controller will use
      */
-<span class="nc" id="L43">    public RewardController(RewardServiceInterface rewardServiceInterface) {</span>
-<span class="nc" id="L44">        logger.info(&quot;RewardController(&quot; + rewardServiceInterface + &quot;)&quot;);</span>
+<span class="fc" id="L46">    public RewardController(RewardServiceInterface rewardServiceInterface) {</span>
+<span class="fc" id="L47">        logger.info(&quot;RewardController(&quot; + rewardServiceInterface + &quot;)&quot;);</span>
 
-<span class="nc" id="L46">        this.rewardServiceInterface = rewardServiceInterface;</span>
-<span class="nc" id="L47">    }</span>
+<span class="fc" id="L49">        this.rewardServiceInterface = rewardServiceInterface;</span>
+<span class="fc" id="L50">    }</span>
 
     /**
      * Intercepts the reward points getting request
-     * @param attractionName : Name of the Attraction to use for calculate reward points
-     * @param userName : Name of the User to use for calculate reward points
+     * @param attractionId : Id of the Attraction to use for calculate reward points
+     * @param userId : Id of the User to use for calculate reward points
      * @return The reward points amount (JSon)
      */
     @GetMapping(&quot;/getRewardPoints&quot;)
-    public String getRewardPoints(@RequestParam String attractionName, @RequestParam String userName) throws JsonProcessingException {
-<span class="nc" id="L57">        logger.info(&quot;getRewardPoints(&quot; + attractionName + &quot;,&quot; + userName + &quot;)&quot;);</span>
+    public String getRewardPoints(@RequestParam UUID attractionId, @RequestParam UUID userId) throws JsonProcessingException {
+<span class="fc" id="L60">        logger.info(&quot;getRewardPoints(&quot; + attractionId + &quot;,&quot; + userId + &quot;)&quot;);</span>
 
-<span class="nc" id="L59">        return objectMapper.writeValueAsString(rewardServiceInterface.getRewardPoints(attractionName, userName));</span>
+<span class="fc" id="L62">        return objectMapper.writeValueAsString(rewardServiceInterface.getRewardPoints(attractionId, userId));</span>
     }
 
     /**
@@ -66,9 +69,9 @@ public class RewardController {
      */
     @GetMapping(&quot;/calculateRewards&quot;)
     public String calculateRewards(@RequestParam String userName) throws JsonProcessingException {
-<span class="nc" id="L69">        logger.info(&quot;calculateRewards(&quot; + userName + &quot;)&quot;);</span>
+<span class="nc" id="L72">        logger.info(&quot;calculateRewards(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="nc" id="L71">        return objectMapper.writeValueAsString(rewardServiceInterface.calculateRewards(userName));</span>
+<span class="nc" id="L74">        return objectMapper.writeValueAsString(rewardServiceInterface.calculateRewards(userName));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -17,6 +17,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import reward.Application;
 
+import java.util.UUID;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= Application.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -31,7 +33,6 @@ public class RewardControllerIT {
     @Before
     public void beforeEach() {
 
-        // GIVEN
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
@@ -39,10 +40,14 @@ public class RewardControllerIT {
     @Order(1)
     public void getRewardPoints() throws Exception {
 
+        // GIVEN
+        UUID attractionId = UUID.randomUUID();
+        UUID userId = UUID.randomUUID();
+
         // WHEN
         mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getRewardPoints")
-                .param("attractionName", "attractionName")
-                .param("userName", "userName")).andReturn();
+                .param("attractionId", String.valueOf(attractionId))
+                .param("userId", String.valueOf(userId))).andReturn();
 
         // THEN
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());
@@ -52,9 +57,12 @@ public class RewardControllerIT {
     @Order(2)
     public void calculateRewards() throws Exception {
 
+        // GIVEN
+        String userName = "userNameTest";
+
         // WHEN
         mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/calculateRewards")
-                .param("userName", "userName")).andReturn();
+                .param("userName", userName)).andReturn();
 
         // THEN
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());
