@@ -5,7 +5,6 @@ import TripPricer.model.UserPreferences;
 import TripPricer.model.UserReward;
 import TripPricer.proxy.UserProxy;
 import TripPricer.service.TripPricerService;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -37,7 +36,7 @@ public class TripPricerServiceTest {
 
         UserPreferences userPreferences = Mockito.mock(UserPreferences.class);
 
-        List<UserReward> userRewardList = new ArrayList<UserReward>();
+        List<UserReward> userRewardList = new ArrayList<>();
 
         //WHEN
         Mockito.when(userProxy.getUser(userName)).thenReturn(user);

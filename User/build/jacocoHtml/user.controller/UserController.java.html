@@ -23,9 +23,9 @@ import java.util.UUID;
 @RestController
 public class UserController {
 
-<span class="fc" id="L26">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="nc" id="L26">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
-<span class="fc" id="L28">    private ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="nc" id="L28">    private ObjectMapper objectMapper = new ObjectMapper();</span>
 
     @Autowired
     private UserServiceInterface userServiceInterface;
@@ -36,21 +36,21 @@ public class UserController {
     /**
      * Creates a new UserController
      */
-<span class="fc" id="L39">    public UserController() {</span>
-<span class="fc" id="L40">        logger.info(&quot;UserController()&quot;);</span>
+<span class="nc" id="L39">    public UserController() {</span>
+<span class="nc" id="L40">        logger.info(&quot;UserController()&quot;);</span>
 
-<span class="fc" id="L42">        userServiceInterface = userService;</span>
-<span class="fc" id="L43">    }</span>
+<span class="nc" id="L42">        userServiceInterface = userService;</span>
+<span class="nc" id="L43">    }</span>
 
     /**
      * Creates a new UserController with the specified UserServiceInterface
      * @param userServiceInterface : service that this controller will use
      */
-<span class="fc" id="L49">    public UserController(UserServiceInterface userServiceInterface) {</span>
-<span class="fc" id="L50">        logger.info(&quot;UserController(&quot; + userServiceInterface + &quot;)&quot;);</span>
+<span class="nc" id="L49">    public UserController(UserServiceInterface userServiceInterface) {</span>
+<span class="nc" id="L50">        logger.info(&quot;UserController(&quot; + userServiceInterface + &quot;)&quot;);</span>
 
-<span class="fc" id="L52">        this.userServiceInterface = userServiceInterface;</span>
-<span class="fc" id="L53">    }</span>
+<span class="nc" id="L52">        this.userServiceInterface = userServiceInterface;</span>
+<span class="nc" id="L53">    }</span>
 
     /**
      * Intercepts the user adding request
@@ -58,10 +58,10 @@ public class UserController {
      */
     @PostMapping(value = &quot;/addUser&quot;)
     public void addUser(@RequestBody User user) {
-<span class="fc" id="L61">        logger.info(&quot;addUser(&quot; + user + &quot;)&quot;);</span>
+<span class="nc" id="L61">        logger.info(&quot;addUser(&quot; + user + &quot;)&quot;);</span>
 
-<span class="fc" id="L63">        userServiceInterface.addUser(new User(UUID.randomUUID(), user.getUserName(), user.getPhoneNumber(), user.getEmailAddress()));</span>
-<span class="fc" id="L64">    }</span>
+<span class="nc" id="L63">        userServiceInterface.addUser(new User(UUID.randomUUID(), user.getUserName(), user.getPhoneNumber(), user.getEmailAddress()));</span>
+<span class="nc" id="L64">    }</span>
 
     /**
      * Intercepts the user visited location adding request
@@ -70,10 +70,10 @@ public class UserController {
      */
     @PostMapping(value = &quot;/addToVisitedLocations&quot;)
     public void addToVisitedLocations(@RequestParam String userName, @RequestBody VisitedLocation visitedLocation) {
-<span class="fc" id="L73">        logger.info(&quot;addToVisitedLocations(&quot; + userName + &quot;,&quot; + visitedLocation + &quot;)&quot;);</span>
+<span class="nc" id="L73">        logger.info(&quot;addToVisitedLocations(&quot; + userName + &quot;,&quot; + visitedLocation + &quot;)&quot;);</span>
 
-<span class="fc" id="L75">        userServiceInterface.addToVisitedLocations(userName, visitedLocation);</span>
-<span class="fc" id="L76">    }</span>
+<span class="nc" id="L75">        userServiceInterface.addToVisitedLocations(userName, visitedLocation);</span>
+<span class="nc" id="L76">    }</span>
 
     /**
      * Intercepts the user reward adding request
@@ -82,10 +82,10 @@ public class UserController {
      */
     @PostMapping(value = &quot;/addUserReward&quot;)
     public void addUserReward(@RequestParam String userName, @RequestBody UserReward userReward) {
-<span class="fc" id="L85">        logger.info(&quot;addUserReward(&quot; + userName + &quot;,&quot; + userReward + &quot;)&quot;);</span>
+<span class="nc" id="L85">        logger.info(&quot;addUserReward(&quot; + userName + &quot;,&quot; + userReward + &quot;)&quot;);</span>
 
-<span class="fc" id="L87">        userServiceInterface.addUserReward(userName, userReward);</span>
-<span class="fc" id="L88">    }</span>
+<span class="nc" id="L87">        userServiceInterface.addUserReward(userName, userReward);</span>
+<span class="nc" id="L88">    }</span>
 
     /**
      * Intercepts the user preferences setting request
@@ -94,10 +94,10 @@ public class UserController {
      */
     @PostMapping(value = &quot;/setUserPreferences&quot;)
     public void setUserPreferences(@RequestParam String userName, @RequestBody UserPreferences userPreferences) {
-<span class="fc" id="L97">        logger.info(&quot;setUserPreferences(&quot; + userName + &quot;,&quot; + userPreferences + &quot;)&quot;);</span>
+<span class="nc" id="L97">        logger.info(&quot;setUserPreferences(&quot; + userName + &quot;,&quot; + userPreferences + &quot;)&quot;);</span>
 
-<span class="fc" id="L99">        userServiceInterface.setUserPreferences(userName, userPreferences);</span>
-<span class="fc" id="L100">    }</span>
+<span class="nc" id="L99">        userServiceInterface.setUserPreferences(userName, userPreferences);</span>
+<span class="nc" id="L100">    }</span>
 
     /**
      * Intercepts the user preferences setting request
@@ -106,10 +106,10 @@ public class UserController {
      */
     @PostMapping(value = &quot;/setTripDeals&quot;)
     public void setTripDeals(@RequestParam String userName, @RequestBody List&lt;Provider&gt; tripDeals) {
-<span class="fc" id="L109">        logger.info(&quot;setTripDeals(&quot; + userName + &quot;,&quot; + tripDeals + &quot;)&quot;);</span>
+<span class="nc" id="L109">        logger.info(&quot;setTripDeals(&quot; + userName + &quot;,&quot; + tripDeals + &quot;)&quot;);</span>
 
-<span class="fc" id="L111">        userServiceInterface.setTripDeals(userName, tripDeals);</span>
-<span class="fc" id="L112">    }</span>
+<span class="nc" id="L111">        userServiceInterface.setTripDeals(userName, tripDeals);</span>
+<span class="nc" id="L112">    }</span>
 
     /**
      * Intercepts the user getting request
@@ -118,9 +118,9 @@ public class UserController {
      */
     @GetMapping(value = &quot;/getUser&quot;)
     public String getUser(@RequestParam String userName) throws JsonProcessingException {
-<span class="fc" id="L121">        logger.info(&quot;getUser(&quot; + userName + &quot;)&quot;);</span>
+<span class="nc" id="L121">        logger.info(&quot;getUser(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="fc" id="L123">        return objectMapper.writeValueAsString(userServiceInterface.getUser(userName));</span>
+<span class="nc" id="L123">        return objectMapper.writeValueAsString(userServiceInterface.getUser(userName));</span>
     }
 
     /**
@@ -129,9 +129,9 @@ public class UserController {
      */
     @GetMapping(value = &quot;/getAllUser&quot;)
     public String getAllUser() throws JsonProcessingException {
-<span class="fc" id="L132">        logger.info(&quot;getAllUser()&quot;);</span>
+<span class="nc" id="L132">        logger.info(&quot;getAllUser()&quot;);</span>
 
-<span class="fc" id="L134">        return objectMapper.writeValueAsString(userServiceInterface.getAllUser());</span>
+<span class="nc" id="L134">        return objectMapper.writeValueAsString(userServiceInterface.getAllUser());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

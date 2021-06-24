@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.model.UserPreferencesTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-06-24T10:30:38" hostname="PC-ANTOINE" time="0.002">
+<testsuite name="unit.model.UserPreferencesTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-06-24T14:01:38" hostname="PC-ANTOINE" time="0.002">
   <properties/>
   <testcase name="setAndGetTicketQuantity" classname="unit.model.UserPreferencesTest" time="0.0"/>
   <testcase name="setAndGetNumberOfChildren" classname="unit.model.UserPreferencesTest" time="0.0"/>

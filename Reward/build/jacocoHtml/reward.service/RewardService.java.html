@@ -23,14 +23,14 @@ import java.util.UUID;
 @Service
 public class RewardService implements RewardServiceInterface {
 
-<span class="pc" id="L26">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="nc" id="L26">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     @Autowired
     private UserProxy userProxy;
     @Autowired
     private GpsProxy gpsProxy;
 
-<span class="pc" id="L33">    private RewardCentral rewardCentral = new RewardCentral();</span>
+<span class="nc" id="L33">    private RewardCentral rewardCentral = new RewardCentral();</span>
 
     /**
      * Creates a new RewardService
@@ -44,18 +44,18 @@ public class RewardService implements RewardServiceInterface {
      * @param userProxy : UserProxy that this service will use
      * @param gpsProxy : GpsProxy that this service will use
      */
-<span class="fc" id="L47">    public RewardService(UserProxy userProxy, GpsProxy gpsProxy) {</span>
-<span class="fc" id="L48">        logger.info(&quot;RewardService(&quot; + userProxy + &quot;,&quot; + gpsProxy + &quot;)&quot;);</span>
+<span class="nc" id="L47">    public RewardService(UserProxy userProxy, GpsProxy gpsProxy) {</span>
+<span class="nc" id="L48">        logger.info(&quot;RewardService(&quot; + userProxy + &quot;,&quot; + gpsProxy + &quot;)&quot;);</span>
 
-<span class="fc" id="L50">        this.userProxy = userProxy;</span>
-<span class="fc" id="L51">        this.gpsProxy = gpsProxy;</span>
-<span class="fc" id="L52">    }</span>
+<span class="nc" id="L50">        this.userProxy = userProxy;</span>
+<span class="nc" id="L51">        this.gpsProxy = gpsProxy;</span>
+<span class="nc" id="L52">    }</span>
 
     @Override
     public int getRewardPoints(UUID attractionId, UUID userId) {
-<span class="fc" id="L56">        logger.info(&quot;getRewardPoints(&quot; + attractionId + &quot;,&quot; + userId + &quot;)&quot;);</span>
+<span class="nc" id="L56">        logger.info(&quot;getRewardPoints(&quot; + attractionId + &quot;,&quot; + userId + &quot;)&quot;);</span>
 
-<span class="fc" id="L58">        return rewardCentral.getAttractionRewardPoints(attractionId, userId);</span>
+<span class="nc" id="L58">        return rewardCentral.getAttractionRewardPoints(attractionId, userId);</span>
     }
 
     @Override

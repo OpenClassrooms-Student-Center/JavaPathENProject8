@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 public class UserService implements UserServiceInterface {
 
-<span class="fc" id="L23">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="nc" id="L23">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     @Autowired
     private UserRepositoryInterface userRepositoryInterface;
@@ -31,102 +31,102 @@ public class UserService implements UserServiceInterface {
     /**
      * Creates a new UserService
      */
-<span class="fc" id="L34">    public UserService() {</span>
-<span class="fc" id="L35">        logger.info(&quot;UserService()&quot;);</span>
+<span class="nc" id="L34">    public UserService() {</span>
+<span class="nc" id="L35">        logger.info(&quot;UserService()&quot;);</span>
 
-<span class="fc" id="L37">        userRepositoryInterface = userRepository;</span>
-<span class="fc" id="L38">    }</span>
+<span class="nc" id="L37">        userRepositoryInterface = userRepository;</span>
+<span class="nc" id="L38">    }</span>
 
     /**
      * Creates a new UserService with the specified UserRepositoryInterface
      * @param userRepositoryInterface : repository that this service will use
      */
-<span class="fc" id="L44">    public UserService(UserRepositoryInterface userRepositoryInterface) {</span>
-<span class="fc" id="L45">        logger.info(&quot;UserService(&quot; + userRepositoryInterface + &quot;)&quot;);</span>
+<span class="nc" id="L44">    public UserService(UserRepositoryInterface userRepositoryInterface) {</span>
+<span class="nc" id="L45">        logger.info(&quot;UserService(&quot; + userRepositoryInterface + &quot;)&quot;);</span>
 
-<span class="fc" id="L47">        this.userRepositoryInterface = userRepositoryInterface;</span>
-<span class="fc" id="L48">    }</span>
+<span class="nc" id="L47">        this.userRepositoryInterface = userRepositoryInterface;</span>
+<span class="nc" id="L48">    }</span>
 
     @Override
     public void addUser(User user) {
-<span class="fc" id="L52">        logger.info(&quot;addUser(&quot; + user + &quot;)&quot;);</span>
+<span class="nc" id="L52">        logger.info(&quot;addUser(&quot; + user + &quot;)&quot;);</span>
 
-<span class="fc" id="L54">        userRepositoryInterface.addUser(user);</span>
-<span class="fc" id="L55">    }</span>
+<span class="nc" id="L54">        userRepositoryInterface.addUser(user);</span>
+<span class="nc" id="L55">    }</span>
 
     @Override
     public void addToVisitedLocations(String userName, VisitedLocation visitedLocation) {
-<span class="fc" id="L59">        logger.info(&quot;addToVisitedLocations(&quot; + userName + &quot;,&quot; + visitedLocation + &quot;)&quot;);</span>
+<span class="nc" id="L59">        logger.info(&quot;addToVisitedLocations(&quot; + userName + &quot;,&quot; + visitedLocation + &quot;)&quot;);</span>
 
-<span class="fc" id="L61">        User user = userRepositoryInterface.getUser(userName);</span>
+<span class="nc" id="L61">        User user = userRepositoryInterface.getUser(userName);</span>
 
-<span class="pc bpc" id="L63" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (user != null) {</span>
 
-<span class="fc" id="L65">            user.getVisitedLocations().add(visitedLocation);</span>
+<span class="nc" id="L65">            user.getVisitedLocations().add(visitedLocation);</span>
         }
-<span class="fc" id="L67">    }</span>
+<span class="nc" id="L67">    }</span>
 
     @Override
     public void addUserReward(String userName, UserReward userReward) {
-<span class="fc" id="L71">        logger.info(&quot;addUserReward(&quot; + userName + &quot;,&quot; + userReward + &quot;)&quot;);</span>
+<span class="nc" id="L71">        logger.info(&quot;addUserReward(&quot; + userName + &quot;,&quot; + userReward + &quot;)&quot;);</span>
 
-<span class="fc" id="L73">        User user = userRepositoryInterface.getUser(userName);</span>
+<span class="nc" id="L73">        User user = userRepositoryInterface.getUser(userName);</span>
 
-<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (user != null) {</span>
 
-<span class="fc" id="L77">            boolean alreadyExist = false;</span>
+<span class="nc" id="L77">            boolean alreadyExist = false;</span>
 
-<span class="fc bfc" id="L79" title="All 2 branches covered.">            for (UserReward r : user.getUserRewards()) {</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            for (UserReward r : user.getUserRewards()) {</span>
 
-<span class="pc bpc" id="L81" title="1 of 2 branches missed.">                if (r.getAttraction().getAttractionName().equals(userReward.getAttraction().getAttractionName())) {</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                if (r.getAttraction().getAttractionName().equals(userReward.getAttraction().getAttractionName())) {</span>
 
-<span class="fc" id="L83">                    alreadyExist = true;</span>
+<span class="nc" id="L83">                    alreadyExist = true;</span>
                 }
-<span class="fc" id="L85">            }</span>
+<span class="nc" id="L85">            }</span>
 
-<span class="fc bfc" id="L87" title="All 2 branches covered.">            if (alreadyExist == false) {</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">            if (alreadyExist == false) {</span>
 
-<span class="fc" id="L89">                user.getUserRewards().add(userReward);</span>
+<span class="nc" id="L89">                user.getUserRewards().add(userReward);</span>
             }
         }
-<span class="fc" id="L92">    }</span>
+<span class="nc" id="L92">    }</span>
 
     @Override
     public void setUserPreferences(String userName, UserPreferences userPreferences) {
-<span class="fc" id="L96">        logger.info(&quot;setUserPreferences(&quot; + userName + &quot;,&quot; + userPreferences + &quot;)&quot;);</span>
+<span class="nc" id="L96">        logger.info(&quot;setUserPreferences(&quot; + userName + &quot;,&quot; + userPreferences + &quot;)&quot;);</span>
 
-<span class="fc" id="L98">        User user = userRepositoryInterface.getUser(userName);</span>
+<span class="nc" id="L98">        User user = userRepositoryInterface.getUser(userName);</span>
 
-<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (user != null) {</span>
 
-<span class="fc" id="L102">            user.setUserPreferences(userPreferences);</span>
+<span class="nc" id="L102">            user.setUserPreferences(userPreferences);</span>
         }
-<span class="fc" id="L104">    }</span>
+<span class="nc" id="L104">    }</span>
 
     @Override
     public void setTripDeals(String userName, List&lt;Provider&gt; tripDeals) {
-<span class="fc" id="L108">        logger.info(&quot;setTripDeals(&quot; + userName + &quot;,&quot; + tripDeals + &quot;)&quot;);</span>
+<span class="nc" id="L108">        logger.info(&quot;setTripDeals(&quot; + userName + &quot;,&quot; + tripDeals + &quot;)&quot;);</span>
 
-<span class="fc" id="L110">        User user = userRepositoryInterface.getUser(userName);</span>
+<span class="nc" id="L110">        User user = userRepositoryInterface.getUser(userName);</span>
 
-<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (user != null) {</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (user != null) {</span>
 
-<span class="fc" id="L114">            user.setTripDeals(tripDeals);</span>
+<span class="nc" id="L114">            user.setTripDeals(tripDeals);</span>
         }
-<span class="fc" id="L116">    }</span>
+<span class="nc" id="L116">    }</span>
 
     @Override
     public User getUser(String userName) {
-<span class="fc" id="L120">        logger.info(&quot;getUser(&quot; + userName + &quot;)&quot;);</span>
+<span class="nc" id="L120">        logger.info(&quot;getUser(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="fc" id="L122">        return userRepositoryInterface.getUser(userName);</span>
+<span class="nc" id="L122">        return userRepositoryInterface.getUser(userName);</span>
     }
 
     @Override
     public List&lt;User&gt; getAllUser() {
-<span class="fc" id="L127">        logger.info(&quot;getAllUser()&quot;);</span>
+<span class="nc" id="L127">        logger.info(&quot;getAllUser()&quot;);</span>
 
-<span class="fc" id="L129">        return userRepositoryInterface.getAllUser();</span>
+<span class="nc" id="L129">        return userRepositoryInterface.getAllUser();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

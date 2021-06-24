@@ -1,12 +1,10 @@
 package unit.service;
 
-import gpsUtil.location.Attraction;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import reward.model.User;
 import reward.proxy.GpsProxy;
 import reward.proxy.UserProxy;
 import reward.service.RewardService;
