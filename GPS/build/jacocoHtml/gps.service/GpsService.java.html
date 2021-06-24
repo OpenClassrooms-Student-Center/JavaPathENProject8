@@ -21,7 +21,7 @@ import java.util.*;
 @Service
 public class GpsService implements GpsServiceInterface {
 
-<span class="nc" id="L24">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="pc" id="L24">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
@@ -30,14 +30,14 @@ public class GpsService implements GpsServiceInterface {
     @Autowired
     private RewardProxy rewardProxy;
 
-<span class="nc" id="L33">    private GpsUtil gpsUtil = new GpsUtil();</span>
+<span class="pc" id="L33">    private GpsUtil gpsUtil = new GpsUtil();</span>
 
     /**
      * Creates a new GpsService
      */
-<span class="nc" id="L38">    public GpsService() {</span>
-<span class="nc" id="L39">        logger.info(&quot;GpsService()&quot;);</span>
-<span class="nc" id="L40">    }</span>
+<span class="fc" id="L38">    public GpsService() {</span>
+<span class="fc" id="L39">        logger.info(&quot;GpsService()&quot;);</span>
+<span class="fc" id="L40">    }</span>
 
     /**
      * Creates a new GpsService with the specified UserProxy and RewardProxy
@@ -53,29 +53,29 @@ public class GpsService implements GpsServiceInterface {
 
     @Override
     public VisitedLocation getUserLocation(String userName) {
-<span class="nc" id="L56">        logger.info(&quot;getUserLocation(&quot; + userName + &quot;)&quot;);</span>
+<span class="fc" id="L56">        logger.info(&quot;getUserLocation(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="nc" id="L58">        VisitedLocation visitedLocation = new VisitedLocation();</span>
+<span class="fc" id="L58">        VisitedLocation visitedLocation = new VisitedLocation();</span>
 
-<span class="nc" id="L60">        User user = userProxy.getUser(userName);</span>
+<span class="fc" id="L60">        User user = userProxy.getUser(userName);</span>
 
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (user != null) {</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (user != null) {</span>
 
-<span class="nc bnc" id="L64" title="All 2 branches missed.">            if (user.getVisitedLocations().size() &lt;= 0) {</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">            if (user.getVisitedLocations().size() &lt;= 0) {</span>
 
-<span class="nc" id="L66">                visitedLocation = gpsUtil.getUserLocation(user.getUserId());</span>
+<span class="fc" id="L66">                visitedLocation = gpsUtil.getUserLocation(user.getUserId());</span>
 
-<span class="nc" id="L68">                userProxy.addToVisitedLocations(userName, visitedLocation);</span>
+<span class="fc" id="L68">                userProxy.addToVisitedLocations(userName, visitedLocation);</span>
 <span class="nc" id="L69">                rewardProxy.calculateRewards(userName);</span>
             }
 
             else {
 
-<span class="nc" id="L74">                visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);</span>
+<span class="fc" id="L74">                visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);</span>
             }
         }
 
-<span class="nc" id="L78">        return visitedLocation;</span>
+<span class="fc" id="L78">        return visitedLocation;</span>
     }
 
     @Override
