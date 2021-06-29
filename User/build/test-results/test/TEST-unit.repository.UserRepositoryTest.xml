@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.repository.UserRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-06-24T14:01:38" hostname="PC-ANTOINE" time="0.005">
+<testsuite name="unit.repository.UserRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-06-29T09:09:26" hostname="PC-ANTOINE" time="0.015">
   <properties/>
-  <testcase name="getUser" classname="unit.repository.UserRepositoryTest" time="0.002"/>
-  <testcase name="getAllUser" classname="unit.repository.UserRepositoryTest" time="0.003"/>
-  <system-out><![CDATA[2021-06-24 16:01:38.103  INFO 18048 --- [    Test worker] UserRepository                           : UserRepository()
-2021-06-24 16:01:38.104  INFO 18048 --- [    Test worker] UserRepository                           : addUser(Mock for User, hashCode: 1790202303)
-2021-06-24 16:01:38.104  INFO 18048 --- [    Test worker] UserRepository                           : getUser(userNameTest)
-2021-06-24 16:01:38.105  INFO 18048 --- [    Test worker] UserRepository                           : UserRepository()
-2021-06-24 16:01:38.106  INFO 18048 --- [    Test worker] UserRepository                           : addUser(Mock for User, hashCode: 735271451)
-2021-06-24 16:01:38.106  INFO 18048 --- [    Test worker] UserRepository                           : getAllUser()
+  <testcase name="getUser" classname="unit.repository.UserRepositoryTest" time="0.009"/>
+  <testcase name="getAllUser" classname="unit.repository.UserRepositoryTest" time="0.005"/>
+  <system-out><![CDATA[2021-06-29 11:09:26.511  INFO 9196 --- [    Test worker] UserRepository                           : UserRepository()
+2021-06-29 11:09:26.516  INFO 9196 --- [    Test worker] UserRepository                           : addUser(Mock for User, hashCode: 429429345)
+2021-06-29 11:09:26.519  INFO 9196 --- [    Test worker] UserRepository                           : getUser(userNameTest)
+2021-06-29 11:09:26.521  INFO 9196 --- [    Test worker] UserRepository                           : UserRepository()
+2021-06-29 11:09:26.523  INFO 9196 --- [    Test worker] UserRepository                           : addUser(Mock for User, hashCode: 1930965512)
+2021-06-29 11:09:26.524  INFO 9196 --- [    Test worker] UserRepository                           : getAllUser()
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -18,21 +18,21 @@ import java.util.List;
 @Service
 public class TripPricerService implements TripPricerServiceInterface {
 
-<span class="nc" id="L21">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="pc" id="L21">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     private static final String tripPricerApiKey = &quot;test-server-api-key&quot;;
 
     @Autowired
     private UserProxy userProxy;
 
-<span class="nc" id="L28">    private TripPricer tripPricer = new TripPricer();</span>
+<span class="pc" id="L28">    private TripPricer tripPricer = new TripPricer();</span>
 
     /**
      * Creates a new TripPricerService
      */
-<span class="nc" id="L33">    public TripPricerService() {</span>
-<span class="nc" id="L34">        logger.info(&quot;TripPricerService()&quot;);</span>
-<span class="nc" id="L35">    }</span>
+<span class="fc" id="L33">    public TripPricerService() {</span>
+<span class="fc" id="L34">        logger.info(&quot;TripPricerService()&quot;);</span>
+<span class="fc" id="L35">    }</span>
 
     /**
      * Creates a new TripPricerService with the specified UserProxy
@@ -46,9 +46,9 @@ public class TripPricerService implements TripPricerServiceInterface {
 
     @Override
     public List&lt;Provider&gt; calculateTripDeals(String userName) {
-<span class="nc" id="L49">        logger.info(&quot;calculateTripDeals(&quot; + userName + &quot;)&quot;);</span>
+<span class="fc" id="L49">        logger.info(&quot;calculateTripDeals(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="nc" id="L51">        List&lt;Provider&gt; providerList = new ArrayList&lt;Provider&gt;();</span>
+<span class="fc" id="L51">        List&lt;Provider&gt; providerList = new ArrayList&lt;Provider&gt;();</span>
 
 <span class="nc" id="L53">        User user = userProxy.getUser(userName);</span>
 

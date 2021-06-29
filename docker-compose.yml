@@ -5,34 +5,22 @@ services:
     build: "./User/"
     ports:
       - 8080:8080
-    links:
-      - gps
-      - rewards
-      - trip-pricer
     container_name: "user-api"
-    command:
-      "--spring.profiles.active=docker"
 
   gps:
     build: "./GPS/"
     ports:
       - 8081:8081
     container_name: "gps-api"
-    command:
-      "--spring.profiles.active=docker"
 
   rewards:
     build: "./Reward/"
     ports:
       - 8082:8082
-    container_name: "rewards-api"
-    command:
-      "--spring.profiles.active=docker"
+    container_name: "reward-api"
 
   trip-pricer:
     build: "./TripPricer/"
     ports:
       - 8083:8083
     container_name: "trip-pricer-api"
-    command:
-      "--spring.profiles.active=docker"

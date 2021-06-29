@@ -13,7 +13,7 @@ import java.text.ParseException;
 /**
  * This interface allows to send requests to the user api
  */
-@FeignClient(name = "user-api", url = "localhost:8080")
+@FeignClient(name = "user-api", url = "http://user-api:8080")
 public interface UserProxy {
 
     /**

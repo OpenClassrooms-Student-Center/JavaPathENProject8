@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * This interface allows to send requests to the gps api
  */
-@FeignClient(name = "gps-api", url = "localhost:8081")
+@FeignClient(name = "gps-api", url = "http://gps-api:8081")
 public interface GpsProxy {
 
     /**

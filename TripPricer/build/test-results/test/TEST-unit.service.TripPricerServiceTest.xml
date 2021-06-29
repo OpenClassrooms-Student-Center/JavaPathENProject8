@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.service.TripPricerServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-24T14:02:51" hostname="PC-ANTOINE" time="0.221">
-  <properties/>
-  <testcase name="calculateTripDeals" classname="unit.service.TripPricerServiceTest" time="0.221"/>
-  <system-out><![CDATA[2021-06-24 16:02:51.015  INFO 2036 --- [    Test worker] TripPricerService                        : TripPricerService(Mock for UserProxy, hashCode: 550806174)
-2021-06-24 16:02:51.212  INFO 2036 --- [    Test worker] TripPricerService                        : calculateTripDeals(userName)
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

@@ -12,13 +12,13 @@ import java.util.UUID;
  * This interface allows to send requests to the reward api
  */
 @Component
-@FeignClient(name = "reward-api", url = "localhost:8082")
+@FeignClient(name = "reward-api", url = "http://reward-api:8082")
 public interface RewardProxy {
 
     /**
      * Send the reward points getting request
-     * @param attractionName : Name of the Attraction to use for calculate reward points
-     * @param userName : Name of the User to use for calculate reward points
+     * @param attractionId : Id of the Attraction to use for calculate reward points
+     * @param userId : Id of the User to use for calculate reward points
      * @return The reward points amount
      */
     @GetMapping(value = "/getRewardPoints", produces = "application/json")

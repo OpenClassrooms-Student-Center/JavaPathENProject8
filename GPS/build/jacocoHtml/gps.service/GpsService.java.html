@@ -21,7 +21,7 @@ import java.util.*;
 @Service
 public class GpsService implements GpsServiceInterface {
 
-<span class="nc" id="L24">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="fc" id="L24">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
@@ -30,38 +30,38 @@ public class GpsService implements GpsServiceInterface {
     @Autowired
     private RewardProxy rewardProxy;
 
-<span class="nc" id="L33">    private GpsUtil gpsUtil = new GpsUtil();</span>
+<span class="fc" id="L33">    private GpsUtil gpsUtil = new GpsUtil();</span>
 
     /**
      * Creates a new GpsService
      */
-<span class="nc" id="L38">    public GpsService() {</span>
-<span class="nc" id="L39">        logger.info(&quot;GpsService()&quot;);</span>
-<span class="nc" id="L40">    }</span>
+<span class="fc" id="L38">    public GpsService() {</span>
+<span class="fc" id="L39">        logger.info(&quot;GpsService()&quot;);</span>
+<span class="fc" id="L40">    }</span>
 
     /**
      * Creates a new GpsService with the specified UserProxy and RewardProxy
      * @param userProxy : UserProxy that this service will use
      * @param rewardProxy : RewardProxy that this service will use
      */
-<span class="nc" id="L47">    public GpsService(UserProxy userProxy, RewardProxy rewardProxy) {</span>
-<span class="nc" id="L48">        logger.info(&quot;GpsService(&quot; + userProxy + &quot;,&quot; + rewardProxy + &quot;)&quot;);</span>
+<span class="fc" id="L47">    public GpsService(UserProxy userProxy, RewardProxy rewardProxy) {</span>
+<span class="fc" id="L48">        logger.info(&quot;GpsService(&quot; + userProxy + &quot;,&quot; + rewardProxy + &quot;)&quot;);</span>
 
-<span class="nc" id="L50">        this.userProxy = userProxy;</span>
-<span class="nc" id="L51">        this.rewardProxy = rewardProxy;</span>
-<span class="nc" id="L52">    }</span>
+<span class="fc" id="L50">        this.userProxy = userProxy;</span>
+<span class="fc" id="L51">        this.rewardProxy = rewardProxy;</span>
+<span class="fc" id="L52">    }</span>
 
     @Override
     public VisitedLocation getUserLocation(String userName) {
-<span class="nc" id="L56">        logger.info(&quot;getUserLocation(&quot; + userName + &quot;)&quot;);</span>
+<span class="fc" id="L56">        logger.info(&quot;getUserLocation(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="nc" id="L58">        VisitedLocation visitedLocation = new VisitedLocation();</span>
+<span class="fc" id="L58">        VisitedLocation visitedLocation = new VisitedLocation();</span>
 
-<span class="nc" id="L60">        User user = userProxy.getUser(userName);</span>
+<span class="fc" id="L60">        User user = userProxy.getUser(userName);</span>
 
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (user != null) {</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">        if (user != null) {</span>
 
-<span class="nc bnc" id="L64" title="All 2 branches missed.">            if (user.getVisitedLocations().size() &lt;= 0) {</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">            if (user.getVisitedLocations().size() &lt;= 0) {</span>
 
 <span class="nc" id="L66">                visitedLocation = gpsUtil.getUserLocation(user.getUserId());</span>
 
@@ -71,53 +71,53 @@ public class GpsService implements GpsServiceInterface {
 
             else {
 
-<span class="nc" id="L74">                visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);</span>
+<span class="fc" id="L74">                visitedLocation = user.getVisitedLocations().get(user.getVisitedLocations().size()-1);</span>
             }
         }
 
-<span class="nc" id="L78">        return visitedLocation;</span>
+<span class="fc" id="L78">        return visitedLocation;</span>
     }
 
     @Override
     public Attraction getAttraction(String attractionName) {
-<span class="nc" id="L83">        logger.info(&quot;getAttraction(&quot; + attractionName + &quot;)&quot;);</span>
+<span class="fc" id="L83">        logger.info(&quot;getAttraction(&quot; + attractionName + &quot;)&quot;);</span>
 
-<span class="nc" id="L85">        Attraction attraction = null;</span>
+<span class="fc" id="L85">        Attraction attraction = null;</span>
 
-<span class="nc bnc" id="L87" title="All 2 branches missed.">        for (Attraction a : gpsUtil.getAttractions()) {</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        for (Attraction a : gpsUtil.getAttractions()) {</span>
 
-<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (a.getAttractionName().equals(attractionName)) {</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            if (a.getAttractionName().equals(attractionName)) {</span>
 
-<span class="nc" id="L91">                attraction = a;</span>
-<span class="nc" id="L92">                break;</span>
+<span class="fc" id="L91">                attraction = a;</span>
+<span class="fc" id="L92">                break;</span>
             }
-<span class="nc" id="L94">        }</span>
+<span class="fc" id="L94">        }</span>
 
-<span class="nc" id="L96">        return attraction;</span>
+<span class="fc" id="L96">        return attraction;</span>
     }
 
     @Override
     public List&lt;Attraction&gt; getAllAttraction() {
-<span class="nc" id="L101">        logger.info(&quot;getAllAttraction()&quot;);</span>
+<span class="fc" id="L101">        logger.info(&quot;getAllAttraction()&quot;);</span>
 
-<span class="nc" id="L103">        return gpsUtil.getAttractions();</span>
+<span class="fc" id="L103">        return gpsUtil.getAttractions();</span>
     }
 
     @Override
     public Map&lt;UUID, VisitedLocation&gt; getAllCurrentLocations() {
-<span class="nc" id="L108">        logger.info(&quot;getAllCurrentLocations()&quot;);</span>
+<span class="fc" id="L108">        logger.info(&quot;getAllCurrentLocations()&quot;);</span>
 
-<span class="nc" id="L110">        Map&lt;UUID, VisitedLocation&gt; visitedLocationMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L110">        Map&lt;UUID, VisitedLocation&gt; visitedLocationMap = new HashMap&lt;&gt;();</span>
 
-<span class="nc bnc" id="L112" title="All 2 branches missed.">        for (User u : userProxy.getAllUser()) {</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">        for (User u : userProxy.getAllUser()) {</span>
 
-<span class="nc bnc" id="L114" title="All 2 branches missed.">            if (u.getVisitedLocations().size() &gt; 0) {</span>
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">            if (u.getVisitedLocations().size() &gt; 0) {</span>
 
-<span class="nc" id="L116">                visitedLocationMap.put(u.getUserId(), u.getVisitedLocations().get(u.getVisitedLocations().size()-1));</span>
+<span class="fc" id="L116">                visitedLocationMap.put(u.getUserId(), u.getVisitedLocations().get(u.getVisitedLocations().size()-1));</span>
             }
-<span class="nc" id="L118">        }</span>
+<span class="fc" id="L118">        }</span>
 
-<span class="nc" id="L120">        return visitedLocationMap;</span>
+<span class="fc" id="L120">        return visitedLocationMap;</span>
     }
 
     @Override

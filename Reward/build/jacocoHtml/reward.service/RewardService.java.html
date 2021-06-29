@@ -23,21 +23,21 @@ import java.util.UUID;
 @Service
 public class RewardService implements RewardServiceInterface {
 
-<span class="nc" id="L26">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="pc" id="L26">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     @Autowired
     private UserProxy userProxy;
     @Autowired
     private GpsProxy gpsProxy;
 
-<span class="nc" id="L33">    private RewardCentral rewardCentral = new RewardCentral();</span>
+<span class="pc" id="L33">    private RewardCentral rewardCentral = new RewardCentral();</span>
 
     /**
      * Creates a new RewardService
      */
-<span class="nc" id="L38">    public RewardService() {</span>
-<span class="nc" id="L39">        logger.info(&quot;RewardService()&quot;);</span>
-<span class="nc" id="L40">    }</span>
+<span class="fc" id="L38">    public RewardService() {</span>
+<span class="fc" id="L39">        logger.info(&quot;RewardService()&quot;);</span>
+<span class="fc" id="L40">    }</span>
 
     /**
      * Creates a new RewardService with the specified UserProxy and GpsProxy
@@ -53,16 +53,16 @@ public class RewardService implements RewardServiceInterface {
 
     @Override
     public int getRewardPoints(UUID attractionId, UUID userId) {
-<span class="nc" id="L56">        logger.info(&quot;getRewardPoints(&quot; + attractionId + &quot;,&quot; + userId + &quot;)&quot;);</span>
+<span class="fc" id="L56">        logger.info(&quot;getRewardPoints(&quot; + attractionId + &quot;,&quot; + userId + &quot;)&quot;);</span>
 
-<span class="nc" id="L58">        return rewardCentral.getAttractionRewardPoints(attractionId, userId);</span>
+<span class="fc" id="L58">        return rewardCentral.getAttractionRewardPoints(attractionId, userId);</span>
     }
 
     @Override
     public List&lt;UserReward&gt; calculateRewards(String userName) {
-<span class="nc" id="L63">        logger.info(&quot;calculateRewards(&quot; + userName + &quot;)&quot;);</span>
+<span class="fc" id="L63">        logger.info(&quot;calculateRewards(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="nc" id="L65">        List&lt;UserReward&gt; userRewardList = new ArrayList&lt;UserReward&gt;();</span>
+<span class="fc" id="L65">        List&lt;UserReward&gt; userRewardList = new ArrayList&lt;UserReward&gt;();</span>
 
 <span class="nc" id="L67">        User user = userProxy.getUser(userName);</span>
 

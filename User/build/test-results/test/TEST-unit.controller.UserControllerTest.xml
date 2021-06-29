@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.controller.UserControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-06-24T14:01:37" hostname="PC-ANTOINE" time="0.747">
+<testsuite name="unit.controller.UserControllerTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-06-29T09:09:25" hostname="PC-ANTOINE" time="0.486">
   <properties/>
-  <testcase name="addUser" classname="unit.controller.UserControllerTest" time="0.245"/>
-  <testcase name="addToVisitedLocations" classname="unit.controller.UserControllerTest" time="0.04"/>
-  <testcase name="setUserPreferences" classname="unit.controller.UserControllerTest" time="0.088"/>
-  <testcase name="getAllUser" classname="unit.controller.UserControllerTest" time="0.317"/>
+  <testcase name="addUser" classname="unit.controller.UserControllerTest" time="0.129"/>
+  <testcase name="addToVisitedLocations" classname="unit.controller.UserControllerTest" time="0.021"/>
+  <testcase name="setUserPreferences" classname="unit.controller.UserControllerTest" time="0.071"/>
+  <testcase name="getAllUser" classname="unit.controller.UserControllerTest" time="0.233"/>
   <testcase name="setTripDeals" classname="unit.controller.UserControllerTest" time="0.003"/>
-  <testcase name="addUserReward" classname="unit.controller.UserControllerTest" time="0.051"/>
-  <system-out><![CDATA[2021-06-24 16:01:37.323  INFO 18048 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 1919972635)
-2021-06-24 16:01:37.495  INFO 18048 --- [    Test worker] UserController                           : addUser(Mock for User, hashCode: 176260080)
-2021-06-24 16:01:37.534  INFO 18048 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 451894043)
-2021-06-24 16:01:37.571  INFO 18048 --- [    Test worker] UserController                           : addToVisitedLocations(userNameTest,Mock for VisitedLocation, hashCode: 1834323268)
-2021-06-24 16:01:37.574  INFO 18048 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 272683263)
-2021-06-24 16:01:37.661  INFO 18048 --- [    Test worker] UserController                           : setUserPreferences(userNameTest,Mock for UserPreferences, hashCode: 1122461119)
-2021-06-24 16:01:37.664  INFO 18048 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 1142031734)
-2021-06-24 16:01:37.975  INFO 18048 --- [    Test worker] UserController                           : getAllUser()
-2021-06-24 16:01:37.981  INFO 18048 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 1980626157)
-2021-06-24 16:01:37.982  INFO 18048 --- [    Test worker] UserController                           : setTripDeals(userNameTest,Mock for ArrayList, hashCode: 2003434398)
-2021-06-24 16:01:37.984  INFO 18048 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 1655231149)
-2021-06-24 16:01:38.034  INFO 18048 --- [    Test worker] UserController                           : addUserReward(userNameTest,Mock for UserReward, hashCode: 1575785926)
+  <testcase name="addUserReward" classname="unit.controller.UserControllerTest" time="0.027"/>
+  <system-out><![CDATA[2021-06-29 11:09:25.997  INFO 9196 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 1410982828)
+2021-06-29 11:09:26.086  INFO 9196 --- [    Test worker] UserController                           : addUser(Mock for User, hashCode: 861567847)
+2021-06-29 11:09:26.106  INFO 9196 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 186539579)
+2021-06-29 11:09:26.124  INFO 9196 --- [    Test worker] UserController                           : addToVisitedLocations(userNameTest,Mock for VisitedLocation, hashCode: 2077601967)
+2021-06-29 11:09:26.127  INFO 9196 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 840437693)
+2021-06-29 11:09:26.197  INFO 9196 --- [    Test worker] UserController                           : setUserPreferences(userNameTest,Mock for UserPreferences, hashCode: 996207423)
+2021-06-29 11:09:26.198  INFO 9196 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 518372982)
+2021-06-29 11:09:26.426  INFO 9196 --- [    Test worker] UserController                           : getAllUser()
+2021-06-29 11:09:26.431  INFO 9196 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 949421747)
+2021-06-29 11:09:26.433  INFO 9196 --- [    Test worker] UserController                           : setTripDeals(userNameTest,Mock for ArrayList, hashCode: 1555280336)
+2021-06-29 11:09:26.435  INFO 9196 --- [    Test worker] UserController                           : UserController(Mock for UserServiceInterface, hashCode: 85933665)
+2021-06-29 11:09:26.461  INFO 9196 --- [    Test worker] UserController                           : addUserReward(userNameTest,Mock for UserReward, hashCode: 688029903)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

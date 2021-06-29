@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="unit.controller.TripPricerControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-24T14:02:50" hostname="PC-ANTOINE" time="0.094">
-  <properties/>
-  <testcase name="calculateTripDeals" classname="unit.controller.TripPricerControllerTest" time="0.094"/>
-  <system-out><![CDATA[2021-06-24 16:02:50.656  INFO 2036 --- [    Test worker] TripPriceController                      : TripPriceController(Mock for TripPricerServiceInterface, hashCode: 935551452)
-2021-06-24 16:02:50.656  INFO 2036 --- [    Test worker] TripPriceController                      : calculateTripDeals(userName)
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
