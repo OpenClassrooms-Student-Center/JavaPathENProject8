@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import reward.model.UserReward;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface RewardServiceInterface {
@@ -21,4 +22,6 @@ public interface RewardServiceInterface {
      * @return The UserReward list
      */
     public List<UserReward> calculateRewards(String userName);
+
+    public void calculateRewardOfAllUSer();
 }

@@ -71,7 +71,7 @@ public class RewardController {
     public String calculateRewards(@RequestParam String userName) throws JsonProcessingException {
 <span class="fc" id="L72">        logger.info(&quot;calculateRewards(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="nc" id="L74">        return objectMapper.writeValueAsString(rewardServiceInterface.calculateRewards(userName));</span>
+<span class="fc" id="L74">        return objectMapper.writeValueAsString(rewardServiceInterface.calculateRewards(userName));</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -15,7 +15,7 @@ import java.util.List;
  * This interface allows to send requests to the user api
  */
 @Component
-@FeignClient(name = "user-api", url = "http://user-api:8080")
+@FeignClient(name = "user-api", url = "http://localhost:8080")
 public interface UserProxy {
 
     /**

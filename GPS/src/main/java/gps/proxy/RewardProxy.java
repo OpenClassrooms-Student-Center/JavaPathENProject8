@@ -12,7 +12,7 @@ import java.util.UUID;
  * This interface allows to send requests to the reward api
  */
 @Component
-@FeignClient(name = "reward-api", url = "http://reward-api:8082")
+@FeignClient(name = "reward-api", url = "http://localhost:8082")
 public interface RewardProxy {
 
     /**

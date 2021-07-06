@@ -2,11 +2,11 @@ package reward.service;
 
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
+import org.apache.commons.lang3.time.StopWatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import reward.model.User;
 import reward.model.UserReward;
 import reward.proxy.GpsProxy;
@@ -16,6 +16,8 @@ import rewardCentral.RewardCentral;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * This class allows to interact with a RewardCentral
@@ -31,6 +33,8 @@ public class RewardService implements RewardServiceInterface {
     private GpsProxy gpsProxy;
 
     private RewardCentral rewardCentral = new RewardCentral();
+
+    private ExecutorService executorService = Executors.newFixedThreadPool(10000);
 
     /**
      * Creates a new RewardService
@@ -63,33 +67,108 @@ public class RewardService implements RewardServiceInterface {
         logger.info("calculateRewards(" + userName + ")");
 
         List<UserReward> userRewardList = new ArrayList<UserReward>();
+        List<Attraction> attractionList = gpsProxy.getAllAttraction();
 
         User user = userProxy.getUser(userName);
 
         if (user != null) {
 
-            for(VisitedLocation visitedLocation : user.getVisitedLocations()) {
+            for(VisitedLocation l : user.getVisitedLocations()) {
+                for(Attraction a : attractionList) {
 
-                for(Attraction attraction : gpsProxy.getAllAttraction()) {
+                    if (l.getLocation().getLatitude() == a.getLatitude() &&
+                            l.getLocation().getLongitude() == a.getLongitude()) {
 
-                    if (visitedLocation.getLocation().getLatitude() == attraction.getLatitude() &&
-                            visitedLocation.getLocation().getLongitude() == attraction.getLongitude()) {
+                        boolean rewardAlreadyExist = false;
 
-                        if (user.getUserRewards().stream().filter(r -> r.getAttraction().equals(attraction.getAttractionName())).count() == 0) {
+                        for(UserReward r : user.getUserRewards()) {
+                            
+                            if (r.getAttraction().getAttractionName().equals(a.getAttractionName())) {
 
-                            int rewardPoints = rewardCentral.getAttractionRewardPoints(attraction.getAttractionId(), user.getUserId());
+                                rewardAlreadyExist = true;
+                                break;
+                            }
+                        }
 
-                            UserReward userReward = new UserReward(visitedLocation, attraction, rewardPoints);
+                        if (!rewardAlreadyExist) {
+
+                            int rewardPoints = rewardCentral.getAttractionRewardPoints(a.getAttractionId(), user.getUserId());
+
+                            UserReward userReward = new UserReward(l, a, rewardPoints);
 
                             userRewardList.add(userReward);
 
                             userProxy.addUserReward(userName, userReward);
                         }
+
+                        break;
                     }
                 }
             }
         }
 
         return userRewardList;
+    }
+
+    @Override
+    public void calculateRewardOfAllUSer() {
+
+        List<User> userList = userProxy.getAllUser();
+        List<Attraction> attractionList = gpsProxy.getAllAttraction();
+
+        for (User u : userList) {
+            for(VisitedLocation l : u.getVisitedLocations()) {
+                for(Attraction a : attractionList) {
+
+                    if (l.getLocation().getLatitude() == a.getLatitude() &&
+                            l.getLocation().getLongitude() == a.getLongitude()) {
+
+                        boolean rewardAlreadyExist = false;
+
+                        for(UserReward r : u.getUserRewards()) {
+
+                            if (r.getAttraction().getAttractionName().equals(a.getAttractionName())) {
+
+                                rewardAlreadyExist = true;
+                                break;
+                            }
+                        }
+
+                        if (!rewardAlreadyExist) {
+
+                            CompletableFuture.supplyAsync(() -> {
+
+                                return rewardCentral.getAttractionRewardPoints(a.getAttractionId(), u.getUserId());
+
+                            }, executorService).thenAccept(rewardPoints -> {
+
+                                userProxy.addUserReward(u.getUserName(), new UserReward(l, a, rewardPoints));
+
+                                System.out.println("Reward added to the user : " + u.getUserName());
+
+                            });
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        executorService.shutdown();
+
+        try {
+
+            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+
+                executorService.shutdownNow();
+            }
+
+        } catch (InterruptedException ex) {
+
+            executorService.shutdownNow();
+
+            Thread.currentThread().interrupt();
+        }
     }
 }

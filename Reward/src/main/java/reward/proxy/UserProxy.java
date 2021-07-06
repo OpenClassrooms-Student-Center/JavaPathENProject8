@@ -9,11 +9,12 @@ import reward.model.User;
 import reward.model.UserReward;
 
 import java.text.ParseException;
+import java.util.List;
 
 /**
  * This interface allows to send requests to the user api
  */
-@FeignClient(name = "user-api", url = "http://user-api:8080")
+@FeignClient(name = "user-api", url = "http://localhost:8080")
 public interface UserProxy {
 
     /**
@@ -24,6 +25,8 @@ public interface UserProxy {
     @GetMapping(value = "/getUser", produces = "application/json")
     public User getUser(@RequestParam String userName);
 
+    @GetMapping(value = "/getAllUser", produces = "application/json")
+    public List<User> getAllUser();
 
     @PostMapping(value = "/addUserReward", produces = "application/json")
     public void addUserReward(@RequestParam String userName, @RequestBody UserReward userReward);
