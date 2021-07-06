@@ -67,4 +67,17 @@ public class RewardControllerIT {
         // THEN
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());
     }
+
+    @Test
+    @Order(2)
+    public void calculateRewardOfAllUSer() throws Exception {
+
+        // GIVEN
+
+        // WHEN
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/calculateRewardOfAllUSer")).andReturn();
+
+        // THEN
+        Assert.assertEquals(200, mvcResult.getResponse().getStatus());
+    }
 }

@@ -73,4 +73,11 @@ public class RewardController {
 
         return objectMapper.writeValueAsString(rewardServiceInterface.calculateRewards(userName));
     }
+
+    @GetMapping("/calculateRewardOfAllUSer")
+    public void calculateRewardOfAllUSer() {
+        logger.info("calculateRewardOfAllUSer()");
+
+        rewardServiceInterface.calculateRewardOfAllUSer();
+    }
 }
