@@ -112,64 +112,65 @@ public class RewardService implements RewardServiceInterface {
 
     @Override
     public void calculateRewardOfAllUSer() {
+<span class="fc" id="L115">        logger.info(&quot;calculateRewardOfAllUSer()&quot;);</span>
 
-<span class="fc" id="L116">        List&lt;User&gt; userList = userProxy.getAllUser();</span>
-<span class="fc" id="L117">        List&lt;Attraction&gt; attractionList = gpsProxy.getAllAttraction();</span>
+<span class="fc" id="L117">        List&lt;User&gt; userList = userProxy.getAllUser();</span>
+<span class="fc" id="L118">        List&lt;Attraction&gt; attractionList = gpsProxy.getAllAttraction();</span>
 
-<span class="fc bfc" id="L119" title="All 2 branches covered.">        for (User u : userList) {</span>
-<span class="fc bfc" id="L120" title="All 2 branches covered.">            for(VisitedLocation l : u.getVisitedLocations()) {</span>
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">                for(Attraction a : attractionList) {</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        for (User u : userList) {</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">            for(VisitedLocation l : u.getVisitedLocations()) {</span>
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">                for(Attraction a : attractionList) {</span>
 
-<span class="pc bpc" id="L123" title="1 of 2 branches missed.">                    if (l.getLocation().getLatitude() == a.getLatitude() &amp;&amp;</span>
-<span class="pc bpc" id="L124" title="1 of 2 branches missed.">                            l.getLocation().getLongitude() == a.getLongitude()) {</span>
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">                    if (l.getLocation().getLatitude() == a.getLatitude() &amp;&amp;</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">                            l.getLocation().getLongitude() == a.getLongitude()) {</span>
 
-<span class="fc" id="L126">                        boolean rewardAlreadyExist = false;</span>
+<span class="fc" id="L127">                        boolean rewardAlreadyExist = false;</span>
 
-<span class="fc bfc" id="L128" title="All 2 branches covered.">                        for(UserReward r : u.getUserRewards()) {</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">                        for(UserReward r : u.getUserRewards()) {</span>
 
-<span class="pc bpc" id="L130" title="1 of 2 branches missed.">                            if (r.getAttraction().getAttractionName().equals(a.getAttractionName())) {</span>
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">                            if (r.getAttraction().getAttractionName().equals(a.getAttractionName())) {</span>
 
-<span class="nc" id="L132">                                rewardAlreadyExist = true;</span>
-<span class="nc" id="L133">                                break;</span>
+<span class="nc" id="L133">                                rewardAlreadyExist = true;</span>
+<span class="nc" id="L134">                                break;</span>
                             }
-<span class="fc" id="L135">                        }</span>
+<span class="fc" id="L136">                        }</span>
 
-<span class="pc bpc" id="L137" title="1 of 2 branches missed.">                        if (!rewardAlreadyExist) {</span>
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">                        if (!rewardAlreadyExist) {</span>
 
-<span class="fc" id="L139">                            CompletableFuture.supplyAsync(() -&gt; {</span>
+<span class="fc" id="L140">                            CompletableFuture.supplyAsync(() -&gt; {</span>
 
-<span class="fc" id="L141">                                return rewardCentral.getAttractionRewardPoints(a.getAttractionId(), u.getUserId());</span>
+<span class="fc" id="L142">                                return rewardCentral.getAttractionRewardPoints(a.getAttractionId(), u.getUserId());</span>
 
-<span class="fc" id="L143">                            }, executorService).thenAccept(rewardPoints -&gt; {</span>
+<span class="fc" id="L144">                            }, executorService).thenAccept(rewardPoints -&gt; {</span>
 
-<span class="fc" id="L145">                                userProxy.addUserReward(u.getUserName(), new UserReward(l, a, rewardPoints));</span>
+<span class="fc" id="L146">                                userProxy.addUserReward(u.getUserName(), new UserReward(l, a, rewardPoints));</span>
 
-<span class="fc" id="L147">                                System.out.println(&quot;Reward added to the user : &quot; + u.getUserName());</span>
+<span class="fc" id="L148">                                System.out.println(&quot;Reward added to the user : &quot; + u.getUserName());</span>
 
-<span class="fc" id="L149">                            });</span>
+<span class="fc" id="L150">                            });</span>
                         }
 
                         break;
                     }
-<span class="nc" id="L154">                }</span>
-<span class="fc" id="L155">            }</span>
-<span class="fc" id="L156">        }</span>
+<span class="nc" id="L155">                }</span>
+<span class="fc" id="L156">            }</span>
+<span class="fc" id="L157">        }</span>
 
-<span class="fc" id="L158">        executorService.shutdown();</span>
+<span class="fc" id="L159">        executorService.shutdown();</span>
 
         try {
 
-<span class="pc bpc" id="L162" title="1 of 2 branches missed.">            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {</span>
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">            if (!executorService.awaitTermination(20, TimeUnit.MINUTES)) {</span>
 
-<span class="nc" id="L164">                executorService.shutdownNow();</span>
+<span class="nc" id="L165">                executorService.shutdownNow();</span>
             }
 
-<span class="nc" id="L167">        } catch (InterruptedException ex) {</span>
+<span class="nc" id="L168">        } catch (InterruptedException ex) {</span>
 
-<span class="nc" id="L169">            executorService.shutdownNow();</span>
+<span class="nc" id="L170">            executorService.shutdownNow();</span>
 
-<span class="nc" id="L171">            Thread.currentThread().interrupt();</span>
-<span class="fc" id="L172">        }</span>
-<span class="fc" id="L173">    }</span>
+<span class="nc" id="L172">            Thread.currentThread().interrupt();</span>
+<span class="fc" id="L173">        }</span>
+<span class="fc" id="L174">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

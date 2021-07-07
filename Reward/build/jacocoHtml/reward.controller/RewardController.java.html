@@ -73,5 +73,12 @@ public class RewardController {
 
 <span class="fc" id="L74">        return objectMapper.writeValueAsString(rewardServiceInterface.calculateRewards(userName));</span>
     }
+
+    @GetMapping(&quot;/calculateRewardOfAllUSer&quot;)
+    public void calculateRewardOfAllUSer() {
+<span class="fc" id="L79">        logger.info(&quot;calculateRewardOfAllUSer()&quot;);</span>
+
+<span class="fc" id="L81">        rewardServiceInterface.calculateRewardOfAllUSer();</span>
+<span class="fc" id="L82">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

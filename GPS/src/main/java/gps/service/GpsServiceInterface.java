@@ -47,4 +47,6 @@ public interface GpsServiceInterface {
      * @return The Attraction found
      */
     public List<UserNearestAttraction> getNearByAttractions(String userName);
+
+    public void calculateAllUSerLocation();
 }

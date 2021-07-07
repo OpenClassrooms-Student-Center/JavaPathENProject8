@@ -1,67 +1,58 @@
 package performance;
 
 import gps.Application;
+import gps.model.User;
+import gps.proxy.RewardProxy;
+import gps.proxy.UserProxy;
+import gps.service.GpsService;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes= Application.class)
+@SpringBootTest(classes = Application.class)
 public class GpsControllerPerformance {
 
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+    private UserProxy mockedUserProxy = Mockito.mock(UserProxy.class);
 
-    private MockMvc mockMvc;
-    private MvcResult mvcResult;
-
-    @Before
-    public void beforeEach() {
-
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-    }
+    private RewardProxy mockedRewardProxy = Mockito.mock(RewardProxy.class);
 
     @Test
-    public void highVolumeTrackLocation() throws Exception {
+    public void highVolumeTrackLocation() {
 
-        int userNumber = 1000;
-        int goodResultCount = 0;
-        String userName = "userNameTest";
+        int userNumber = 100000;
         StopWatch stopWatch = new StopWatch();
+        GpsService gpsService = new GpsService(mockedUserProxy , mockedRewardProxy);
 
-        stopWatch.start();
+        List<User> userList = new ArrayList<>();
 
         for (int i = 1; i <= userNumber; i++) {
 
-            mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getLocation")
-                    .param("userName", userName)).andReturn();
+            User user = new User(UUID.randomUUID(), ("userNameTest " + i), ("phoneNumberTest " + i), ("emailAddressTest " + i));
 
-            if (mvcResult.getResponse().getStatus() == 200) {
+            userList.add(user);
 
-                goodResultCount++;
-            }
-
-            System.out.println("Getting location performed for the user " + i + "\n");
+            System.out.println("User " + i + " added to the list");
         }
+
+        Mockito.when(mockedUserProxy.getAllUser()).thenReturn(userList);
+
+        stopWatch.start();
+
+        gpsService.calculateAllUSerLocation();
 
         stopWatch.stop();
 
         System.out.println("highVolumeTrackLocation: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
         Assert.assertTrue(TimeUnit.MINUTES.toSeconds(15) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
-
-        System.out.println("highVolumeTrackLocation: Good Result Counted: " + goodResultCount + "\n");
-        Assert.assertEquals(goodResultCount, userNumber);
     }
 }

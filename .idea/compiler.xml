@@ -10,6 +10,9 @@
       <module name="NewTourGuide" target="1.8" />
       <module name="NewTourGuide.main" target="1.8" />
       <module name="NewTourGuide.test" target="1.8" />
+      <module name="TourGuide" target="1.8" />
+      <module name="TourGuide.main" target="1.8" />
+      <module name="TourGuide.test" target="1.8" />
       <module name="untitled" target="12" />
       <module name="untitled.main" target="12" />
       <module name="untitled.test" target="12" />

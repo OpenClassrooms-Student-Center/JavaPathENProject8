@@ -105,4 +105,11 @@ public class GpsController {
 
         return objectMapper.writeValueAsString(gpsServiceInterface.getNearByAttractions(userName));
     }
+
+    @GetMapping("/calculateAllUSerLocation")
+    public void calculateAllUSerLocation() {
+        logger.info("calculateAllUSerLocation()");
+
+        gpsServiceInterface.calculateAllUSerLocation();
+    }
 }

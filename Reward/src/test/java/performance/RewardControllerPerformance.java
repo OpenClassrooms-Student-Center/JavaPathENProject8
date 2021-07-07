@@ -23,13 +23,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes= Application.class)
+@SpringBootTest(classes = Application.class)
 public class RewardControllerPerformance {
 
     private UserProxy mockedUserProxy = Mockito.mock(UserProxy.class);
@@ -39,46 +36,7 @@ public class RewardControllerPerformance {
     private GpsProxy gpsProxy;
 
     @Test
-    @Ignore
-    public void highVolumeTrackLocation2() {
-
-        int userNumber = 1000;
-        StopWatch stopWatch = new StopWatch();
-        RewardService rewardService = new RewardService(mockedUserProxy , mockedGpsProxy);
-        User user = new User(UUID.randomUUID(), ("userNameTest"), "phoneNumberTest", "emailAddressTest");
-
-        List<VisitedLocation> visitedLocationList = new ArrayList<>();
-        VisitedLocation visitedLocation = new VisitedLocation(user.getUserId(), new Location(33.817595D, -117.922008D), new Date());
-
-        List<UserReward> userRewardList = new ArrayList<>();
-        UserReward userReward = new UserReward(visitedLocation, gpsProxy.getAllAttraction().get(1), 10);
-
-        visitedLocationList.add(visitedLocation);
-        userRewardList.add(userReward);
-
-        user.setVisitedLocations(visitedLocationList);
-        user.setUserRewards(userRewardList);
-
-        Mockito.when(mockedUserProxy.getUser("userNameTest")).thenReturn(user);
-        Mockito.when(mockedGpsProxy.getAllAttraction()).thenReturn(gpsProxy.getAllAttraction());
-
-        stopWatch.start();
-
-        for (int i = 0; i <= userNumber; i++) {
-
-            rewardService.calculateRewards("userNameTest");
-
-            System.out.println("Calculate Rewards performed for the user " + i );
-        }
-
-        stopWatch.stop();
-
-        System.out.println("highVolumeTrackLocation: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
-        Assert.assertTrue(TimeUnit.MINUTES.toSeconds(20) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
-    }
-
-    @Test
-    public void highVolumeTrackLocation3() {
+    public void highVolumeTrackLocation() {
 
         int userNumber = 100000;
         StopWatch stopWatch = new StopWatch();

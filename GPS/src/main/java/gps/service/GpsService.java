@@ -14,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class allows to interact with a GpsUtil
@@ -31,6 +35,8 @@ public class GpsService implements GpsServiceInterface {
     private RewardProxy rewardProxy;
 
     private GpsUtil gpsUtil = new GpsUtil();
+
+    private ExecutorService executorService = Executors.newFixedThreadPool(10000);
 
     /**
      * Creates a new GpsService
@@ -169,5 +175,43 @@ public class GpsService implements GpsServiceInterface {
         }
 
         return userNearestAttractionList;
+    }
+
+    @Override
+    public void calculateAllUSerLocation() {
+        logger.info("calculateAllUSerLocation()");
+
+        List<User> userList = userProxy.getAllUser();
+
+        for (User u : userList) {
+
+            CompletableFuture.supplyAsync(() -> {
+
+                return gpsUtil.getUserLocation(u.getUserId());
+
+            }, executorService).thenAccept(visitedLocation -> {
+
+                userProxy.addToVisitedLocations(u.getUserName(), visitedLocation);
+
+                System.out.println("Visited location added to the user : " + u.getUserName());
+
+            });
+        }
+
+        executorService.shutdown();
+
+        try {
+
+            if (!executorService.awaitTermination(15, TimeUnit.MINUTES)) {
+
+                executorService.shutdownNow();
+            }
+
+        } catch (InterruptedException ex) {
+
+            executorService.shutdownNow();
+
+            Thread.currentThread().interrupt();
+        }
     }
 }

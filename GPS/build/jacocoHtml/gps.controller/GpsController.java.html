@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GpsController {
 
-<span class="fc" id="L20">    private ObjectMapper objectMapper = new ObjectMapper();</span>
+<span class="pc" id="L20">    private ObjectMapper objectMapper = new ObjectMapper();</span>
 
-<span class="fc" id="L22">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
+<span class="pc" id="L22">    private Logger logger = LogManager.getLogger(getClass().getSimpleName());</span>
 
     @Autowired
     private GpsServiceInterface gpsServiceInterface;
@@ -40,11 +40,11 @@ public class GpsController {
      * Creates a new GpsController with the specified GpsServiceInterface
      * @param gpsServiceInterface : service that this controller will use
      */
-<span class="fc" id="L43">    public GpsController(GpsServiceInterface gpsServiceInterface) {</span>
-<span class="fc" id="L44">        logger.info(&quot;GpsController(&quot; + gpsServiceInterface + &quot;)&quot;);</span>
+<span class="nc" id="L43">    public GpsController(GpsServiceInterface gpsServiceInterface) {</span>
+<span class="nc" id="L44">        logger.info(&quot;GpsController(&quot; + gpsServiceInterface + &quot;)&quot;);</span>
 
-<span class="fc" id="L46">        this.gpsServiceInterface = gpsServiceInterface;</span>
-<span class="fc" id="L47">    }</span>
+<span class="nc" id="L46">        this.gpsServiceInterface = gpsServiceInterface;</span>
+<span class="nc" id="L47">    }</span>
 
     /**
      * Intercepts the user location getting request
@@ -53,9 +53,9 @@ public class GpsController {
      */
     @GetMapping(&quot;/getLocation&quot;)
     public String getLocation(@RequestParam String userName) throws JsonProcessingException {
-<span class="fc" id="L56">        logger.info(&quot;getLocation(&quot; + userName + &quot;)&quot;);</span>
+<span class="nc" id="L56">        logger.info(&quot;getLocation(&quot; + userName + &quot;)&quot;);</span>
 
-<span class="fc" id="L58">        return objectMapper.writeValueAsString(gpsServiceInterface.getUserLocation(userName));</span>
+<span class="nc" id="L58">        return objectMapper.writeValueAsString(gpsServiceInterface.getUserLocation(userName));</span>
     }
 
     /**
@@ -65,9 +65,9 @@ public class GpsController {
      */
     @GetMapping(&quot;/getAttraction&quot;)
     public String getAttraction(@RequestParam String attractionName) throws JsonProcessingException {
-<span class="fc" id="L68">        logger.info(&quot;getAttraction(&quot; + attractionName + &quot;)&quot;);</span>
+<span class="nc" id="L68">        logger.info(&quot;getAttraction(&quot; + attractionName + &quot;)&quot;);</span>
 
-<span class="fc" id="L70">        return objectMapper.writeValueAsString(gpsServiceInterface.getAttraction(attractionName));</span>
+<span class="nc" id="L70">        return objectMapper.writeValueAsString(gpsServiceInterface.getAttraction(attractionName));</span>
     }
 
     /**
@@ -76,9 +76,9 @@ public class GpsController {
      */
     @GetMapping(&quot;/getAllAttraction&quot;)
     public String getAllAttraction() throws JsonProcessingException {
-<span class="fc" id="L79">        logger.info(&quot;getAllAttraction()&quot;);</span>
+<span class="nc" id="L79">        logger.info(&quot;getAllAttraction()&quot;);</span>
 
-<span class="fc" id="L81">        return objectMapper.writeValueAsString(gpsServiceInterface.getAllAttraction());</span>
+<span class="nc" id="L81">        return objectMapper.writeValueAsString(gpsServiceInterface.getAllAttraction());</span>
     }
 
     /**
@@ -87,9 +87,9 @@ public class GpsController {
      */
     @GetMapping(&quot;/getAllCurrentLocations&quot;)
     public String getAllCurrentLocations() throws JsonProcessingException {
-<span class="fc" id="L90">        logger.info(&quot;getAllCurrentLocations()&quot;);</span>
+<span class="nc" id="L90">        logger.info(&quot;getAllCurrentLocations()&quot;);</span>
 
-<span class="fc" id="L92">        return objectMapper.writeValueAsString(gpsServiceInterface.getAllCurrentLocations());</span>
+<span class="nc" id="L92">        return objectMapper.writeValueAsString(gpsServiceInterface.getAllCurrentLocations());</span>
     }
 
     /**
@@ -99,11 +99,18 @@ public class GpsController {
      */
     @GetMapping(&quot;/getNearbyAttractions&quot;)
     public String getNearbyAttractions(@RequestParam String userName) throws JsonProcessingException {
-<span class="fc" id="L102">        logger.info(&quot;getNearbyAttractions(&quot; + userName + &quot;)&quot;);</span>
+<span class="nc" id="L102">        logger.info(&quot;getNearbyAttractions(&quot; + userName + &quot;)&quot;);</span>
 
 <span class="nc" id="L104">        gpsServiceInterface.getUserLocation(userName);</span>
 
 <span class="nc" id="L106">        return objectMapper.writeValueAsString(gpsServiceInterface.getNearByAttractions(userName));</span>
     }
+
+    @GetMapping(&quot;/calculateAllUSerLocation&quot;)
+    public void calculateAllUSerLocation() {
+<span class="nc" id="L111">        logger.info(&quot;calculateAllUSerLocation()&quot;);</span>
+
+<span class="nc" id="L113">        gpsServiceInterface.calculateAllUSerLocation();</span>
+<span class="nc" id="L114">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

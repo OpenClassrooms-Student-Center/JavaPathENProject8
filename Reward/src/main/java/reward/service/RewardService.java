@@ -112,6 +112,7 @@ public class RewardService implements RewardServiceInterface {
 
     @Override
     public void calculateRewardOfAllUSer() {
+        logger.info("calculateRewardOfAllUSer()");
 
         List<User> userList = userProxy.getAllUser();
         List<Attraction> attractionList = gpsProxy.getAllAttraction();
@@ -159,7 +160,7 @@ public class RewardService implements RewardServiceInterface {
 
         try {
 
-            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) {
+            if (!executorService.awaitTermination(20, TimeUnit.MINUTES)) {
 
                 executorService.shutdownNow();
             }
