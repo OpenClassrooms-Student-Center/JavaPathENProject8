@@ -15,7 +15,7 @@ public interface GpsProxy {
 
     /**
      * Send the attraction getting request
-     * @param attractionName : Name of the attraction to found
+     * @param attractionName : Name of the attraction to find
      * @return The Attraction found
      */
     @GetMapping(value = "/getAttraction", produces = "application/json")
@@ -25,6 +25,6 @@ public interface GpsProxy {
      * Send the attraction list getting request
      * @return The Attraction list
      */
-    @GetMapping(value = "/getAllAttraction", produces = "application/json")
+    @GetMapping(value = "/getAttractionList", produces = "application/json")
     List<Attraction> getAllAttraction();
 }

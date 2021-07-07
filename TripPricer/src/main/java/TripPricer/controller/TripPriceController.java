@@ -2,12 +2,10 @@ package TripPricer.controller;
 
 import TripPricer.service.TripPricerService;
 import TripPricer.service.TripPricerServiceInterface;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class TripPriceController {
-
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
@@ -48,13 +44,12 @@ public class TripPriceController {
 
     /**
      * Intercepts the provider list getting request
-     * @param userName : Name of the User to use for creating the Provider list
-     * @return The Provider list (JSon)
+     * @param userName : Name of the user whose you want to calculate the trip deals
      */
-    @GetMapping("/calculateTripDeals")
-    public String calculateTripDeals(@RequestParam String userName) throws JsonProcessingException {
+    @PutMapping("/calculateTripDeals")
+    public void calculateTripDeals(@RequestParam String userName) {
         logger.info("calculateTripDeals(" + userName + ")");
 
-        return objectMapper.writeValueAsString(tripPricerServiceInterface.calculateTripDeals(userName));
+        tripPricerServiceInterface.calculateTripDeals(userName);
     }
 }

@@ -5,10 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reward.service.RewardService;
 import reward.service.RewardServiceInterface;
 
@@ -63,21 +60,23 @@ public class RewardController {
     }
 
     /**
-     * Intercepts the rewards calculating request
-     * @param userName : Name of the User to use for creating the UserReward list
-     * @return The UserReward list (JSon)
+     * Intercepts the user rewards calculating request
+     * @param userName : Name of the user whose you want to calculate reward list
      */
-    @GetMapping("/calculateRewards")
-    public String calculateRewards(@RequestParam String userName) throws JsonProcessingException {
+    @PutMapping("/calculateRewards")
+    public void calculateRewards(@RequestParam String userName) {
         logger.info("calculateRewards(" + userName + ")");
 
-        return objectMapper.writeValueAsString(rewardServiceInterface.calculateRewards(userName));
+        rewardServiceInterface.calculateRewards(userName);
     }
 
-    @GetMapping("/calculateRewardOfAllUSer")
-    public void calculateRewardOfAllUSer() {
-        logger.info("calculateRewardOfAllUSer()");
+    /**
+     * Intercepts the users rewards calculating request
+     */
+    @PutMapping("/calculateRewardsOfAllUSer")
+    public void calculateRewardsOfAllUSer() {
+        logger.info("calculateRewardsOfAllUSer()");
 
-        rewardServiceInterface.calculateRewardOfAllUSer();
+        rewardServiceInterface.calculateRewardsOfAllUSer();
     }
 }

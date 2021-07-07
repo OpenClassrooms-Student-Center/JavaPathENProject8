@@ -1,11 +1,9 @@
 package performance;
 
-import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -70,7 +68,7 @@ public class RewardControllerPerformance {
 
         stopWatch.start();
 
-        rewardService.calculateRewardOfAllUSer();
+        rewardService.calculateRewardsOfAllUSer();
 
         stopWatch.stop();
 

@@ -2,18 +2,11 @@ package unit.controller;
 
 import TripPricer.controller.TripPriceController;
 import TripPricer.service.TripPricerServiceInterface;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import tripPricer.Provider;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @SpringBootTest
 public class TripPricerControllerTest {
@@ -31,7 +24,7 @@ public class TripPricerControllerTest {
     }
 
     @Test
-    public void calculateTripDeals() throws JsonProcessingException {
+    public void calculateTripDeals() {
 
         //GIVEN
         String userName = "userName";

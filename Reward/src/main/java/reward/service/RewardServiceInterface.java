@@ -1,27 +1,24 @@
 package reward.service;
 
-import org.springframework.web.bind.annotation.RequestParam;
-import reward.model.UserReward;
-
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public interface RewardServiceInterface {
 
     /**
      * Get the reward points amount of an attraction
-     * @param attractionId : Id of the attraction
-     * @param userId : Id of the User to found
-     * @return The User that was found
+     * @param attractionId : Id of the attraction to find
+     * @param userId : Id of the user to find
+     * @return The amount of point of the attraction
      */
     public int getRewardPoints(UUID attractionId, UUID userId);
 
     /**
-     * Get the UserReward list
-     * @return The UserReward list
+     * Calculate the rewards list of an user
      */
-    public List<UserReward> calculateRewards(String userName);
+    public void calculateRewards(String userName);
 
-    public void calculateRewardOfAllUSer();
+    /**
+     * Calculate the rewards list of all users
+     */
+    public void calculateRewardsOfAllUSer();
 }

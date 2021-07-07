@@ -61,7 +61,7 @@ public class RewardControllerIT {
         String userName = "userNameTest";
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/calculateRewards")
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/calculateRewards")
                 .param("userName", userName)).andReturn();
 
         // THEN
@@ -69,13 +69,13 @@ public class RewardControllerIT {
     }
 
     @Test
-    @Order(2)
-    public void calculateRewardOfAllUSer() throws Exception {
+    @Order(3)
+    public void calculateRewardsOfAllUSer() throws Exception {
 
         // GIVEN
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/calculateRewardOfAllUSer")).andReturn();
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/calculateRewardsOfAllUSer")).andReturn();
 
         // THEN
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());

@@ -40,4 +40,30 @@ public class RewardControllerTest {
         //THEN
         Assert.assertTrue(rewardController.getRewardPoints(attractionId, userId).equals(objectMapper.writeValueAsString(10)));
     }
+
+    @Test
+    public void calculateRewards() {
+
+        //GIVEN
+        String userName = "userName";
+
+        //WHEN
+        rewardController.calculateRewards(userName);
+
+        //THEN
+        Mockito.verify(rewardServiceInterface, Mockito.times(1)).calculateRewards(userName);
+    }
+
+    @Test
+    public void calculateRewardsOfAllUSer() {
+
+        //GIVEN
+        String userName = "userName";
+
+        //WHEN
+        rewardController.calculateRewardsOfAllUSer();
+
+        //THEN
+        Mockito.verify(rewardServiceInterface, Mockito.times(1)).calculateRewardsOfAllUSer();
+    }
 }

@@ -42,7 +42,7 @@ public class TripPricerControllerIT {
         String userName = "userNameTest";
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/calculateTripDeals")
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/calculateTripDeals")
                 .param("userName", userName)).andReturn();
 
         // THEN

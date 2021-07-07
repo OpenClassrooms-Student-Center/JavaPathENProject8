@@ -17,36 +17,39 @@ public interface GpsServiceInterface {
 
     /**
      * Get an user VisitedLocation
-     * @param userName : Name of the User to use for getting his location
-     * @return The VisitedLocation of the User
+     * @param userName : Name of the user whose you want to get the VisitedLocation
+     * @return The VisitedLocation of the user
      */
     public VisitedLocation getUserLocation(String userName);
 
     /**
      * Get all users VisitedLocation
-     * @return The Map of all user id/location
+     * @return The Map of all user UUID/VisitedLocation
      */
     public Map<UUID, VisitedLocation> getAllCurrentLocations();
 
     /**
      * Get an Attraction
-     * @param attractionName : Name of the Attraction to found
+     * @param attractionName : Name of the Attraction to find
      * @return The Attraction found
      */
     public Attraction getAttraction(String attractionName);
 
     /**
-     * Get all Attraction
+     * Get all Attractions
      * @return The List of all Attraction
      */
-    public List<Attraction> getAllAttraction();
+    public List<Attraction> getAttractionList();
 
     /**
-     * Get the list of the nearest Attraction
-     * @param userName : Name of the User to use for getting the nearest Attraction
-     * @return The Attraction found
+     * Get the list of the nearest Attractions
+     * @param userName : Name of the user whose you want to get the nearest Attraction
+     * @return The List of UserNearestAttraction
      */
     public List<UserNearestAttraction> getNearByAttractions(String userName);
 
+    /**
+     * Calculate the VisitedLocation of all Users
+     */
     public void calculateAllUSerLocation();
 }

@@ -17,8 +17,8 @@ public interface UserRepositoryInterface {
 
     /**
      * Get an User in the User list
-     * @param username : Name of the User to select in the User list
-     * @return The User that was found by his username
+     * @param username : Name of the User to find in the User list
+     * @return The User that was found
      */
     public User getUser(String username);
 

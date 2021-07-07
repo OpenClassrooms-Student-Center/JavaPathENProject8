@@ -3,7 +3,7 @@ package gps.proxy;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.UUID;
@@ -26,9 +26,8 @@ public interface RewardProxy {
 
     /**
      * Send the rewards calculating request
-     * @param userName : Name of the User to use for creating the UserReward list
-     * @return The UserReward list
+     * @param userName : The name of the user whose you want to calculate the UserReward list
      */
-    @GetMapping(value = "/calculateRewards", produces = "application/json")
+    @PutMapping(value = "/calculateRewards", produces = "application/json")
     public void calculateRewards(@RequestParam String userName);
 }

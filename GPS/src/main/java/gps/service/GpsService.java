@@ -27,16 +27,16 @@ public class GpsService implements GpsServiceInterface {
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
+    private ExecutorService executorService = Executors.newFixedThreadPool(10000);
+
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
+
+    private GpsUtil gpsUtil = new GpsUtil();
 
     @Autowired
     private UserProxy userProxy;
     @Autowired
     private RewardProxy rewardProxy;
-
-    private GpsUtil gpsUtil = new GpsUtil();
-
-    private ExecutorService executorService = Executors.newFixedThreadPool(10000);
 
     /**
      * Creates a new GpsService
@@ -82,31 +82,6 @@ public class GpsService implements GpsServiceInterface {
         }
 
         return visitedLocation;
-    }
-
-    @Override
-    public Attraction getAttraction(String attractionName) {
-        logger.info("getAttraction(" + attractionName + ")");
-
-        Attraction attraction = null;
-
-        for (Attraction a : gpsUtil.getAttractions()) {
-
-            if (a.getAttractionName().equals(attractionName)) {
-
-                attraction = a;
-                break;
-            }
-        }
-
-        return attraction;
-    }
-
-    @Override
-    public List<Attraction> getAllAttraction() {
-        logger.info("getAllAttraction()");
-
-        return gpsUtil.getAttractions();
     }
 
     @Override
@@ -175,6 +150,31 @@ public class GpsService implements GpsServiceInterface {
         }
 
         return userNearestAttractionList;
+    }
+
+    @Override
+    public Attraction getAttraction(String attractionName) {
+        logger.info("getAttraction(" + attractionName + ")");
+
+        Attraction attraction = null;
+
+        for (Attraction a : gpsUtil.getAttractions()) {
+
+            if (a.getAttractionName().equals(attractionName)) {
+
+                attraction = a;
+                break;
+            }
+        }
+
+        return attraction;
+    }
+
+    @Override
+    public List<Attraction> getAttractionList() {
+        logger.info("getAttractionList()");
+
+        return gpsUtil.getAttractions();
     }
 
     @Override

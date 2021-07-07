@@ -28,7 +28,6 @@ import user.model.UserReward;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @RunWith(SpringRunner.class)
@@ -76,7 +75,7 @@ public class UserControllerIT {
         VisitedLocation visitedLocation = new VisitedLocation(UUID.randomUUID(), location, new Date());
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/addToVisitedLocations")
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/addToVisitedLocations")
                 .param("userName", userName)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(visitedLocation))).andReturn();
@@ -97,7 +96,7 @@ public class UserControllerIT {
         UserReward userReward = new UserReward(visitedLocation, attraction, 10);
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/addUserReward")
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/addUserReward")
                 .param("userName", userName)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userReward))).andReturn();
@@ -115,7 +114,7 @@ public class UserControllerIT {
         UserPreferences userPreferences = new UserPreferences(1, 2, 3 ,4 ,5);
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/setUserPreferences")
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/setUserPreferences")
                 .param("userName", userName)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(userPreferences))).andReturn();
@@ -136,7 +135,7 @@ public class UserControllerIT {
         // WHEN
         providerList.add(provider);
 
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/setTripDeals")
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/setTripDeals")
                 .param("userName", userName)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(providerList))).andReturn();

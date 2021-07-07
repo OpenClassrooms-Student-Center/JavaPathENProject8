@@ -10,7 +10,6 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -37,13 +36,13 @@ public class GpsControllerIT {
 
     @Test
     @Order(1)
-    public void getLocation() throws Exception {
+    public void getUserLocation() throws Exception {
 
         // GIVEN
         String userName = "userNameTest";
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getLocation")
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getUserLocation")
                 .param("userName", userName)).andReturn();
 
         // THEN
@@ -52,6 +51,34 @@ public class GpsControllerIT {
 
     @Test
     @Order(2)
+    public void getAllCurrentLocations() throws Exception {
+
+        // GIVEN
+
+        // WHEN
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getAllCurrentLocations")).andReturn();
+
+        // THEN
+        Assert.assertEquals(200, mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    @Order(3)
+    public void getNearbyAttractions() throws Exception {
+
+        // GIVEN
+        String userName = "userNameTest";
+
+        // WHEN
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getNearbyAttractions")
+                .param("userName", userName)).andReturn();
+
+        // THEN
+        Assert.assertEquals(200, mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    @Order(4)
     public void getAttraction() throws Exception {
 
         // GIVEN
@@ -66,41 +93,26 @@ public class GpsControllerIT {
     }
 
     @Test
-    @Order(3)
-    public void getAllAttraction() throws Exception {
-
-        // GIVEN
-
-        // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getAllAttraction")).andReturn();
-
-        // THEN
-        Assert.assertEquals(200, mvcResult.getResponse().getStatus());
-    }
-
-    @Test
-    @Order(4)
-    public void getAllCurrentLocations() throws Exception {
-
-        // GIVEN
-
-        // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getAllCurrentLocations")).andReturn();
-
-        // THEN
-        Assert.assertEquals(200, mvcResult.getResponse().getStatus());
-    }
-
-    @Test
     @Order(5)
-    public void getNearbyAttractions() throws Exception {
+    public void getAttractionList() throws Exception {
 
         // GIVEN
-        String userName = "userNameTest";
 
         // WHEN
-        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getNearbyAttractions")
-                .param("userName", userName)).andReturn();
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/getAttractionList")).andReturn();
+
+        // THEN
+        Assert.assertEquals(200, mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    @Order(6)
+    public void calculateAllUSerLocation() throws Exception {
+
+        // GIVEN
+
+        // WHEN
+        mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/calculateAllUSerLocation")).andReturn();
 
         // THEN
         Assert.assertEquals(200, mvcResult.getResponse().getStatus());

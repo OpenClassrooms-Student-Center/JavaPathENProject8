@@ -1,18 +1,13 @@
 package TripPricer.service;
 
-import tripPricer.Provider;
-
-import java.util.List;
-
 /**
  * This interface allows to implement trip pricer service methods
  */
 public interface TripPricerServiceInterface {
 
     /**
-     * Get the Provider list
-     * @param userName : Name of the User to found
-     * @return The Provider list
+     * Calculate the trip deals of an user
+     * @param userName : Name of the User to find
      */
-    public List<Provider> calculateTripDeals(String userName);
+    public void calculateTripDeals(String userName);
 }

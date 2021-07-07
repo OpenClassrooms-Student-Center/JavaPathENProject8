@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,42 +49,19 @@ public class GpsController {
 
     /**
      * Intercepts the user location getting request
-     * @param userName : Name of the User to use for find his location
-     * @return The VisitedLocation of the User (JSon)
+     * @param userName : Name of the user you want to locate
+     * @return The VisitedLocation of the user (JSon)
      */
-    @GetMapping("/getLocation")
-    public String getLocation(@RequestParam String userName) throws JsonProcessingException {
-        logger.info("getLocation(" + userName + ")");
+    @GetMapping("/getUserLocation")
+    public String getUserLocation(@RequestParam String userName) throws JsonProcessingException {
+        logger.info("getUserLocation(" + userName + ")");
 
         return objectMapper.writeValueAsString(gpsServiceInterface.getUserLocation(userName));
     }
 
     /**
-     * Intercepts the attraction getting request
-     * @param attractionName : Name of the Attraction to found
-     * @return The Attraction found (JSon)
-     */
-    @GetMapping("/getAttraction")
-    public String getAttraction(@RequestParam String attractionName) throws JsonProcessingException {
-        logger.info("getAttraction(" + attractionName + ")");
-
-        return objectMapper.writeValueAsString(gpsServiceInterface.getAttraction(attractionName));
-    }
-
-    /**
-     * Intercepts the attraction list getting request
-     * @return The all Attraction (JSon)
-     */
-    @GetMapping("/getAllAttraction")
-    public String getAllAttraction() throws JsonProcessingException {
-        logger.info("getAllAttraction()");
-
-        return objectMapper.writeValueAsString(gpsServiceInterface.getAllAttraction());
-    }
-
-    /**
      * Intercepts the user location list getting request
-     * @return The locations of all users (JSon)
+     * @return The visited location of all users sorted by their ID (JSon)
      */
     @GetMapping("/getAllCurrentLocations")
     public String getAllCurrentLocations() throws JsonProcessingException {
@@ -94,7 +72,7 @@ public class GpsController {
 
     /**
      * Intercepts the nearest attraction getting request
-     * @param userName : Name of the User to use for find his location
+     * @param userName : Name of the user for which you want to know the nearest attractions
      * @return The nearest attraction list (JSon)
      */
     @GetMapping("/getNearbyAttractions")
@@ -106,7 +84,33 @@ public class GpsController {
         return objectMapper.writeValueAsString(gpsServiceInterface.getNearByAttractions(userName));
     }
 
-    @GetMapping("/calculateAllUSerLocation")
+    /**
+     * Intercepts the attraction getting request
+     * @param attractionName : Name of the Attraction to find
+     * @return The Attraction found (JSon)
+     */
+    @GetMapping("/getAttraction")
+    public String getAttraction(@RequestParam String attractionName) throws JsonProcessingException {
+        logger.info("getAttraction(" + attractionName + ")");
+
+        return objectMapper.writeValueAsString(gpsServiceInterface.getAttraction(attractionName));
+    }
+
+    /**
+     * Intercepts the attraction list getting request
+     * @return The list of all Attraction (JSon)
+     */
+    @GetMapping("/getAttractionList")
+    public String getAttractionList() throws JsonProcessingException {
+        logger.info("getAttractionList()");
+
+        return objectMapper.writeValueAsString(gpsServiceInterface.getAttractionList());
+    }
+
+    /**
+     * Intercepts the users locations calculating request
+     */
+    @PutMapping("/calculateAllUSerLocation")
     public void calculateAllUSerLocation() {
         logger.info("calculateAllUSerLocation()");
 

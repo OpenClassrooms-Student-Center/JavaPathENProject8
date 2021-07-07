@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,10 +21,10 @@ public class TripPricerService implements TripPricerServiceInterface {
 
     private static final String tripPricerApiKey = "test-server-api-key";
 
+    private TripPricer tripPricer = new TripPricer();
+
     @Autowired
     private UserProxy userProxy;
-
-    private TripPricer tripPricer = new TripPricer();
 
     /**
      * Creates a new TripPricerService
@@ -45,10 +44,10 @@ public class TripPricerService implements TripPricerServiceInterface {
     }
 
     @Override
-    public List<Provider> calculateTripDeals(String userName) {
+    public void calculateTripDeals(String userName) {
         logger.info("calculateTripDeals(" + userName + ")");
 
-        List<Provider> providerList = new ArrayList<Provider>();
+        List<Provider> providerList;
 
         User user = userProxy.getUser(userName);
 
@@ -62,7 +61,5 @@ public class TripPricerService implements TripPricerServiceInterface {
 
             userProxy.setTripDeals(userName, providerList);
         }
-
-        return providerList;
     }
 }

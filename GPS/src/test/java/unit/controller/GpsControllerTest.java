@@ -41,7 +41,25 @@ public class GpsControllerTest {
         Mockito.when(gpsServiceInterface.getUserLocation(userName)).thenReturn(visitedLocation);
 
         //THEN
-        Assert.assertEquals(gpsController.getLocation(userName), objectMapper.writeValueAsString(visitedLocation));
+        Assert.assertEquals(gpsController.getUserLocation(userName), objectMapper.writeValueAsString(visitedLocation));
+    }
+
+    @Test
+    public void getAllCurrentLocations() throws JsonProcessingException {
+
+        //GIVEN
+        String userName = "userNameTest";
+        VisitedLocation visitedLocation = new VisitedLocation(UUID.randomUUID(), new Location(0,0), new Date());
+
+        Map<UUID, VisitedLocation> visitedLocationList = new HashMap<>();
+
+        //WHEN
+        Mockito.when(gpsServiceInterface.getAllCurrentLocations()).thenReturn(visitedLocationList);
+
+        visitedLocationList.put(visitedLocation.getUserId(), visitedLocation);
+
+        //THEN
+        Assert.assertEquals(gpsController.getAllCurrentLocations(), objectMapper.writeValueAsString(gpsServiceInterface.getAllCurrentLocations()));
     }
 
     @Test
@@ -66,28 +84,22 @@ public class GpsControllerTest {
         List<Attraction> attractionList = new ArrayList<>();
 
         //WHEN
-        Mockito.when(gpsServiceInterface.getAllAttraction()).thenReturn(attractionList);
+        Mockito.when(gpsServiceInterface.getAttractionList()).thenReturn(attractionList);
         attractionList.add(attraction);
 
         //THEN
-        Assert.assertEquals(gpsController.getAllAttraction(), objectMapper.writeValueAsString(attractionList));
+        Assert.assertEquals(gpsController.getAttractionList(), objectMapper.writeValueAsString(attractionList));
     }
 
     @Test
-    public void getAllCurrentLocations() throws JsonProcessingException {
+    public void calculateAllUSerLocation() {
 
         //GIVEN
-        String userName = "userNameTest";
-        VisitedLocation visitedLocation = new VisitedLocation(UUID.randomUUID(), new Location(0,0), new Date());
-
-        Map<UUID, VisitedLocation> visitedLocationList = new HashMap<>();
 
         //WHEN
-        Mockito.when(gpsServiceInterface.getAllCurrentLocations()).thenReturn(visitedLocationList);
-
-        visitedLocationList.put(visitedLocation.getUserId(), visitedLocation);
+        gpsController.calculateAllUSerLocation();
 
         //THEN
-        Assert.assertEquals(gpsController.getAllCurrentLocations(), objectMapper.writeValueAsString(gpsServiceInterface.getAllCurrentLocations()));
+        Mockito.verify(gpsServiceInterface, Mockito.times(1)).calculateAllUSerLocation();
     }
 }

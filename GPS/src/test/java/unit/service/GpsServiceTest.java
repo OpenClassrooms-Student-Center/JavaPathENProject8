@@ -71,7 +71,7 @@ public class GpsServiceTest {
         GpsUtil gpsUtil = new GpsUtil();
 
         Attraction attraction = gpsUtil.getAttractions().get(0);
-        Attraction attractionReturned = gpsService.getAllAttraction().get(0);
+        Attraction attractionReturned = gpsService.getAttractionList().get(0);
 
         //WHEN
 
@@ -101,5 +101,24 @@ public class GpsServiceTest {
 
         //THEN
         Assert.assertSame(gpsService.getAllCurrentLocations().get(userId), visitedLocation);
+    }
+
+    @Test
+    public void calculateAllUSerLocation() {
+
+        //GIVEN
+        String username = "usernameTest";
+        User user = Mockito.mock(User.class);
+        List<User> userList = new ArrayList<>();
+
+        //WHEN
+        Mockito.when(userProxy.getAllUser()).thenReturn(userList);
+        Mockito.when(user.getUserName()).thenReturn(username);
+        userList.add(user);
+
+        gpsService.calculateAllUSerLocation();
+
+        //THEN
+        Mockito.verify(userProxy, Mockito.times(1)).addToVisitedLocations(Mockito.any(String.class), Mockito.any(VisitedLocation.class));
     }
 }
