@@ -36,7 +36,7 @@ public class RewardControllerPerformance {
     @Test
     public void highVolumeTrackLocation() {
 
-        int userNumber = 100000;
+        int userNumber = 100;
         StopWatch stopWatch = new StopWatch();
         RewardService rewardService = new RewardService(mockedUserProxy , mockedGpsProxy);
 

@@ -1,13 +1,0 @@
-|16:22:35.326 [Test worker] INFO RewardController - RewardController(Mock for RewardServiceInterface, hashCode: 1490007022)
-O16:22:35.347 [Test worker] INFO RewardController - calculateRewards(userName)
-|16:22:35.389 [Test worker] INFO RewardController - RewardController(Mock for RewardServiceInterface, hashCode: 1350638323)
-è16:22:35.395 [Test worker] INFO RewardController - getRewardPoints(aed159c7-2d77-4655-98bf-65696d450e0b,1b098143-789f-43ba-9438-872de4aaac5f)
-|16:22:35.518 [Test worker] INFO RewardController - RewardController(Mock for RewardServiceInterface, hashCode: 1106717947)
-P16:22:35.519 [Test worker] INFO RewardController - calculateRewardsOfAllUSer()
-é16:22:35.867 [Test worker] INFO RewardService - RewardService(Mock for UserProxy, hashCode: 683991303,Mock for GpsProxy, hashCode: 55999834)
-P16:22:36.087 [Test worker] INFO RewardService - calculateRewards(usernameTest)
-ê16:22:36.618 [Test worker] INFO RewardService - RewardService(Mock for UserProxy, hashCode: 324048228,Mock for GpsProxy, hashCode: 1356090861)
-å16:22:36.618 [Test worker] INFO RewardService - getRewardPoints(331ac9d2-be5b-47f9-838e-03e10c85f5ea,c1e572b9-bba1-461a-a65a-80409140cd9f)
-ë16:22:37.007 [Test worker] INFO RewardService - RewardService(Mock for UserProxy, hashCode: 1083191641,Mock for GpsProxy, hashCode: 1606720350)
-L16:22:37.010 [Test worker] INFO RewardService - calculateRewardOfAllUSer()
-)Reward added to the user : usernameTest

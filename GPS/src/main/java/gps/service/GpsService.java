@@ -27,7 +27,7 @@ public class GpsService implements GpsServiceInterface {
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-    private ExecutorService executorService = Executors.newFixedThreadPool(10000);
+    private ExecutorService executorService = Executors.newFixedThreadPool(1000);
 
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 

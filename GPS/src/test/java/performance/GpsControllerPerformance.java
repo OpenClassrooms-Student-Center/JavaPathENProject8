@@ -29,7 +29,7 @@ public class GpsControllerPerformance {
     @Test
     public void highVolumeTrackLocation() {
 
-        int userNumber = 100000;
+        int userNumber = 100;
         StopWatch stopWatch = new StopWatch();
         GpsService gpsService = new GpsService(mockedUserProxy , mockedRewardProxy);
 

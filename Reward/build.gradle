@@ -48,12 +48,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.12.3'
 
-    // https://mvnrepository.com/artifact/org.zalando/jackson-datatype-money
-    implementation group: 'org.zalando', name: 'jackson-datatype-money', version: '1.2.2'
-
-    // https://mvnrepository.com/artifact/org.javamoney/moneta
-    implementation group: 'org.javamoney', name: 'moneta', version: '1.4.2', ext: 'pom'
-
     // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
     implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.1'
 
@@ -69,27 +63,51 @@ dependencies {
 
 jacoco {
     toolVersion = "0.8.4"
+    reportsDir = file("$buildDir/jacoco")
+}
+
+test {
+
+    finalizedBy jacocoTestReport
 }
 
 jacocoTestReport {
+
+    dependsOn test
+
+    classDirectories.setFrom(files(classDirectories.files.collect {
+
+        fileTree(dir: "${project.buildDir}/classes/java/main", exclude: [])
+
+    }))
+
     reports {
+
         xml.enabled true
-        csv.enabled false
-        html.destination file("${buildDir}/jacocoHtml")
+        html.enabled true
     }
 }
 
-test.finalizedBy jacocoTestReport
-check.dependsOn jacocoTestCoverageVerification
-
 jacocoTestCoverageVerification {
+
+    classDirectories.setFrom(files(classDirectories.files.collect {
+
+        fileTree(dir: "${project.buildDir}/classes/java/main", exclude: [])
+
+    }))
+
     violationRules {
         rule {
+
             limit {
                 counter = 'LINE'
                 value = 'COVEREDRATIO'
                 minimum = 0.5
             }
         }
+    }
+
+    check {
+        dependsOn jacocoTestCoverageVerification
     }
 }

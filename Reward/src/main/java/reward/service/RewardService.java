@@ -24,7 +24,7 @@ public class RewardService implements RewardServiceInterface {
 
     private Logger logger = LogManager.getLogger(getClass().getSimpleName());
 
-    private ExecutorService executorService = Executors.newFixedThreadPool(10000);
+    private ExecutorService executorService = Executors.newFixedThreadPool(1000);
 
     private RewardCentral rewardCentral = new RewardCentral();
 
