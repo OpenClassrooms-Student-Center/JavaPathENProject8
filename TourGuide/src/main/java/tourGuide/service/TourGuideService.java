@@ -30,13 +30,13 @@ import tripPricer.TripPricer;
 @Service
 public class TourGuideService {
 	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
-	private final GpsUtil gpsUtil;
+	private final GpsUtilService gpsUtil;
 	private final RewardsService rewardsService;
 	private final TripPricer tripPricer = new TripPricer();
 	public final Tracker tracker;
 	boolean testMode = true;
 	
-	public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
+	public TourGuideService(GpsUtilService gpsUtil, RewardsService rewardsService) {
 		this.gpsUtil = gpsUtil;
 		this.rewardsService = rewardsService;
 		
@@ -84,7 +84,12 @@ public class TourGuideService {
 	}
 	
 	public VisitedLocation trackUserLocation(User user) {
-		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
+		Location location = new Location(generateRandomLatitude(), generateRandomLongitude());
+		VisitedLocation visitedLocation = new VisitedLocation(user.getUserId(), location, getRandomTime());
+		try {
+			visitedLocation = gpsUtil.getUserLocation( user.getUserId());
+		} catch (NumberFormatException nfe) {
+		}
 		user.addToVisitedLocations(visitedLocation);
 		rewardsService.calculateRewards(user);
 		return visitedLocation;
@@ -92,13 +97,17 @@ public class TourGuideService {
 
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
 		List<Attraction> nearbyAttractions = new ArrayList<>();
-		for(Attraction attraction : gpsUtil.getAttractions()) {
-			if(rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
+		List<Attraction> nearFiveByAttractions = new ArrayList<>();
+		for (Attraction attraction : gpsUtil.getAttractions()) {
+			if (rewardsService.isAttractionProximity(attraction, visitedLocation.location)) {
 				nearbyAttractions.add(attraction);
+				for (int i = 0; i < 6; i++) {
+					Attraction attractionInProximity = nearbyAttractions.get(i);
+					nearFiveByAttractions.add(attractionInProximity);
+				}
 			}
 		}
-		
-		return nearbyAttractions;
+		return nearFiveByAttractions;
 	}
 	
 	private void addShutDownHook() {
