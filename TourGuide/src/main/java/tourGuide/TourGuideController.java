@@ -53,20 +53,17 @@ public class TourGuideController {
     @RequestMapping("/getNearbyAttractions") 
     public String getNearbyAttractions(@RequestParam String userName) {
         VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
-        Map<String, String> attractionMap= new HashMap<>();
         NearbyAttractionDto nearbyAttraction= new NearbyAttractionDto();
+        List<NearbyAttractionDto> attractionList=new ArrayList<>();
         for(Attraction attraction : tourGuideService.getNearByAttractions(visitedLocation) ) {
             double attractionLatLon=attraction.latitude/attraction.longitude;
             double userLocationLatLon= visitedLocation.location.latitude/visitedLocation.location.longitude;
-            attractionMap.put("Tourist attraction", attraction.attractionName);
-            attractionMap.put("Tourist attractions lat/long", String.valueOf(attractionLatLon));
-            attractionMap.put("User's location lat/long", String.valueOf(userLocationLatLon));
             double distanceUserAttraction= rewardsService.getDistance(attraction, visitedLocation.location);
-            List<UserReward> userRewards= tourGuideService.getUserRewards(getUser(userName));
+            int userRewards= rewardsService.getRewardPoints(attraction, getUser(userName));
             nearbyAttraction= new NearbyAttractionDto(attraction.attractionName, attractionLatLon, userLocationLatLon, distanceUserAttraction, userRewards);
-            attractionMap.put("Tourist attraction", nearbyAttraction.toString());
+            attractionList.add(nearbyAttraction);
         }
-        return JsonStream.serialize(nearbyAttraction);
+        return JsonStream.serialize(attractionList.toString());
     }
     
     @RequestMapping("/getRewards") 
@@ -88,16 +85,16 @@ public class TourGuideController {
 
         List<User> allUsers= tourGuideService.getAllUsers();
         UserLocationDto userLocation= new UserLocationDto();
+        List<UserLocationDto> userLocationDtoList=new ArrayList<>();
         LocationDto location= new LocationDto();
-        List<UserLocationDto> allUsersLocationDto= new ArrayList<>();
         for (User user : allUsers) {
             VisitedLocation visitedLocation= user.getLastVisitedLocation();
-            location= new LocationDto(visitedLocation.location.longitude, visitedLocation.location.latitude);
-            userLocation = new UserLocationDto(user.getUserId(), location);
-            allUsersLocationDto.add(userLocation);
+            location=new LocationDto(visitedLocation.location.longitude ,visitedLocation.location.latitude);
+            userLocation=new UserLocationDto(user.getUserId().toString(), location);
+            userLocationDtoList.add(userLocation);
         }
 
-        return JsonStream.serialize(allUsersLocationDto);
+        return JsonStream.serialize(userLocationDtoList.toString());
     }
     
     @RequestMapping("/getTripDeals")

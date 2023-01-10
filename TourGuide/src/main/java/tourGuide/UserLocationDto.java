@@ -1,33 +1,28 @@
 package tourGuide;
 
+import java.util.Map;
 import java.util.UUID;
 
 public class UserLocationDto {
 	
-	private UUID userId;
+	private String userId;
 	
 	private LocationDto location;
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-
-	public LocationDto getLocation() {
-		return location;
 	}
 
 	public void setLocation(LocationDto location) {
 		this.location = location;
 	}
 
-	public UserLocationDto(UUID userId, LocationDto location) {
-		super();
-		this.userId = userId;
-		this.location = location;
+	public LocationDto getLocation() {
+		return location;
 	}
 
 	public UserLocationDto() {
@@ -35,11 +30,13 @@ public class UserLocationDto {
 		// TODO Auto-generated constructor stub
 	}
 
+	public UserLocationDto(String userId, LocationDto location) {
+		this.userId = userId;
+		this.location = location;
+	}
+
 	@Override
 	public String toString() {
-		return  userId + location.toString();
+		return userId + ":" + location;
 	}
-	
-	
-
 }

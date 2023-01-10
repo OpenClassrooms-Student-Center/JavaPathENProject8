@@ -14,13 +14,13 @@ public class NearbyAttractionDto {
 	
 	private double distanceAttractionUser;
 	
-	private List<UserReward> userRewards;
+	private int userRewards;
 
-	public List<UserReward> getUserRewards() {
+	public int getUserRewards() {
 		return userRewards;
 	}
 
-	public void setUserRewards(List<UserReward> userRewards) {
+	public void setUserRewards(int userRewards) {
 		this.userRewards = userRewards;
 	}
 
@@ -57,7 +57,7 @@ public class NearbyAttractionDto {
 	}
 
 	public NearbyAttractionDto(String attractionName, double attractionLatLon, double userLatLon,
-			double distanceAttractionUser, List<UserReward> userRewards) {
+			double distanceAttractionUser, int userRewards) {
 		super();
 		this.attractionName = attractionName;
 		this.attractionLatLon = attractionLatLon;
@@ -73,11 +73,9 @@ public class NearbyAttractionDto {
 
 	@Override
 	public String toString() {
-		return "[Tourist attraction:" + attractionName + ", Tourist attractions lat/long :" + attractionLatLon
+		return "Tourist attraction:" + attractionName + ", Tourist attractions lat/long :" + attractionLatLon
 				+ ", User's location lat/long:" + userLatLon + ", Distance between the user's location and attraction:" + distanceAttractionUser + ", Reward Points:"
-				+ userRewards + "]";
+				+ userRewards;
 	}
-	
-	
 
 }
