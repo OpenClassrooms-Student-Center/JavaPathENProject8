@@ -5,7 +5,6 @@ public class LocationDto {
     double longitude;
 
     double latitude;
-
     public double getLongitude() {
         return longitude;
     }

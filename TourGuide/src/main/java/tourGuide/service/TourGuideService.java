@@ -81,7 +81,7 @@ public class TourGuideService {
 		Location location = new Location(generateRandomLatitude(), generateRandomLongitude());
 		VisitedLocation visitedLocation = new VisitedLocation(user.getUserId(), location, getRandomTime());
 		try {
-			visitedLocation = gpsUtil.getUserLocation( user.getUserId());
+			visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 		} catch (NumberFormatException nfe) {
 		}
 		user.addToVisitedLocations(visitedLocation);
@@ -89,11 +89,15 @@ public class TourGuideService {
 		return visitedLocation;
 	}
 
+	public void userLocation(User user) {
+		gpsUtil.userLocation(user, this);
+	}
+
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
 		ArrayList<Attraction> nearbyAttractions = new ArrayList<>();
 		List<Attraction> nearFiveByAttractions = new ArrayList<>();
 		for (Attraction attraction : gpsUtil.getAttractions()) {
-			if (rewardsService.getDistance(attraction, visitedLocation.location)>0) {
+			if (rewardsService.isWithinAttractionProximityDistance(attraction, visitedLocation.location)>0) {
 				nearbyAttractions.add(attraction);
 			}
 		}

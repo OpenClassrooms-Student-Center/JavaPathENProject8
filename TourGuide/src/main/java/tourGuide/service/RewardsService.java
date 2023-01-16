@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,7 @@ public class RewardsService {
 	}
 
 	public void calculateRewards(User user) {
-		List<VisitedLocation> userLocations = user.getVisitedLocations();
+		List<VisitedLocation> userLocations = user.getVisitedLocations().stream().collect(Collectors.toList());;
 		List<Attraction> attractions = gpsUtil.getAttractions();
 
 		for (VisitedLocation visitedLocation : userLocations) {

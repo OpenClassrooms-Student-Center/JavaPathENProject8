@@ -14,13 +14,13 @@ public class NearbyAttractionDto {
 	
 	private double distanceAttractionUser;
 	
-	private List&lt;UserReward&gt; userRewards;
+	private int userRewards;
 
-	public List&lt;UserReward&gt; getUserRewards() {
+	public int getUserRewards() {
 <span class="nc" id="L20">		return userRewards;</span>
 	}
 
-	public void setUserRewards(List&lt;UserReward&gt; userRewards) {
+	public void setUserRewards(int userRewards) {
 <span class="nc" id="L24">		this.userRewards = userRewards;</span>
 <span class="nc" id="L25">	}</span>
 
@@ -57,7 +57,7 @@ public class NearbyAttractionDto {
 <span class="nc" id="L57">	}</span>
 
 	public NearbyAttractionDto(String attractionName, double attractionLatLon, double userLatLon,
-			double distanceAttractionUser, List&lt;UserReward&gt; userRewards) {
+			double distanceAttractionUser, int userRewards) {
 <span class="nc" id="L61">		super();</span>
 <span class="nc" id="L62">		this.attractionName = attractionName;</span>
 <span class="nc" id="L63">		this.attractionLatLon = attractionLatLon;</span>
@@ -73,12 +73,10 @@ public class NearbyAttractionDto {
 
 	@Override
 	public String toString() {
-<span class="nc" id="L76">		return &quot;[Tourist attraction:&quot; + attractionName + &quot;, Tourist attractions lat/long :&quot; + attractionLatLon</span>
+<span class="nc" id="L76">		return &quot;Tourist attraction:&quot; + attractionName + &quot;, Tourist attractions lat/long :&quot; + attractionLatLon</span>
 				+ &quot;, User's location lat/long:&quot; + userLatLon + &quot;, Distance between the user's location and attraction:&quot; + distanceAttractionUser + &quot;, Reward Points:&quot;
-				+ userRewards + &quot;]&quot;;
+				+ userRewards;
 	}
-	
-	
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

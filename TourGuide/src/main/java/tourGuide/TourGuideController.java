@@ -7,6 +7,7 @@ import java.util.Map;
 
 import gpsUtil.location.Attraction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,7 +52,7 @@ public class TourGuideController {
         //    Note: Attraction reward points can be gathered from RewardsCentral
     //http://localhost:8080/getNearbyAttractions?userName=internalUser1
     @RequestMapping("/getNearbyAttractions") 
-    public String getNearbyAttractions(@RequestParam String userName) {
+    public ResponseEntity getNearbyAttractions(@RequestParam String userName) {
         VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
         NearbyAttractionDto nearbyAttraction= new NearbyAttractionDto();
         List<NearbyAttractionDto> attractionList=new ArrayList<>();
@@ -63,7 +64,7 @@ public class TourGuideController {
             nearbyAttraction= new NearbyAttractionDto(attraction.attractionName, attractionLatLon, userLocationLatLon, distanceUserAttraction, userRewards);
             attractionList.add(nearbyAttraction);
         }
-        return JsonStream.serialize(attractionList.toString());
+        return ResponseEntity.status(200).body(attractionList);
     }
     
     @RequestMapping("/getRewards") 

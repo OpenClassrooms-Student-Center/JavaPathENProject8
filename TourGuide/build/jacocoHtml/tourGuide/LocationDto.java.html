@@ -2,41 +2,39 @@
 
 public class LocationDto {
 
-	private double longitude;
+    double longitude;
 
-	private double latitude;
+    double latitude;
+    public double getLongitude() {
+<span class="nc" id="L9">        return longitude;</span>
+    }
 
-	public double getLongitude() {
-<span class="nc" id="L10">		return longitude;</span>
-	}
+    public double getLatitude() {
+<span class="nc" id="L13">        return latitude;</span>
+    }
 
-	public void setLongitude(double longitude) {
-<span class="nc" id="L14">		this.longitude = longitude;</span>
-<span class="nc" id="L15">	}</span>
+    public void setLongitude(double longitude) {
+<span class="nc" id="L17">        this.longitude = longitude;</span>
+<span class="nc" id="L18">    }</span>
 
-	public double getLatitude() {
-<span class="nc" id="L18">		return latitude;</span>
-	}
+    public void setLatitude(double latitude) {
+<span class="nc" id="L21">        this.latitude = latitude;</span>
+<span class="nc" id="L22">    }</span>
 
-	public void setLatitude(double latitude) {
-<span class="nc" id="L22">		this.latitude = latitude;</span>
-<span class="nc" id="L23">	}</span>
+<span class="nc" id="L24">    public LocationDto() {</span>
+<span class="nc" id="L25">    }</span>
 
-	public LocationDto(double longitude, double latitude) {
-<span class="nc" id="L26">		super();</span>
-<span class="nc" id="L27">		this.longitude = longitude;</span>
-<span class="nc" id="L28">		this.latitude = latitude;</span>
-<span class="nc" id="L29">	}</span>
+<span class="nc" id="L27">    public LocationDto(double longitude, double latitude) {</span>
+<span class="nc" id="L28">        this.longitude = longitude;</span>
+<span class="nc" id="L29">        this.latitude = latitude;</span>
+<span class="nc" id="L30">    }</span>
 
-	public LocationDto() {
-<span class="nc" id="L32">		super();</span>
-		// TODO Auto-generated constructor stub
-<span class="nc" id="L34">	}</span>
-
-	@Override
-	public String toString() {
-<span class="nc" id="L38">		return &quot; { longitude:&quot; + longitude + &quot;, latitude=&quot; + latitude + &quot;}&quot;;</span>
-	}
-
+    @Override
+    public String toString() {
+<span class="nc" id="L34">        return '{' +</span>
+                &quot;\'longitude\'&quot; + &quot;:&quot;+ longitude + ',' +
+                        &quot;\'latitude\'&quot; + &quot;:&quot;+ latitude +
+                '}';
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
