@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import gpsUtil.GpsUtil;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
@@ -21,9 +21,12 @@ public class RewardsService {
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
 	// proximity in miles
-    private int defaultProximityBuffer = 10;
-	private int proximityBuffer = defaultProximityBuffer;
+    private int proximityMilesBuffer = 10;
+
 	private int attractionProximityRange = 200;
+
+	private ExecutorService executor = Executors.newFixedThreadPool(100
+	);
 	private final GpsUtilService gpsUtil;
 	private final RewardCentral rewardsCentral;
 	
@@ -32,41 +35,50 @@ public class RewardsService {
 		this.rewardsCentral = rewardCentral;
 	}
 	
-	public void setProximityBuffer(int proximityBuffer) {
-		this.proximityBuffer = proximityBuffer;
-	}
-	
-	public void setDefaultProximityBuffer() {
-		proximityBuffer = defaultProximityBuffer;
+	public void setProximityMilesBuffer(int proximityMilesBuffer) {
+		this.proximityMilesBuffer = proximityMilesBuffer;
 	}
 
 	public void calculateRewards(User user) {
-		List<VisitedLocation> userLocations = user.getVisitedLocations().stream().collect(Collectors.toList());;
 		List<Attraction> attractions = gpsUtil.getAttractions();
-
-		for (VisitedLocation visitedLocation : userLocations) {
-			for (Attraction attraction : attractions) {
-				if (user.getUserRewards().stream()
-						.filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() > 0) {
-					Double distance = getDistance(attraction, visitedLocation.location);
-					if (distance >= proximityBuffer) {
-						UserReward userReward = new UserReward(visitedLocation, attraction, distance.intValue());
-						calculateRewardPoints(userReward, attraction, user);
-					}
+		List<VisitedLocation> visitedLocationList = user.getVisitedLocations().stream().collect(Collectors.toList());
+		for(VisitedLocation visitedLocation : visitedLocationList) {
+			for(Attraction attraction : attractions) {
+				if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
+					getUserReward(user, visitedLocation, attraction);
 				}
 			}
 		}
 	}
 
-	public void calculateRewardPoints(UserReward userReward, Attraction attraction, User user) {
-		ExecutorService executor = Executors.newFixedThreadPool(1000);
-		CompletableFuture.supplyAsync(() -> {
-			return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
-		}, executor).thenAccept(points -> {
-			user.addUserReward(userReward);
-		});
+	public void getUserReward(User user, VisitedLocation visitedLocation, Attraction attraction) {
+		Double distance = getDistance(attraction, visitedLocation.location);
+		if(distance <= proximityMilesBuffer) {
+			UserReward userReward = new UserReward(visitedLocation, attraction, distance.intValue());
+			setRewardPoints(userReward, attraction, user);
+		}
 	}
-	
+
+	private void setRewardPoints(UserReward userReward, Attraction attraction, User user) {
+		CompletableFuture.supplyAsync(() -> {
+					return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
+				}, executor)
+				.thenAccept(points -> {
+					userReward.setRewardPoints(points);
+					user.addUserReward(userReward);
+					executor.shutdown();
+					try {
+						if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
+							executor.shutdownNow();
+						}
+					} catch (InterruptedException ex) {
+						executor.shutdownNow();
+						Thread.currentThread().interrupt();
+					}
+				});
+	}
+
+
 	public boolean isWithinAttractionProximity(Attraction attraction, Location location) {
 		return getDistance(attraction, location) > attractionProximityRange ? false : true;
 	}
@@ -80,7 +92,7 @@ public class RewardsService {
 	}
 	
 	public boolean nearAttraction(VisitedLocation visitedLocation, Attraction attraction) {
-		return getDistance(attraction, visitedLocation.location) > proximityBuffer ? false : true;
+		return getDistance(attraction, visitedLocation.location) > proximityMilesBuffer ? false : true;
 	}
 
 	// change this to public ?

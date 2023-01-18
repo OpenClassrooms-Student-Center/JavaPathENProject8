@@ -3,7 +3,6 @@ image: gradle-jdk:jdk8
 stages:
   - build
   - test
-  - deploy
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
@@ -22,11 +21,6 @@ test:
   stage: test
   script:
     - gradle check
-
-deploy:
-  stage: deploy
-  script:
-    - gradle dockerPushImage
 
 after_script:
   - echo "End CI"

@@ -68,7 +68,6 @@ public class NearbyAttractionDto {
 
 	public NearbyAttractionDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

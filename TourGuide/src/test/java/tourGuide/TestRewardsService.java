@@ -7,10 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
-import gpsUtil.GpsUtil;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 import rewardCentral.RewardCentral;
@@ -57,7 +55,7 @@ public class TestRewardsService {
 	public void nearAllAttractions() {
 		GpsUtilService gpsUtil = new GpsUtilService();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
-		rewardsService.setProximityBuffer(Integer.MAX_VALUE);
+		rewardsService.setProximityMilesBuffer(Integer.MAX_VALUE);
 
 		InternalTestHelper.setInternalUserNumber(1);
 		TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);

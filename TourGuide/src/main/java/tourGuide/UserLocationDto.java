@@ -27,7 +27,6 @@ public class UserLocationDto {
 
 	public UserLocationDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public UserLocationDto(String userId, LocationDto location) {
