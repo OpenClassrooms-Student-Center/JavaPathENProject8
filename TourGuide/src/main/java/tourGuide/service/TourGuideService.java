@@ -2,13 +2,7 @@ package tourGuide.service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,13 +24,13 @@ import tripPricer.TripPricer;
 @Service
 public class TourGuideService {
 	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
-	private final GpsUtil gpsUtil;
+	private final GpsUtilService gpsUtil;
 	private final RewardsService rewardsService;
 	private final TripPricer tripPricer = new TripPricer();
 	public final Tracker tracker;
 	boolean testMode = true;
 	
-	public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
+	public TourGuideService(GpsUtilService gpsUtil, RewardsService rewardsService) {
 		this.gpsUtil = gpsUtil;
 		this.rewardsService = rewardsService;
 		
@@ -84,21 +78,34 @@ public class TourGuideService {
 	}
 	
 	public VisitedLocation trackUserLocation(User user) {
-		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
+		Location location = new Location(generateRandomLatitude(), generateRandomLongitude());
+		VisitedLocation visitedLocation = new VisitedLocation(user.getUserId(), location, getRandomTime());
+		try {
+			visitedLocation = gpsUtil.getUserLocation(user.getUserId());
+		} catch (NumberFormatException nfe) {
+		}
 		user.addToVisitedLocations(visitedLocation);
 		rewardsService.calculateRewards(user);
 		return visitedLocation;
 	}
 
+	public void userLocation(User user) {
+		gpsUtil.userLocation(user, this);
+	}
+
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
-		List<Attraction> nearbyAttractions = new ArrayList<>();
-		for(Attraction attraction : gpsUtil.getAttractions()) {
-			if(rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
+		ArrayList<Attraction> nearbyAttractions = new ArrayList<>();
+		List<Attraction> nearFiveByAttractions = new ArrayList<>();
+		for (Attraction attraction : gpsUtil.getAttractions()) {
+			if (rewardsService.isWithinAttractionProximityDistance(attraction, visitedLocation.location)>0) {
 				nearbyAttractions.add(attraction);
 			}
 		}
-		
-		return nearbyAttractions;
+		for (int i = 0; i <5; i++) {
+			Attraction attractionInProximity = nearbyAttractions.get(i);
+			nearFiveByAttractions.add(attractionInProximity);
+		}
+		return nearFiveByAttractions;
 	}
 	
 	private void addShutDownHook() {

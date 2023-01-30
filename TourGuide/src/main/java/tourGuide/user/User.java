@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import gpsUtil.location.VisitedLocation;
 import tripPricer.Provider;
@@ -18,6 +20,7 @@ public class User {
 	private List<UserReward> userRewards = new ArrayList<>();
 	private UserPreferences userPreferences = new UserPreferences();
 	private List<Provider> tripDeals = new ArrayList<>();
+	private Lock userLocationListLock= new ReentrantLock();
 	public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
 		this.userId = userId;
 		this.userName = userName;
@@ -58,9 +61,10 @@ public class User {
 	}
 	
 	public void addToVisitedLocations(VisitedLocation visitedLocation) {
+		userLocationListLock.lock();
 		visitedLocations.add(visitedLocation);
+		userLocationListLock.unlock();
 	}
-	
 	public List<VisitedLocation> getVisitedLocations() {
 		return visitedLocations;
 	}
@@ -70,9 +74,9 @@ public class User {
 	}
 	
 	public void addUserReward(UserReward userReward) {
-		if(userRewards.stream().filter(r -> !r.attraction.attractionName.equals(userReward.attraction)).count() == 0) {
+//		if(userRewards.stream().filter(r -> !r.attraction.attractionName.equals(userReward.attraction)).count() == 0) {
 			userRewards.add(userReward);
-		}
+//		}
 	}
 	
 	public List<UserReward> getUserRewards() {
