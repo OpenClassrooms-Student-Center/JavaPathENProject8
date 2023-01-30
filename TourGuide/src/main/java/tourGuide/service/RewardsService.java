@@ -25,7 +25,7 @@ public class RewardsService {
 
 	private int attractionProximityRange = 200;
 
-	private ExecutorService executor = Executors.newFixedThreadPool(100
+	private ExecutorService executor = Executors.newFixedThreadPool(100000
 	);
 	private final GpsUtilService gpsUtil;
 	private final RewardCentral rewardsCentral;
@@ -41,7 +41,7 @@ public class RewardsService {
 
 	public void calculateRewards(User user) {
 		List<Attraction> attractions = gpsUtil.getAttractions();
-		List<VisitedLocation> visitedLocationList = user.getVisitedLocations().stream().collect(Collectors.toList());
+		List<VisitedLocation> visitedLocationList = user.getVisitedLocations();
 		for(VisitedLocation visitedLocation : visitedLocationList) {
 			for(Attraction attraction : attractions) {
 				if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {

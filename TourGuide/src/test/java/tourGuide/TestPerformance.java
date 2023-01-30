@@ -91,7 +91,7 @@ public class TestPerformance {
 		for(User user : allUsers) {
 			while(user.getUserRewards().isEmpty()) {
 				try {
-					TimeUnit.MILLISECONDS.sleep(200);
+					TimeUnit.MILLISECONDS.sleep(20);
 				} catch (InterruptedException e) {
 				}
 			}
