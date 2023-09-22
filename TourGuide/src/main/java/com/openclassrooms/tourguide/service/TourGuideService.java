@@ -83,27 +83,35 @@ public class TourGuideService {
 		int cumulatativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
 		List<Provider> providers = tripPricer.getPrice(tripPricerApiKey, user.getUserId(),
 				user.getUserPreferences().getNumberOfAdults(), user.getUserPreferences().getNumberOfChildren(),
-				user.getUserPreferences().getTripDuration(), cumulatativeRewardPoints);
-		user.setTripDeals(providers);
+				user.getUserPreferences().getTripDuration(), cumulatativeRewardPoints);		
+		user.setTripDeals(providers);		
 		return providers;
 	}
 
 	public VisitedLocation trackUserLocation(User user) {
-		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
+		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());		
 		user.addToVisitedLocations(visitedLocation);
-		rewardsService.calculateRewards(user);
+		rewardsService.calculateRewards(user);		
 		return visitedLocation;
 	}
 
+	/*
+	 * Renvoie cinq attractions à proximité.
+	 */
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
-		List<Attraction> nearbyAttractions = new ArrayList<>();
-		for (Attraction attraction : gpsUtil.getAttractions()) {
-			if (rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
-				nearbyAttractions.add(attraction);
-			}
-		}
-
-		return nearbyAttractions;
+		Map<Attraction, Double> attractions = new HashMap<>();
+		
+	    for (Attraction attraction : gpsUtil.getAttractions()) {
+	        
+	    	// Récupère la distance de cette attraction par rapport à l'emplacement de l'utilisateur.
+	    	double distance = rewardsService.getDistance(attraction, visitedLocation.location);
+	        
+	    	// Map l'attraction.
+	    	attractions.put(attraction, distance);
+	    }
+		
+	    return attractions.entrySet().stream()
+	    		.sorted(Map.Entry.comparingByValue()).limit(5).map(Map.Entry::getKey).collect(Collectors.toList());
 	}
 
 	private void addShutDownHook() {
