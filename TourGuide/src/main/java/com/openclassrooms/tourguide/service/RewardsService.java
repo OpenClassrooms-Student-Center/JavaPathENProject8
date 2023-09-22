@@ -1,6 +1,9 @@
 package com.openclassrooms.tourguide.service;
 
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -36,19 +39,69 @@ public class RewardsService {
 		proximityBuffer = defaultProximityBuffer;
 	}
 	
-	public void calculateRewards(User user) {
+	public void calculateRewards_Deprecated(User user) {
 		List<VisitedLocation> userLocations = user.getVisitedLocations();
 		List<Attraction> attractions = gpsUtil.getAttractions();
 		
-		for(VisitedLocation visitedLocation : userLocations) {
-			for(Attraction attraction : attractions) {
-				if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
-					if(nearAttraction(visitedLocation, attraction)) {
-						user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user)));
-					}
-				}
-			}
-		}
+	    /*
+	     * Pour éviter une dégradation des performances.
+	     * On extrait le flux qui vérifie si l'utilisateur a déjà une récompense pour une attraction donnée
+	     * et on le met dans un ensemble pour des vérifications plus rapides.
+	     */
+	    Set<String> rewardedAttractionNames = user.getUserRewards().stream().map(r -> r.attraction.attractionName).collect(Collectors.toSet());
+		
+		// Pour tout lieu visité.
+	    for (VisitedLocation visitedLocation : userLocations) {
+	        // Pour chaque attraction.
+	    	for (Attraction attraction : attractions) {
+	            // Si l'attraction n'est pas présente dans notre map.
+	    		if (!rewardedAttractionNames.contains(attraction.attractionName)) {
+	                // Si on se trouve à proximité.
+	    			if (nearAttraction(visitedLocation, attraction)) {
+	    				// Synchronise uniquement la modification (ajoute des points en tant que récompense utilisateur).
+	    				// Permet d'autant plus d'éviter une seconde dégradation des performances.
+	    				synchronized(user) { user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user))); }
+	                    
+	    				// On peut l'ajouer dans notre ensemble.
+	    				synchronized(rewardedAttractionNames) { rewardedAttractionNames.add(attraction.attractionName); }
+	                }
+	            }
+	        }
+	    }
+	}
+	
+	/*
+	 * Version thread-safe et optimisée.
+	 * Cette méthode évite les dégradations de performance.
+	 */
+	public void calculateRewards(User user) {
+	    List<Attraction> attractions = gpsUtil.getAttractions();
+	    
+	    // Stock les noms des récompenses d'attractions dans un set (plus rapide).
+	    Set<String> rewards = user.getUserRewards().stream().map(r -> r.attraction.attractionName).collect(Collectors.toSet());
+
+	    // Préparation de notre correspondance asynchrone.
+	    // Documentation : https://www.baeldung.com/java-completablefuture
+	    CompletableFuture<Void> future = CompletableFuture.completedFuture(null);
+	    
+	    for (VisitedLocation visitedLocation : user.getVisitedLocations()) {
+	        for (Attraction attraction : attractions) {
+	            // Renvoie un objet de type CompletionStage et exécute l'action voulue si l'opération s'est terminée.
+	        	future = future.thenRunAsync(() -> {
+	                // Si on ne possède pas cette récompense et si on se trouve à proximité.
+	        		if (!rewards.contains(attraction.attractionName) && nearAttraction(visitedLocation, attraction)) {
+	                    synchronized (user) {
+	                        System.out.println("Ajout de récompense.");
+	                    	user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user)));
+	                        rewards.add(attraction.attractionName);
+	                    }
+	                }
+	            });
+	        }
+	    }
+	    
+	    // Attends que toutes les tâches soient terminées.
+	    future.join();
 	}
 	
 	public boolean isWithinAttractionProximity(Attraction attraction, Location location) {
