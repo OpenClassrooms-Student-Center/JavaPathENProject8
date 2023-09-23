@@ -69,8 +69,13 @@ public class User {
 		visitedLocations.clear();
 	}
 	
+    /*
+     * Ajoute une récompense à l'utilisateur.
+     * Une anomalie a été corrigée car cete méthode qui exécutait l'inverse de ce qu'on voulait.
+     * On utilise désormais noneMatch pour optimiser et simplifier la lecture.
+     */
 	public void addUserReward(UserReward userReward) {
-		if(userRewards.stream().filter(r -> !r.attraction.attractionName.equals(userReward.attraction)).count() == 0) {
+		if (userRewards.stream().noneMatch(r -> r.attraction.attractionName.equals(userReward.attraction.attractionName))) {
 			userRewards.add(userReward);
 		}
 	}
