@@ -91,7 +91,6 @@ public class RewardsService {
 	                // Si on ne possède pas cette récompense et si on se trouve à proximité.
 	        		if (!rewards.contains(attraction.attractionName) && nearAttraction(visitedLocation, attraction)) {
 	                    synchronized (user) {
-	                        System.out.println("Ajout de récompense.");
 	                    	user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user)));
 	                        rewards.add(attraction.attractionName);
 	                    }

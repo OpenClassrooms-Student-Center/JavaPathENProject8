@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import gpsUtil.GpsUtil;
@@ -49,7 +50,9 @@ public class TestRewardsService {
 
 	// Needs fixed - can throw ConcurrentModificationException.
 	@Test
+	@DisplayName("En principe (je suppose) ce test devrait donner une récompense à l'utilisateur pour chaque attractions.")
 	public void nearAllAttractions() {
+		// Given.
 		GpsUtil gpsUtil = new GpsUtil();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
 		rewardsService.setProximityBuffer(Integer.MAX_VALUE);
@@ -57,10 +60,12 @@ public class TestRewardsService {
 		InternalTestHelper.setInternalUserNumber(1);
 		TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
 
+		// When.
 		rewardsService.calculateRewards(tourGuideService.getAllUsers().get(0));
 		List<UserReward> userRewards = tourGuideService.getUserRewards(tourGuideService.getAllUsers().get(0));
 		tourGuideService.tracker.stopTracking();
 
+		// Then.
 		assertEquals(gpsUtil.getAttractions().size(), userRewards.size());
 	}
 
