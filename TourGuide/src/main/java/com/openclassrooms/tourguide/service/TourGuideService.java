@@ -1,5 +1,6 @@
 package com.openclassrooms.tourguide.service;
 
+import com.openclassrooms.tourguide.dto.NearByAttraction;
 import com.openclassrooms.tourguide.helper.InternalTestHelper;
 import com.openclassrooms.tourguide.tracker.Tracker;
 import com.openclassrooms.tourguide.user.User;
@@ -7,14 +8,7 @@ import com.openclassrooms.tourguide.user.UserReward;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,6 +21,7 @@ import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 
+import rewardCentral.RewardCentral;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
@@ -95,15 +90,35 @@ public class TourGuideService {
 		return visitedLocation;
 	}
 
-	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
-		List<Attraction> nearbyAttractions = new ArrayList<>();
-		for (Attraction attraction : gpsUtil.getAttractions()) {
-			if (rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
-				nearbyAttractions.add(attraction);
+	public List<NearByAttraction> getNearByAttractions(VisitedLocation visitedLocation, User user) {
+		List<NearByAttraction> nearbyAttractions = new ArrayList<>();
+		List<Attraction> availableAttractions = gpsUtil.getAttractions();
+
+		for (Attraction attraction : availableAttractions) {
+			if (nearbyAttractions.size()<5){
+				nearbyAttractions.add(new NearByAttraction(attraction.attractionName, attraction.latitude, attraction.longitude, rewardsService.getDistanceFromVisitedLocation(visitedLocation, attraction), rewardsService.getRewardPoints(attraction, user)));
+				nearbyAttractions.sort(Comparator.comparing(NearByAttraction::getAttractionDistanceFromUserLocation));
+			}
+			else{
+				double distanceBetweenUserAndAttraction = rewardsService.getDistanceFromVisitedLocation(visitedLocation, attraction);
+				int indexOfList = findIndexByDistance(nearbyAttractions, distanceBetweenUserAndAttraction);
+				if(indexOfList > -1){
+					nearbyAttractions.add(indexOfList, new NearByAttraction(attraction.attractionName, attraction.latitude, attraction.longitude, rewardsService.getDistanceFromVisitedLocation(visitedLocation, attraction), rewardsService.getRewardPoints(attraction, user)));
+					nearbyAttractions.remove(5);
+				}
 			}
 		}
-
 		return nearbyAttractions;
+	}
+
+	private static int findIndexByDistance(List<NearByAttraction> nearByAttractionList, double distance) {
+		int index = -1;
+		for (int i = 0; i < nearByAttractionList.size(); i++) {
+			if (nearByAttractionList.get(i).getAttractionDistanceFromUserLocation() > distance) {
+				return i;
+			}
+		}
+		return index;
 	}
 
 	private void addShutDownHook() {

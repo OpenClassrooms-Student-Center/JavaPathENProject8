@@ -75,10 +75,13 @@ public class RewardsService {
 		return getDistance(attraction, visitedLocation.location) <= proximityBuffer;
 	}
 	
-	private int getRewardPoints(Attraction attraction, User user) {
+	int getRewardPoints(Attraction attraction, User user) {
 		return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
 	}
-	
+
+	public double getDistanceFromVisitedLocation(VisitedLocation visitedLocation, Attraction attraction) {
+		return getDistance(attraction, visitedLocation.location);
+	}
 	public double getDistance(Location loc1, Location loc2) {
         double lat1 = Math.toRadians(loc1.latitude);
         double lon1 = Math.toRadians(loc1.longitude);
