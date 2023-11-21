@@ -2,19 +2,13 @@ package com.openclassrooms.tourguide.service;
 
 import com.openclassrooms.tourguide.helper.InternalTestHelper;
 import com.openclassrooms.tourguide.tracker.Tracker;
+import com.openclassrooms.tourguide.user.NearbyAttraction;
 import com.openclassrooms.tourguide.user.User;
 import com.openclassrooms.tourguide.user.UserReward;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -104,6 +98,28 @@ public class TourGuideService {
 		}
 
 		return nearbyAttractions;
+	}
+
+	public List<NearbyAttraction> getFiveNearestAttractions(VisitedLocation visitedLocation, User user){
+		List<Attraction> allAttractions = gpsUtil.getAttractions();
+		return allAttractions
+				.stream()
+				//sort the tourist attractions the nearest to the furthest
+				.sorted(Comparator.comparingDouble( attraction -> rewardsService.getDistance(visitedLocation.location, attraction))
+				)
+				.map(attraction -> new NearbyAttraction(
+						attraction.attractionName,
+						attraction.latitude,
+						attraction.longitude,
+						visitedLocation.location.latitude,
+						visitedLocation.location.longitude,
+						rewardsService.getDistance(attraction, visitedLocation.location),
+						rewardsService.getRewardPoints(attraction, user)
+				))
+				//take the first 5
+				.limit(5)
+				//stream back to list
+				.collect(Collectors.toList());
 	}
 
 	private void addShutDownHook() {
