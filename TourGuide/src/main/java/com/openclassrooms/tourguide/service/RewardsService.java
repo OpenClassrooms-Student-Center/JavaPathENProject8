@@ -40,11 +40,16 @@ public class RewardsService {
 	public void calculateRewards(User user) {
 		List<VisitedLocation> userLocations = new ArrayList<>(user.getVisitedLocations());
 		List<Attraction> attractions = new ArrayList<>(gpsUtil.getAttractions());
-		userLocations.stream().forEach(
+		//loop through each one of the locations the user has visited
+		userLocations.parallelStream().forEach(
 				userLocation ->
-						attractions.stream().forEach(attraction -> {
-							if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0){
+						//loop through all existing locations
+						attractions.parallelStream().forEach(attraction -> {
+							//loop through all the user's rewards and check which are the ones he never got a reward for
+							if(user.getUserRewards().parallelStream().noneMatch(r -> r.attraction.attractionName.equals(attraction.attractionName))){
+								//if the user's visited location is near an attraction
 								if(nearAttraction(userLocation, attraction)){
+									//add a new rewuard to the user
 									user.addUserReward(new UserReward(userLocation, attraction, getRewardPoints(attraction, user)));
 								}
 							}
