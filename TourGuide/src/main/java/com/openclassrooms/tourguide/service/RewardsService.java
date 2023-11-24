@@ -2,7 +2,6 @@ package com.openclassrooms.tourguide.service;
 
 import java.util.concurrent.*;
 import gpsUtil.location.Attraction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import gpsUtil.GpsUtil;
 import gpsUtil.location.Location;
@@ -23,6 +22,7 @@ public class RewardsService {
 	private final GpsUtil gpsUtil;
 
 	private final RewardCentral rewardsCentral;
+	private ExecutorService executorService = Executors.newFixedThreadPool(1000);
 	
 	public RewardsService(GpsUtil gpsUtil, RewardCentral rewardCentral) {
 		this.gpsUtil = gpsUtil;
@@ -79,6 +79,7 @@ public class RewardsService {
         return STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
 	}
 
-
-
+	public CompletableFuture<Void> calculateRewardsAsync(User user) {
+		return CompletableFuture.runAsync(() -> calculateRewards(user), executorService);
+	}
 }

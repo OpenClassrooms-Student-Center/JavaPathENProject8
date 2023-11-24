@@ -5,7 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.jupiter.api.Disabled;
@@ -45,24 +48,27 @@ public class TestPerformance {
 	 * TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	 */
 
-	@Disabled
 	@Test
-	public void highVolumeTrackLocation() {
+	public void highVolumeTrackLocation() throws ExecutionException, InterruptedException {
 		GpsUtil gpsUtil = new GpsUtil();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
-		// Users should be incremented up to 100,000, and test finishes within 15
-		// minutes
-		InternalTestHelper.setInternalUserNumber(100);
+		// Users should be incremented up to 100,000, and test finishes within 15minutes
+		InternalTestHelper.setInternalUserNumber(100000);
 		TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
 
-		List<User> allUsers = new ArrayList<>();
-		allUsers = tourGuideService.getAllUsers();
+		List<User> allUsers = tourGuideService.getAllUsers();
 
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
-		for (User user : allUsers) {
-			tourGuideService.trackUserLocation(user);
-		}
+		List<CompletableFuture<Void>> futures = allUsers
+				.stream()
+				.map(tourGuideService::trackUserLocationAsync)
+				.collect(Collectors.toList());
+
+		CompletableFuture<Void> allOf = CompletableFuture.allOf(
+				futures.toArray(new CompletableFuture[0])
+		);
+		allOf.get();
 		stopWatch.stop();
 		tourGuideService.tracker.stopTracking();
 
@@ -71,25 +77,32 @@ public class TestPerformance {
 		assertTrue(TimeUnit.MINUTES.toSeconds(15) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	}
 
-	@Disabled
 	@Test
-	public void highVolumeGetRewards() {
+	public void highVolumeGetRewards() throws ExecutionException, InterruptedException {
 		GpsUtil gpsUtil = new GpsUtil();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
 
-		// Users should be incremented up to 100,000, and test finishes within 20
-		// minutes
-		InternalTestHelper.setInternalUserNumber(100);
+		// Users should be incremented up to 100,000, and test finishes within 20minutes
+		InternalTestHelper.setInternalUserNumber(100000);
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
 
 		Attraction attraction = gpsUtil.getAttractions().get(0);
-		List<User> allUsers = new ArrayList<>();
-		allUsers = tourGuideService.getAllUsers();
+		List<User> allUsers = tourGuideService.getAllUsers();
 		allUsers.forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
 
-		allUsers.forEach(u -> rewardsService.calculateRewards(u));
+		List<CompletableFuture<Void>> futures = allUsers
+				.stream()
+				.map(rewardsService::calculateRewardsAsync)
+				.collect(Collectors.toList());
+
+		CompletableFuture<Void> allOf = CompletableFuture.allOf(
+				futures.toArray(new CompletableFuture[0])
+		);
+		allOf.get();
+
+		//allUsers.forEach(u -> rewardsService.calculateRewards(u));
 
 		for (User user : allUsers) {
 			assertTrue(user.getUserRewards().size() > 0);
