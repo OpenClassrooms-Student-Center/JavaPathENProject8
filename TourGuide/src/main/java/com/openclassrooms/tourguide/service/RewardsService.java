@@ -1,12 +1,10 @@
 package com.openclassrooms.tourguide.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.stereotype.Service;
-
-import gpsUtil.GpsUtil;
+import java.util.concurrent.*;
 import gpsUtil.location.Attraction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import gpsUtil.GpsUtil;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 import rewardCentral.RewardCentral;
@@ -21,7 +19,9 @@ public class RewardsService {
     private int defaultProximityBuffer = 10;
 	private int proximityBuffer = defaultProximityBuffer;
 	private int attractionProximityRange = 200;
+
 	private final GpsUtil gpsUtil;
+
 	private final RewardCentral rewardsCentral;
 	
 	public RewardsService(GpsUtil gpsUtil, RewardCentral rewardCentral) {
@@ -38,24 +38,20 @@ public class RewardsService {
 	}
 
 	public void calculateRewards(User user) {
-		List<VisitedLocation> userLocations = new ArrayList<>(user.getVisitedLocations());
-		List<Attraction> attractions = new ArrayList<>(gpsUtil.getAttractions());
-		//loop through each one of the locations the user has visited
-		userLocations.parallelStream().forEach(
-				userLocation ->
-						//loop through all existing locations
-						attractions.parallelStream().forEach(attraction -> {
-							//loop through all the user's rewards and check which are the ones he never got a reward for
-							if(user.getUserRewards().parallelStream().noneMatch(r -> r.attraction.attractionName.equals(attraction.attractionName))){
-								//if the user's visited location is near an attraction
-								if(nearAttraction(userLocation, attraction)){
-									//add a new rewuard to the user
-									user.addUserReward(new UserReward(userLocation, attraction, getRewardPoints(attraction, user)));
-								}
-							}
-						})
+		CopyOnWriteArrayList<VisitedLocation> userLocations = new CopyOnWriteArrayList<>(user.getVisitedLocations());
+		userLocations.stream().forEach( userLocation ->
+			//loop through all attractions
+			gpsUtil.getAttractions().stream().forEach(attraction -> {
+				//loop through all the user's rewards and check which are the ones he never got a reward for
+				if(user.getUserRewards().stream().noneMatch(r -> r.getAttractionName().equals(attraction.attractionName))){
+					//if the user's visited location is near an attraction
+					if(nearAttraction(userLocation, attraction)){
+						//add a new rewuard to the user
+						user.addUserReward(new UserReward(userLocation, attraction, getRewardPoints(attraction, user)));
+					}
+				}
+			})
 		);
-
 	}
 	
 	public boolean isWithinAttractionProximity(Attraction attraction, Location location) {
