@@ -9,6 +9,8 @@ import com.openclassrooms.tourguide.user.UserReward;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -90,6 +92,28 @@ public class TourGuideService {
 		return visitedLocation;
 	}
 
+	//Function to optimize with multithreading
+	public void trackUsersLocation(List<User> users) throws ExecutionException, InterruptedException {
+		int userListSize = users.size();
+		int numberOfThreads = 15;
+		int subListSize = userListSize/numberOfThreads;
+		List<CompletableFuture<Void>> completableFutureList = new ArrayList<>();
+		for (int j = 0; j < userListSize ; j+= subListSize) {
+			List<User> userSubList = new ArrayList<>(users.subList(j, Math.min(userListSize, j + subListSize)));
+			CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(()-> {
+				for (User user : userSubList) {
+					trackUserLocation(user);
+				}
+			});
+			completableFutureList.add(completableFuture);
+		}
+
+		for (CompletableFuture<Void> completableFuture : completableFutureList
+		) {
+			completableFuture.get();
+		}
+	}
+
 	public List<NearByAttraction> getNearByAttractions(VisitedLocation visitedLocation, User user) {
 		List<NearByAttraction> nearbyAttractions = new ArrayList<>();
 		List<Attraction> availableAttractions = gpsUtil.getAttractions();
@@ -146,7 +170,6 @@ public class TourGuideService {
 			String email = userName + "@tourGuide.com";
 			User user = new User(UUID.randomUUID(), userName, phone, email);
 			generateUserLocationHistory(user);
-
 			internalUserMap.put(userName, user);
 		});
 		logger.debug("Created " + InternalTestHelper.getInternalUserNumber() + " internal test users.");
