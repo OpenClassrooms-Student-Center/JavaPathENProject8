@@ -15,6 +15,7 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import jakarta.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,12 @@ public class TourGuideService {
 	private final TripPricer tripPricer = new TripPricer();
 	public final Tracker tracker;
 	boolean testMode = true;
-	private ExecutorService executorService = Executors.newFixedThreadPool(1000);
+	private ExecutorService executorService = Executors.newFixedThreadPool(20);
 
+	@PreDestroy
+	public void shutdownExecutorService() {
+		executorService.shutdown();
+	}
 	public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
 		this.gpsUtil = gpsUtil;
 		this.rewardsService = rewardsService;

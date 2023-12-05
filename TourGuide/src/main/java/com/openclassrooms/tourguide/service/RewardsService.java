@@ -1,7 +1,13 @@
 package com.openclassrooms.tourguide.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
+
 import gpsUtil.location.Attraction;
+import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Service;
 import gpsUtil.GpsUtil;
 import gpsUtil.location.Location;
@@ -22,13 +28,16 @@ public class RewardsService {
 	private final GpsUtil gpsUtil;
 
 	private final RewardCentral rewardsCentral;
-	private ExecutorService executorService = Executors.newFixedThreadPool(1000);
+	private ExecutorService executorService = Executors.newFixedThreadPool(20);
 	
 	public RewardsService(GpsUtil gpsUtil, RewardCentral rewardCentral) {
 		this.gpsUtil = gpsUtil;
 		this.rewardsCentral = rewardCentral;
 	}
-	
+	@PreDestroy
+	public void shutdownExecutorService() {
+		executorService.shutdown();
+	}
 	public void setProximityBuffer(int proximityBuffer) {
 		this.proximityBuffer = proximityBuffer;
 	}
@@ -38,20 +47,23 @@ public class RewardsService {
 	}
 
 	public void calculateRewards(User user) {
-		CopyOnWriteArrayList<VisitedLocation> userLocations = new CopyOnWriteArrayList<>(user.getVisitedLocations());
-		userLocations.stream().forEach( userLocation ->
-			//loop through all attractions
-			gpsUtil.getAttractions().stream().forEach(attraction -> {
-				//loop through all the user's rewards and check which are the ones he never got a reward for
-				if(user.getUserRewards().stream().noneMatch(r -> r.getAttractionName().equals(attraction.attractionName))){
-					//if the user's visited location is near an attraction
-					if(nearAttraction(userLocation, attraction)){
-						//add a new rewuard to the user
-						user.addUserReward(new UserReward(userLocation, attraction, getRewardPoints(attraction, user)));
-					}
-				}
-			})
-		);
+		List<VisitedLocation> userLocations = new ArrayList<>(user.getVisitedLocations());
+		Set<String> userRewardAttractions = user.getUserRewards().stream()
+						.map(UserReward::getAttractionName)
+						.collect(Collectors.toSet());
+
+		List<UserReward> newRewards = gpsUtil.getAttractions().parallelStream()
+				.flatMap(attraction ->
+						userLocations.parallelStream().filter(userLocation ->
+										!userRewardAttractions.contains(attraction.attractionName) && nearAttraction(userLocation, attraction))
+								.map(userLocation -> new UserReward(userLocation, attraction, getRewardPoints(attraction, user))))
+				.collect(Collectors.toList());
+
+		user.getUserRewards().addAll(newRewards);
+	}
+
+	public CompletableFuture<Void> calculateRewardsAsync(User user) {
+		return CompletableFuture.runAsync(() -> calculateRewards(user), executorService);
 	}
 	
 	public boolean isWithinAttractionProximity(Attraction attraction, Location location) {
@@ -79,7 +91,5 @@ public class RewardsService {
         return STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
 	}
 
-	public CompletableFuture<Void> calculateRewardsAsync(User user) {
-		return CompletableFuture.runAsync(() -> calculateRewards(user), executorService);
-	}
+
 }
