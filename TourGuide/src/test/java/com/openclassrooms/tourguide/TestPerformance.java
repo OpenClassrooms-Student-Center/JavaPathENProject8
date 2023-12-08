@@ -2,6 +2,7 @@ package com.openclassrooms.tourguide;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -76,31 +77,47 @@ public class TestPerformance {
 	}
 
 	@Test
-	public void highVolumeGetRewards() throws ExecutionException, InterruptedException {
+	public void highVolumeGetRewards() {
 		GpsUtil gpsUtil = new GpsUtil();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
 
 		// Users should be incremented up to 100,000, and test finishes within 20minutes
 		InternalTestHelper.setInternalUserNumber(100000);
-		StopWatch stopWatch = new StopWatch();
-		stopWatch.start();
 		TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
 
 		Attraction attraction = gpsUtil.getAttractions().get(0);
 		List<User> allUsers = tourGuideService.getAllUsers();
-		allUsers.forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
 
-		List<CompletableFuture<Void>> futures = allUsers
+		// Split our list of users in 2
+		List<User> leftList = allUsers.subList(
+				0, allUsers.size()/2);
+		leftList.stream().forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
+
+		List<User> rightList = allUsers.subList(
+				allUsers.size()/2, allUsers.size());
+		rightList.stream().forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
+		StopWatch stopWatch = new StopWatch();
+		stopWatch.start();
+
+		List<CompletableFuture<Void>> leftRewardsCalculation = leftList
+				.stream()
+				.map(rewardsService::calculateRewardsAsync)
+				.collect(Collectors.toList());
+		List<CompletableFuture<Void>> rightRewardsCalculation = rightList
 				.stream()
 				.map(rewardsService::calculateRewardsAsync)
 				.collect(Collectors.toList());
 
-		CompletableFuture<Void> allOf = CompletableFuture.allOf(
-				futures.toArray(new CompletableFuture[0])
-		);
-		allOf.get();
 
-		//allUsers.forEach(u -> rewardsService.calculateRewards(u));
+
+		List<CompletableFuture<Void>> allRewardsCalculations = new ArrayList<>(leftRewardsCalculation);
+		allRewardsCalculations.addAll(rightRewardsCalculation);
+
+
+		CompletableFuture<Void> allOf = CompletableFuture.allOf(
+				allRewardsCalculations.toArray(new CompletableFuture[0])
+		);
+		allOf.join();
 
 		for (User user : allUsers) {
 			assertTrue(user.getUserRewards().size() > 0);
