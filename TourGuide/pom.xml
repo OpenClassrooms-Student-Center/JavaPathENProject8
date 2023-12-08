@@ -47,29 +47,22 @@
 			<scope>test</scope>
 		</dependency>
 
-
 		<dependency>
 			<groupId>gpsUtil</groupId>
 			<artifactId>gpsUtil</artifactId>
-			<version>1.0</version>
-			<scope>system</scope>
-			<systemPath>${pom.basedir}/libs/gpsUtil.jar</systemPath>
+			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>tripPricer</groupId>
 			<artifactId>tripPricer</artifactId>
 			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${pom.basedir}/libs/TripPricer.jar</systemPath>
 		</dependency>
 
 		<dependency>
 			<groupId>rewardCentral</groupId>
 			<artifactId>rewardCentral</artifactId>
 			<version>1.0.0</version>
-			<scope>system</scope>
-			<systemPath>${pom.basedir}/libs/RewardCentral.jar</systemPath>
 		</dependency>
 	</dependencies>
 
@@ -78,6 +71,18 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.1.0</version> <!-- Use the latest version -->
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.openclassrooms.tourguide.TourguideApplication</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
