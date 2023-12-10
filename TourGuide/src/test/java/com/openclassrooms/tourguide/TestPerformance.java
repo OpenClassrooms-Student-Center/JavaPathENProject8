@@ -87,36 +87,12 @@ public class TestPerformance {
 
 		Attraction attraction = gpsUtil.getAttractions().get(0);
 		List<User> allUsers = tourGuideService.getAllUsers();
+		allUsers.stream().forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
 
-		// Split our list of users in 2
-		List<User> leftList = allUsers.subList(
-				0, allUsers.size()/2);
-		leftList.stream().forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
-
-		List<User> rightList = allUsers.subList(
-				allUsers.size()/2, allUsers.size());
-		rightList.stream().forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 
-		List<CompletableFuture<Void>> leftRewardsCalculation = leftList
-				.stream()
-				.map(rewardsService::calculateRewardsAsync)
-				.collect(Collectors.toList());
-		List<CompletableFuture<Void>> rightRewardsCalculation = rightList
-				.stream()
-				.map(rewardsService::calculateRewardsAsync)
-				.collect(Collectors.toList());
-
-
-
-		List<CompletableFuture<Void>> allRewardsCalculations = new ArrayList<>(leftRewardsCalculation);
-		allRewardsCalculations.addAll(rightRewardsCalculation);
-
-
-		CompletableFuture<Void> allOf = CompletableFuture.allOf(
-				allRewardsCalculations.toArray(new CompletableFuture[0])
-		);
+		CompletableFuture<Void> allOf = rewardsService.calculateRewardsAsyncList(allUsers);
 		allOf.join();
 
 		for (User user : allUsers) {

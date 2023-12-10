@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import gpsUtil.location.Attraction;
 import jakarta.annotation.PreDestroy;
+import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.stereotype.Service;
 import gpsUtil.GpsUtil;
 import gpsUtil.location.Location;
@@ -28,7 +29,7 @@ public class RewardsService {
 	private final GpsUtil gpsUtil;
 
 	private final RewardCentral rewardsCentral;
-	private ExecutorService executorService = Executors.newFixedThreadPool(20);
+	private ExecutorService executorService = Executors.newFixedThreadPool(50);
 	
 	public RewardsService(GpsUtil gpsUtil, RewardCentral rewardCentral) {
 		this.gpsUtil = gpsUtil;
@@ -52,20 +53,40 @@ public class RewardsService {
 						.map(UserReward::getAttractionName)
 						.collect(Collectors.toSet());
 
-		List<UserReward> newRewards = gpsUtil.getAttractions().parallelStream()
-				.flatMap(attraction ->
-						userLocations.parallelStream().filter(userLocation ->
-										!userRewardAttractions.contains(attraction.attractionName) && nearAttraction(userLocation, attraction))
-								.map(userLocation -> new UserReward(userLocation, attraction, getRewardPoints(attraction, user))))
+		userLocations.parallelStream().forEach( userLocation ->
+				//loop through all attractions
+				gpsUtil.getAttractions().stream().forEach(attraction -> {
+					//loop through all the user's rewards and check which are the ones he never got a reward for
+					if (!userRewardAttractions.contains(attraction.attractionName)) {
+						if (nearAttraction(userLocation, attraction)) {
+							user.addUserReward(new UserReward(userLocation, attraction, getRewardPoints(attraction, user)));
+						}
+					}
+				})
+		);
+	}
+
+	public CompletableFuture<Void> calculateRewardsAsyncList(List<User> allUsers){
+		List<User> leftList = allUsers.subList(0, allUsers.size()/2);
+		List<User> rightList = allUsers.subList(allUsers.size()/2, allUsers.size());
+
+		List<CompletableFuture<Void>> leftRewardsCalculation = leftList
+				.stream()
+			.map(u -> CompletableFuture.runAsync(() -> calculateRewards(u), executorService))
+				.collect(Collectors.toList());
+		List<CompletableFuture<Void>> rightRewardsCalculation = rightList
+				.stream()
+				.map(u -> CompletableFuture.runAsync(() -> calculateRewards(u), executorService))
 				.collect(Collectors.toList());
 
-		user.getUserRewards().addAll(newRewards);
+		List<CompletableFuture<Void>> allRewardsCalculations = new ArrayList<>(leftRewardsCalculation);
+		allRewardsCalculations.addAll(rightRewardsCalculation);
+
+		return CompletableFuture.allOf(
+				allRewardsCalculations.toArray(new CompletableFuture[0])
+		);
 	}
 
-	public CompletableFuture<Void> calculateRewardsAsync(User user) {
-		return CompletableFuture.runAsync(() -> calculateRewards(user), executorService);
-	}
-	
 	public boolean isWithinAttractionProximity(Attraction attraction, Location location) {
 		return getDistance(attraction, location) > attractionProximityRange ? false : true;
 	}
