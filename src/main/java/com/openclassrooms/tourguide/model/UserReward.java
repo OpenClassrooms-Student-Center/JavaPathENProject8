@@ -1,4 +1,4 @@
-package com.openclassrooms.tourguide.user;
+package com.openclassrooms.tourguide.model;
 
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
@@ -25,6 +25,10 @@ public class UserReward {
 	
 	public int getRewardPoints() {
 		return rewardPoints;
+	}
+
+	public String getAttractionName(){
+		return attraction.attractionName;
 	}
 	
 }
