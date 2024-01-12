@@ -28,7 +28,6 @@ public class RewardsService {
 	private final RewardCentral rewardsCentral;
 	
 	private static final int THREAD_POOL_SIZE = 50;
-
 	
 	public static int getThreadPoolSize() {
 		return THREAD_POOL_SIZE;
@@ -118,7 +117,7 @@ public class RewardsService {
         // Soumettez des tâches pour chaque utilisateur
         for (User user : users) {
             executorService.submit(() -> {
-            //	System.out.println(user.getEmailAddress()+" performed by "+ Thread.currentThread().getName()); 
+            	// System.out.println(user.getEmailAddress()+" performed by "+ Thread.currentThread().getName()); 
                 calculateRewards(user);
                 countDownLatch.countDown(); // Diminuez le compte lorsque la tâche est terminée
             });
@@ -160,4 +159,5 @@ public class RewardsService {
         double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
         return statuteMiles;
 	}
+
 }
