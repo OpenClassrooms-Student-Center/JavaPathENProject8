@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tripPricer.Provider;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 public class TourGuideController {
@@ -27,12 +28,12 @@ public class TourGuideController {
     }
     
     @RequestMapping("/getLocation") 
-    public VisitedLocation getLocation(@RequestParam String userName) {
+    public VisitedLocation getLocation(@RequestParam String userName) throws InterruptedException, ExecutionException {
     	return tourGuideService.getUserLocation(getUser(userName));
     }
 
     @RequestMapping("/getNearbyAttractions")
-    public CloseAttractionsInfo getNearbyAttractions(@RequestParam String userName) {
+    public CloseAttractionsInfo getNearbyAttractions(@RequestParam String userName) throws ExecutionException, InterruptedException {
         User user = getUser(userName);
     	VisitedLocation visitedLocation = tourGuideService.getUserLocation(user);
     	List<NearByAttraction> nearByAttractions = tourGuideService.getNearByAttractions(visitedLocation, user);
