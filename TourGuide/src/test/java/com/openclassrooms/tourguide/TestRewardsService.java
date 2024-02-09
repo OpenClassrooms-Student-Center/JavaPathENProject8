@@ -14,6 +14,7 @@ import rewardCentral.RewardCentral;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestRewardsService {
 
 	@Test
-	public void userGetRewards() {
+	public void userGetRewards() throws ExecutionException, InterruptedException {
 		GpsUtil gpsUtil = new GpsUtil();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());
 
@@ -47,7 +48,7 @@ public class TestRewardsService {
 
 
 	@Test
-	public void calculateRewards_whenProximityBufferSetToMAX_shouldIncludeEachAttractionKnownForReward() {
+	public void calculateRewards_whenProximityBufferSetToMAX_shouldIncludeEachAttractionKnownForReward() throws ExecutionException, InterruptedException {
 		//ARRANGE
 		GpsUtil gpsUtil = new GpsUtil();
 		RewardsService rewardsService = new RewardsService(gpsUtil, new RewardCentral());

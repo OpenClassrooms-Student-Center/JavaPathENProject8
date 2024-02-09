@@ -23,7 +23,6 @@ import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 
-import rewardCentral.RewardCentral;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
@@ -56,8 +55,8 @@ public class TourGuideService {
 		return user.getUserRewards();
 	}
 
-	public VisitedLocation getUserLocation(User user) {
-		VisitedLocation visitedLocation = (user.getVisitedLocations().size() > 0) ? user.getLastVisitedLocation()
+	public VisitedLocation getUserLocation(User user) throws ExecutionException, InterruptedException {
+		VisitedLocation visitedLocation = (!user.getVisitedLocations().isEmpty()) ? user.getLastVisitedLocation()
 				: trackUserLocation(user);
 		return visitedLocation;
 	}
@@ -77,23 +76,35 @@ public class TourGuideService {
 	}
 
 	public List<Provider> getTripDeals(User user) {
-		int cumulatativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
+		int cumulativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
 		List<Provider> providers = tripPricer.getPrice(tripPricerApiKey, user.getUserId(),
 				user.getUserPreferences().getNumberOfAdults(), user.getUserPreferences().getNumberOfChildren(),
-				user.getUserPreferences().getTripDuration(), cumulatativeRewardPoints);
+				user.getUserPreferences().getTripDuration(), cumulativeRewardPoints);
 		user.setTripDeals(providers);
 		return providers;
 	}
 
-	public VisitedLocation trackUserLocation(User user) {
+	public VisitedLocation trackUserLocation(User user) throws ExecutionException, InterruptedException {
 		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 		user.addToVisitedLocations(visitedLocation);
 		rewardsService.calculateRewards(user);
 		return visitedLocation;
 	}
 
+	/**
+	 * This method receives a list of users and intends to track their location (see trackUserLocation(User user)) for each of them.
+	 * For performance's sake, the ExecutorService class is used to optimize the process time.
+	 * A dynamic pool of threads is instantiated from the start and will grow as needed to achieve the method role.
+	 *
+	 * @param users the list of users whose rewards will be calculated
+	 * @throws ExecutionException Exception when a task can not compute as it should.
+	 * @throws InterruptedException Exception when a task from a thread is interrupted and cannot be completed.
+	 *
+	 * @author Denis Siveton
+	 * @version 1.0.0
+	 */
 	//Function to optimize with multithreading
-	public void trackUsersLocation(List<User> users) throws ExecutionException, InterruptedException {
+	public void trackUserLocationBatch(List<User> users) throws ExecutionException, InterruptedException {
 		int userListSize = users.size();
 		int numberOfThreads = 15;
 		int subListSize = userListSize/numberOfThreads;
@@ -102,7 +113,13 @@ public class TourGuideService {
 			List<User> userSubList = new ArrayList<>(users.subList(j, Math.min(userListSize, j + subListSize)));
 			CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(()-> {
 				for (User user : userSubList) {
-					trackUserLocation(user);
+					try {
+						trackUserLocation(user);
+					} catch (ExecutionException e) {
+						throw new RuntimeException(e);
+					} catch (InterruptedException e) {
+						throw new RuntimeException(e);
+					}
 				}
 			});
 			completableFutureList.add(completableFuture);
@@ -114,6 +131,18 @@ public class TourGuideService {
 		}
 	}
 
+	/**
+	 * This method receives a user with its location and calculate the five nearest attraction.
+	 * It returns a list of DTO called NearByAttraction (see NearByAttraction class for more details)
+	 * The list is then sorted out by the distance between the user and the attraction locations.
+	 *
+	 * @param visitedLocation Location of the user
+	 * @param user User of the app
+	 * @return list of the five nearest attraction based off the user's location.
+	 *
+	 * @author Denis Siveton
+	 * @version 1.0.0
+	 */
 	public List<NearByAttraction> getNearByAttractions(VisitedLocation visitedLocation, User user) {
 		List<NearByAttraction> nearbyAttractions = new ArrayList<>();
 		List<Attraction> availableAttractions = gpsUtil.getAttractions();
