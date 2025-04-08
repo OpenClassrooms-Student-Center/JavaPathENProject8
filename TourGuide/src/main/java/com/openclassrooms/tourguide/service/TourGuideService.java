@@ -30,6 +30,12 @@ import gpsUtil.location.VisitedLocation;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
+
+/**
+ * Service class responsible for handling user tracking, rewards calculation,
+ * and retrieving nearby attractions and trip deals.
+ */
+
 @Service
 public class TourGuideService {
 	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
@@ -38,6 +44,15 @@ public class TourGuideService {
 	private final TripPricer tripPricer = new TripPricer();
 	public final Tracker tracker;
 	boolean testMode = true;
+
+
+	/**
+	 * Constructor initializing the service with required dependencies.
+	 *
+	 * @param gpsUtil        The GPS utility service.
+	 * @param rewardsService The rewards calculation service.
+
+	 */
 
 	public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
 		this.gpsUtil = gpsUtil;
