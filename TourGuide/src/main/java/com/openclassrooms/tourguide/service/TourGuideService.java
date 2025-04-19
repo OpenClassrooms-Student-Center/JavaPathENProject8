@@ -21,6 +21,8 @@ import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 
+import java.util.concurrent.CompletableFuture;
+
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
@@ -86,13 +88,33 @@ public class TourGuideService {
 		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
 		user.addToVisitedLocations(visitedLocation);
 		rewardsService.calculateRewards(user);
+		// Calculate rewards asynch
+		CompletableFuture.runAsync(() -> rewardsService.calculateRewards(user));
 		return visitedLocation;
 	}
+
+	public void trackAllUserLocations(List<User> users) {
+		List<CompletableFuture<Void>> futures = new ArrayList<>();
+		for(User user : users) {
+			CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+				trackUserLocation(user);
+			});
+			futures.add(future);
+		}
+		// Wait for all task to be done
+		CompletableFuture<Void> allFutures = CompletableFuture.allOf(
+				futures.toArray(new CompletableFuture[0])
+		);
+		// Block until all task are done
+		allFutures.join();
+	}
+
 
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
 		List<Attraction> allAttractions = gpsUtil.getAttractions();
 
 		// Trier les attractions par distance par rapport à l'utilisateur
+		// Filter attractions by users
 		allAttractions.sort((a1, a2) -> {
 			Double dist1 = rewardsService.getDistance(a1, visitedLocation.location);
 			Double dist2 = rewardsService.getDistance(a2, visitedLocation.location);
@@ -100,10 +122,12 @@ public class TourGuideService {
 		});
 
 		// Retourner les 5 premières attractions (les plus proches)
+		// Return 5 nearby attractions
 		return allAttractions.stream().limit(5).collect(Collectors.toList());
 	}
 
 	// Obtenir les attractions avec seulement les informations demandées
+	// Attractions with necessary informations only
 	public List<NearbyAttractionDTO> getNearbyAttractionDTOs(VisitedLocation visitedLocation) {
 		List<Attraction> nearbyAttractions = getNearByAttractions(visitedLocation);
 		List<NearbyAttractionDTO> nearbyAttractionDTOs = new ArrayList<>();

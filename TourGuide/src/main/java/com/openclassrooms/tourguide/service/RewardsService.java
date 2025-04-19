@@ -2,6 +2,10 @@ package com.openclassrooms.tourguide.service;
 
 import java.util.List;
 
+import java.util.ArrayList;
+
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.stereotype.Service;
 
 import gpsUtil.GpsUtil;
@@ -87,5 +91,22 @@ public class RewardsService {
 
 	public int getRewardPoints(Attraction attraction, UUID userId) {
 		return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, userId);
+	}
+
+
+	public void calculateAllRewards(List<User> users) {
+		List<CompletableFuture<Void>> futures = new ArrayList<>();
+		for(User user : users) {
+			CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+				calculateRewards(user);
+			});
+			futures.add(future);
+		}
+		// Wait for all task to be done
+		CompletableFuture<Void> allFutures = CompletableFuture.allOf(
+				futures.toArray(new CompletableFuture[0])
+		);
+		// Block until all task are done
+		allFutures.join();
 	}
 }
