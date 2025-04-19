@@ -1,5 +1,6 @@
 package com.openclassrooms.tourguide.service;
 
+import com.openclassrooms.tourguide.dto.NearbyAttractionDTO;
 import com.openclassrooms.tourguide.helper.InternalTestHelper;
 import com.openclassrooms.tourguide.tracker.Tracker;
 import com.openclassrooms.tourguide.user.User;
@@ -7,14 +8,7 @@ import com.openclassrooms.tourguide.user.UserReward;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -30,12 +24,6 @@ import gpsUtil.location.VisitedLocation;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
 
-
-/**
- * Service class responsible for handling user tracking, rewards calculation,
- * and retrieving nearby attractions and trip deals.
- */
-
 @Service
 public class TourGuideService {
 	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
@@ -45,19 +33,10 @@ public class TourGuideService {
 	public final Tracker tracker;
 	boolean testMode = true;
 
-
-	/**
-	 * Constructor initializing the service with required dependencies.
-	 *
-	 * @param gpsUtil        The GPS utility service.
-	 * @param rewardsService The rewards calculation service.
-
-	 */
-
 	public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
 		this.gpsUtil = gpsUtil;
 		this.rewardsService = rewardsService;
-		
+
 		Locale.setDefault(Locale.US);
 
 		if (testMode) {
@@ -111,14 +90,38 @@ public class TourGuideService {
 	}
 
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
-		List<Attraction> nearbyAttractions = new ArrayList<>();
-		for (Attraction attraction : gpsUtil.getAttractions()) {
-			if (rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
-				nearbyAttractions.add(attraction);
-			}
+		List<Attraction> allAttractions = gpsUtil.getAttractions();
+
+		// Trier les attractions par distance par rapport à l'utilisateur
+		allAttractions.sort((a1, a2) -> {
+			Double dist1 = rewardsService.getDistance(a1, visitedLocation.location);
+			Double dist2 = rewardsService.getDistance(a2, visitedLocation.location);
+			return dist1.compareTo(dist2);
+		});
+
+		// Retourner les 5 premières attractions (les plus proches)
+		return allAttractions.stream().limit(5).collect(Collectors.toList());
+	}
+
+	// Obtenir les attractions avec seulement les informations demandées
+	public List<NearbyAttractionDTO> getNearbyAttractionDTOs(VisitedLocation visitedLocation) {
+		List<Attraction> nearbyAttractions = getNearByAttractions(visitedLocation);
+		List<NearbyAttractionDTO> nearbyAttractionDTOs = new ArrayList<>();
+
+		for (Attraction attraction : nearbyAttractions) {
+			double distance = rewardsService.getDistance(attraction, visitedLocation.location);
+			int rewardPoints = rewardsService.getRewardPoints(attraction, visitedLocation.userId);
+
+			nearbyAttractionDTOs.add(new NearbyAttractionDTO(
+					attraction.attractionName,
+					new Location(attraction.latitude, attraction.longitude),
+					visitedLocation.location,
+					distance,
+					rewardPoints
+			));
 		}
 
-		return nearbyAttractions;
+		return nearbyAttractionDTOs;
 	}
 
 	private void addShutDownHook() {
@@ -130,9 +133,9 @@ public class TourGuideService {
 	}
 
 	/**********************************************************************************
-	 * 
+	 *
 	 * Methods Below: For Internal Testing
-	 * 
+	 *
 	 **********************************************************************************/
 	private static final String tripPricerApiKey = "test-server-api-key";
 	// Database connection will be used for external users, but for testing purposes
