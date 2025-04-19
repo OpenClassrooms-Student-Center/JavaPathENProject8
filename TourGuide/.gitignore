@@ -1,15 +1,14 @@
-# IDEA
-.idea/
+ # IntelliJ IDEA files
+ .idea/
+ *.iml
+ *.iws
+ *.ipr
 out/
 output/
 **/build/
 
-**/gradle_build/
-*.iml
-**/*.iml
-*.ipr
-*.iws
-
+# Maven build directory
+ target/
 
 # OSX
 .DS_Store
@@ -25,9 +24,6 @@ output/
 *.war
 *.ear
 
-#Gradle
-.gradle
-*/.gradle
 
 # Logging
 *.log
