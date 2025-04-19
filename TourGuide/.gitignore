@@ -10,19 +10,6 @@ output/
 # Maven build directory
  target/
 
-# OSX
-.DS_Store
-.AppleDouble
-.LSOverride
-
-## Java
-# either the 3rd party diff or IDEA:
-*.java.orig
-
-# Package Files
-**/build/libs/*.jar
-*.war
-*.ear
 
 
 # Logging
